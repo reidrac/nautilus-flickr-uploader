@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Upload pictures to Flickr
+Name[es]=Subir imágenes a Flickr
+Comment=Upload pictures to Flikr from Nautilus
+Comment[es]=Subir imágenes a Flickr desde Nautilus
+Exec=./bin/nautilus-flickr-uploader %F
+TryExec=./bin/nautilus-flickr-uploader
+Terminal=false
+Categories=Network;FileTransfer;GTK;
+StartupNotify=true
+MimeType=image/gif;image/jpeg;image/png;
+

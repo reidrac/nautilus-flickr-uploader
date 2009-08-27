@@ -1,0 +1,20 @@
+REQUIRED
+
+Before installing this software, please check you have installed following
+modules (and its dependencies):
+
+   Gtk2 (with Gtk2::SimpleList)
+   Gtk2::GladeXML
+   YAML
+   Flickr::API
+   XML::Parser::Lite::Tree;
+   Image::Magick
+   LWP::UserAgent
+
+INSTALLATION
+
+To install this software type the following command as root:
+
+   make install
+
+**

@@ -1,0 +1,106 @@
+#!/usr/bin/perl -I./lib
+#
+# nautilus-flickr-uploader - upload pics to Flickr from Nautilus
+# Copyright (C) 2009  Juan J. Martinez <jjm@usebox.net>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+use Getopt::Long;
+use Env qw( XDG_CONFIG_HOME HOME );
+use YAML;
+
+use Upload;
+use Account;
+
+my $VERSION = '0.01';
+my $APPNAME = 'nautilus-flickr-uploader';
+
+sub Help
+{
+	print <<EOH
+$APPNAME v$VERSION
+
+Usage:
+
+   $APPNAME [OPTIONS] <directory or list of files>
+
+Options:
+
+   -?,--help    This help screen
+   --account    Show account dialog
+
+This product uses the Flickr API but is not endorsed or certified by Flickr.
+
+EOH
+
+}
+
+sub LoadConfiguration()
+{
+	if( -r $config_file )
+	{
+		$config = YAML::LoadFile( $config_file )
+			or die( "Error: failed to load $config_file\n" );
+	}
+	else
+	{
+		warn "Warning: failed to load $config_file, using defaults";
+
+		$config = YAML::Load(<<'EndOfConf');
+# default configuration
+username:
+token:
+privacy: public
+resize: no
+size: 1024
+EndOfConf
+	}
+}
+
+my ($help, $account, $config, $config_file, $api);
+
+GetOptions ( 'help|?' => \$help, 'account' => \$account );
+
+if ($help)
+{
+	Help( );
+	exit 0;
+}
+
+# This API data is related to nautilus-flickr-uploader.
+# Please, don't use it for other applications.
+$main::api = {
+	'key' => '8c53a5a7dbdf9b3c354a8ef339cfa2b9',
+	'secret' => '0df5dcc53340ed26'
+};
+
+$main::config_file = ($XDG_CONFIG_HOME ? $XDG_CONFIG_HOME : $HOME .'/.config' )
+	.'/nautilus-flickr-uploader.yml';
+
+LoadConfiguration( );
+
+if( $account )
+{
+	Account::Init( );
+}
+else
+{
+	Upload::Init( );
+}
+
+Gtk2->main;
+
+# EOF
+
