@@ -30,10 +30,8 @@ sub Init
 	$gladexml = $Upload::gladexml;
 }
 
-sub on_UploadDialog_close
+sub SaveConfiguration()
 {
-	Gtk2->main_quit;
-
 	# get current configuration from the GUI and store it in a file
 	my $conf = $main::config;
 
@@ -61,6 +59,13 @@ sub on_UploadDialog_close
 
 	DumpFile( $main::config_file,  \%$conf ) or
 		warn 'Warning: failed to write de configuration';
+}
+
+sub on_UploadDialog_close
+{
+	Gtk2->main_quit;
+
+	SaveConfiguration( );
 }
 
 sub on_ResizeCheckButton_toggled

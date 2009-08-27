@@ -235,6 +235,9 @@ sub UploadFiles
 		}
 
 		Gtk2->main_quit;
+
+		Upload::Callbacks::SaveConfiguration( );
+
 		exec( 'xdg-open', 
 			'http://www.flickr.com/tools/uploader_edit.gne?ids='
 			. join( ',', @IDS ) );
