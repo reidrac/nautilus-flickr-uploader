@@ -1,0 +1,142 @@
+# nautilus-flicker-uploader
+# Copyright (C) 2009 Juan J. Martinez <jjm@usebox.net>
+# This file is distributed under the same license as the nautilus-flicker-uploader package.
+# Juan J. Martinez, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus-flickr-uploader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-30 17:10+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Juan J. Martinez <jjm@usebox.net>\n"
+"Language-Team: English <en@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: UI/Account.glade.h:1
+msgid ""
+"<b>This program requires your authorization before it can upload your photos "
+"to Flickr.</b>"
+msgstr ""
+"<b>This program requires your authorization before it can upload your photos "
+"to Flickr.</b>"
+
+#: UI/Account.glade.h:2
+msgid ""
+"<small>You must be connected to the Internet in order to authorize this "
+"program.</small>"
+msgstr ""
+"<small>You must be connected to the Internet in order to authorize this "
+"program.</small>"
+
+#: UI/Account.glade.h:3
+msgid ""
+"Authorizing is a simple process wich takes place in your web browser. When "
+"you're finished, return to this window to complete authorization and begin "
+"using <i>nautilus-flickr-uploader</i>."
+msgstr ""
+"Authorizing is a simple process wich takes place in your web browser. When "
+"you're finished, return to this window to complete authorization and begin "
+"using <i>nautilus-flickr-uploader</i>."
+
+#: UI/Account.glade.h:4
+msgid "Nautilus Flicker Uploader - Flickr Authentication"
+msgstr "Nautilus Flicker Uploader - Flickr Authentication"
+
+#: UI/Account.glade.h:5
+msgid "_Next"
+msgstr "_Next"
+
+#: UI/Upload.glade.h:1
+msgid "<b>Bulk Actions</b>"
+msgstr "<b>Bulk Actions</b>"
+
+#: UI/Upload.glade.h:2
+msgid "<b>Fickr Account</b>"
+msgstr "<b>Fickr Account</b>"
+
+#: UI/Upload.glade.h:3
+msgid "<b>Privacy</b>"
+msgstr "<b>Privacy</b>"
+
+#: UI/Upload.glade.h:4
+msgid "Change"
+msgstr "Change"
+
+#: UI/Upload.glade.h:5
+msgid "Family"
+msgstr "Family"
+
+#: UI/Upload.glade.h:6
+msgid "Friends"
+msgstr "Friends"
+
+#: UI/Upload.glade.h:7
+msgid "Public"
+msgstr "Public"
+
+#: UI/Upload.glade.h:8
+msgid "Put your tags separated by spaces"
+msgstr "Put your tags separated by spaces"
+
+#: UI/Upload.glade.h:9
+msgid "Resize:"
+msgstr "Resize:"
+
+#: UI/Upload.glade.h:10
+msgid "Tags:"
+msgstr "Tags:"
+
+#: UI/Upload.glade.h:11
+msgid "Upload Photos to Flickr"
+msgstr "Upload Photos to Flickr"
+
+#: UI/Upload.glade.h:12
+msgid "pixels"
+msgstr "pixels"
+
+#: lib/Upload.pm:195
+msgid ""
+"The verification of you Flickr account\n"
+"has failed: "
+msgstr ""
+"The verification of you Flickr account\n"
+"has failed: "
+
+#: lib/Upload.pm:240
+msgid "<small>Something went wrong uploading the photos.</small>"
+msgstr "<small>Something went wrong uploading the photos.</small>"
+
+#: lib/Upload.pm:379
+msgid "Authorizing..."
+msgstr "Authorizing..."
+
+#: lib/Upload.pm:389
+msgid "No account"
+msgstr "No account"
+
+#: lib/Account/Callbacks.pm:66
+msgid ""
+"<b>Return to this window after you have finished the authorization process "
+"on Flickr.com</b>"
+msgstr ""
+"<b>Return to this window after you have finished the authorization process "
+"on Flickr.com</b>"
+
+#: lib/Account/Callbacks.pm:70
+msgid "Once you're done, please click the <i>Finish</i> button on this dialog."
+msgstr "Once you're done, please click the <i>Finish</i> button on this dialog."
+
+#: lib/Account/Callbacks.pm:74
+msgid ""
+"<small>You can revoke this authorization at any time in you account page on "
+"Flickr.com.</small>"
+msgstr ""
+"<small>You can revoke this authorization at any time in you account page on "
+"Flickr.com.</small>"
+
+#: lib/Account/Callbacks.pm:79
+msgid "Finish"
+msgstr "Finish"

@@ -63,20 +63,20 @@ sub on_NextButton_clicked
 		$step++;
 
 		my $titleLabel = $gladexml->get_widget( 'TitleLabel' );
-		$titleLabel->set_markup( '<b>Return to this window after you'
-		.' have finished the authorization process on Flickr.com</b>' );
+		$titleLabel->set_markup( _( '<b>Return to this window after you'
+		.' have finished the authorization process on Flickr.com</b>' ) );
 
 		my $mainTextLabel = $gladexml->get_widget( 'MainTextLabel' );
-		$mainTextLabel->set_markup( 'Once you\'re done, please click the'
-		.' <i>Finish</i> button on this dialog.' );
+		$mainTextLabel->set_markup( _( 'Once you\'re done, please click the'
+		.' <i>Finish</i> button on this dialog.' ) );
 
 		my $tipLabel = $gladexml->get_widget( 'TipLabel' );
-		$tipLabel->set_markup( '<small>You can revoke this authorization'
-		.' at any time in you account page on Flickr.com.</small>' );
+		$tipLabel->set_markup( _( '<small>You can revoke this authorization'
+		.' at any time in you account page on Flickr.com.</small>' ) );
 
 		# TODO: add the mnemonic?
 		my $nextButton = $gladexml->get_widget( 'NextButton' );
-		$nextButton->set_label( "Finish" );
+		$nextButton->set_label( _( 'Finish' ) );
 	}
 	else
 	{

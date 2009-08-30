@@ -1,3 +1,7 @@
+* ?? Juan J. Martinez <jjm@usebox.net> 0.02-1
+- FIX: save configuration changes (privacy, resize) after successfuly 
+uploading pictures 
+
 * Wed Aug 26 2009 Juan J. Martinez <jjm@usebox.net> 0.01-1
 - first public release
 

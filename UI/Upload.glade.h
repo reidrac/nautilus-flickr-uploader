@@ -1,0 +1,12 @@
+char *s = N_("<b>Bulk Actions</b>");
+char *s = N_("<b>Fickr Account</b>");
+char *s = N_("<b>Privacy</b>");
+char *s = N_("Change");
+char *s = N_("Family");
+char *s = N_("Friends");
+char *s = N_("Public");
+char *s = N_("Put your tags separated by spaces");
+char *s = N_("Resize:");
+char *s = N_("Tags:");
+char *s = N_("Upload Photos to Flickr");
+char *s = N_("pixels");

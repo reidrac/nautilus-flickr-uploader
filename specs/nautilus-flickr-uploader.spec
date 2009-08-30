@@ -1,5 +1,5 @@
 Name:           nautilus-flickr-uploader
-Version:        0.01
+Version:        0.02
 Release:        1%{?dist}
 Summary:        Upload pics to Flickr from Nautilus
 
@@ -15,6 +15,8 @@ BuildRequires:  perl(YAML)
 BuildRequires:  perl(Flickr::API), perl(XML::Parser::Lite::Tree)
 BuildRequires:  perl(Image::Magick)
 BuildRequires:  perl(LWP::UserAgent)
+BuildRequires:  gettext
+BuildRequires:  perl(Locale::gettext)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Requires:       nautilus
 
@@ -56,6 +58,8 @@ update-desktop-database %{_datadir}/applications &> /dev/null || :
 update-desktop-database %{_datadir}/applications &> /dev/null || :
 
 %changelog
+* Wed Aug 27 2009 Juan J. Martinez <jjm@usebox.net> 0.02-1
+- TODO
 * Wed Aug 26 2009 Juan J. Martinez <jjm@usebox.net> 0.01-1
 - first public release
 

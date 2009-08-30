@@ -1,7 +1,7 @@
 DESTDIR=/usr/local
 NAME=nautilus-flickr-uploader
 PERL=`which perl`
-VERSION=0.01
+VERSION=0.02
 
 all:
 	echo Try reading INSTALL file
@@ -41,5 +41,11 @@ dist:
 	cp -r bin/ lib/ specs/ .tmp/$(NAME)-$(VERSION)/
 	cd .tmp && tar cvfz ../$(NAME)-$(VERSION).tar.gz $(NAME)-$(VERSION)/
 	rm -rf .tmp
+
+rpm: dist
+	mv -f $(NAME)-$(VERSION).tar.gz ~/rpmbuild/SOURCES
+	cp -f specs/nautilus-flickr-uploader.spec ~/rpmbuild/SPECS
+	cd ~/rpmbuild/SPECS && rpmbuild -ba nautilus-flickr-uploader.spec
+	cd ~/rpmbuild/RPMS/noarch && rpmlint nautilus-flickr-uploader-$(VERSION)-1.fc11.noarch.rpm
 
 # EOF

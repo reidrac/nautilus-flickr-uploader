@@ -27,6 +27,8 @@ use vars qw ( @EXPORT_OK );
 @EXPORT_OK = qw ( $gladexml );
 use vars qw( $gladexml );
 
+use Locale::gettext;
+
 use Gtk2 '-init' ;
 use Gtk2::GladeXML;
 use Gtk2::SimpleList;
@@ -40,6 +42,11 @@ use XML::Parser::Lite::Tree;
 use LWP::UserAgent;
 
 our ( @FILES, $accountVerified, $thumbsOk, @IDS );
+
+sub _
+{
+	return gettext( shift );
+}
 
 #
 # We accept both a directory or a list of images, but we must expand the
@@ -185,8 +192,8 @@ sub TestAccount
 		$errorBox->show( );
 		my $errorLabel = $gladexml->get_widget( 'ErrorLabel' );
 		$errorLabel->set_markup( 
-			"<small>The verification of you Flickr account\n"
-			.'has failed: ' .$response->{error_message} .'.</small>' );
+			'<small>' ._( "The verification of you Flickr account\nhas failed: " ) 
+			.$response->{error_message} .'.</small>' );
 
 		warn 'Warning: the verification of your Flickr account has failed';
 	}
@@ -230,7 +237,7 @@ sub UploadFiles
 			$errorBox->show( );
 			my $errorLabel = $gladexml->get_widget( 'ErrorLabel' );
 			$errorLabel->set_markup( 
-				'<small>Something went wrong uploading the photos.</small>' );
+				_( '<small>Something went wrong uploading the photos.</small>' ) );
 			return 0;
 		}
 
@@ -369,7 +376,7 @@ sub Init
 	if( $conf->{'token'} )
 	{
 		my $account = $gladexml->get_widget( 'UserLabel' );
-		$account->set_text( 'Authorizing...' );
+		$account->set_text( _( 'Authorizing...' ) );
 
 		my $change = $gladexml->get_widget( 'ChangeUserButton' );
 		$change->set_sensitive( 0 );
@@ -379,7 +386,7 @@ sub Init
 	else
 	{
 		my $account = $gladexml->get_widget( 'UserLabel' );
-		$account->set_text( 'No account' );
+		$account->set_text( _( 'No account' ) );
 	}
 
 	my $radioButton = 'RadioPublic';
