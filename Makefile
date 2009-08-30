@@ -27,6 +27,7 @@ pure_install:
 	install -p -m664 UI/*.glade $(DESTDIR)/share/$(NAME)/UI
 	install -p -m664 nautilus-flickr-uploader.desktop $(DESTDIR)/share/applications/$(NAME).desktop
 	chmod 755 $(DESTDIR)/bin/$(NAME)
+	./gen-mo $(DESTDIR)
 
 unistall:
 	rm -f $(DESTDIR)/bin/$(NAME)

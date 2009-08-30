@@ -1,0 +1,25 @@
+#!/bin/bash
+
+name=nautilus-flickr-uploader
+destdir=$1
+
+if [ "X" == "X$destdir" ]; then
+	echo "ERROR: you must provide a destination directory"
+	exit 1
+fi
+
+mkdir .po
+
+for file in po/*.po; do
+
+	base=`basename $file .po`
+
+	mkdir -p $destdir/share/locale/$base/LC_MESSAGES
+	msgfmt $file -o .po/$name.mo
+	install -p -m664 .po/$name.mo $destdir/share/locale/$base/LC_MESSAGES/$name.mo
+	echo $file done
+done
+
+rm -rf .po
+
+# EOF
