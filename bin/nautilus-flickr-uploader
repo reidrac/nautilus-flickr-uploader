@@ -72,7 +72,6 @@ EndOfConf
 
 my ($help, $account, $config, $config_file, $api);
 
-bindtextdomain( 'nautilus-flickr-uploader', '.po' );
 textdomain( 'nautilus-flickr-uploader' );
 
 GetOptions ( 'help|?' => \$help, 'account' => \$account );

@@ -1,4 +1,5 @@
 * ?? Juan J. Martinez <jjm@usebox.net> 0.02-1
+- NEW: added preliminar gettext support (en, es)
 - FIX: save configuration changes (privacy, resize) after successfuly 
 uploading pictures 
 
