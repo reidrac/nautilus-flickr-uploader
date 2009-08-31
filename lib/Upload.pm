@@ -205,8 +205,10 @@ sub TestAccount
 		$account->set_text( $conf->{username} );
 		$accountVerified = 1;
 
-		# if thumbs are OK, the enable the OK button
-		if( $thumbsOk )
+		# if thumbs are OK and there's stuff to upload,
+		# then enable the OK button
+		my $list = $gladexml->get_widget( 'PhotoView' );
+		if( $thumbsOk && scalar ( @{$list->{data}} ) )
 		{
 			my $okButton = $gladexml->get_widget( 'OkButton' );
 			$okButton->set_sensitive( 1 );
