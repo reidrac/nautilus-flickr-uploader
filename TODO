@@ -1,5 +1,4 @@
 - Make image preview faster
-- localization of the texts, right now it's only English
 - Package support for DEB
 - Add/remove pictures from the list with Drag and Drop
 - Don't freeze the UI when uploading files, creating thunbnails, etc
