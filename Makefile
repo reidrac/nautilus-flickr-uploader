@@ -20,12 +20,14 @@ pure_install:
 	mkdir -p $(DESTDIR)/share/$(NAME)/lib/Account
 	mkdir -p $(DESTDIR)/share/$(NAME)/UI
 	mkdir -p $(DESTDIR)/share/applications
+	mkdir -p $(DESTDIR)/share/icons/hicolor/scalable/apps
 	install -p -m664 bin/$(NAME) $(DESTDIR)/bin
 	install -p -m664 lib/*.pm $(DESTDIR)/share/$(NAME)/lib
 	install -p -m664 lib/Upload/*.pm $(DESTDIR)/share/$(NAME)/lib/Upload
 	install -p -m664 lib/Account/*.pm $(DESTDIR)/share/$(NAME)/lib/Account
 	install -p -m664 UI/*.glade $(DESTDIR)/share/$(NAME)/UI
-	install -p -m664 nautilus-flickr-uploader.desktop $(DESTDIR)/share/applications/$(NAME).desktop
+	install -p -m664 UI/$(NAME).svg $(DESTDIR)/share/icons/hicolor/scalable/apps
+	install -p -m664 $(NAME).desktop $(DESTDIR)/share/applications/$(NAME).desktop
 	chmod 755 $(DESTDIR)/bin/$(NAME)
 	./gen-mo $(DESTDIR)
 
@@ -36,10 +38,11 @@ unistall:
 
 dist:
 	mkdir -p .tmp/$(NAME)-$(VERSION)/
-	cp Changes COPYING TODO README INSTALL Makefile nautilus-flickr-uploader.desktop .tmp/$(NAME)-$(VERSION)/
+	cp Changes COPYING TODO README INSTALL Makefile nautilus-flickr-uploader.desktop gen-mo .tmp/$(NAME)-$(VERSION)/
 	mkdir -p .tmp/$(NAME)-$(VERSION)/UI/
 	cp UI/*.glade .tmp/$(NAME)-$(VERSION)/UI/
-	cp -r bin/ lib/ specs/ .tmp/$(NAME)-$(VERSION)/
+	cp UI/*.svg .tmp/$(NAME)-$(VERSION)/UI/
+	cp -r bin/ lib/ specs/ po/ .tmp/$(NAME)-$(VERSION)/
 	cd .tmp && tar cvfz ../$(NAME)-$(VERSION).tar.gz $(NAME)-$(VERSION)/
 	rm -rf .tmp
 
