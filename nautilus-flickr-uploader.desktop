@@ -10,5 +10,6 @@ TryExec=./bin/nautilus-flickr-uploader
 Terminal=false
 Categories=Network;FileTransfer;GTK;
 StartupNotify=true
+Icon=nautilus-flickr-uploader
 MimeType=image/gif;image/jpeg;image/png;
 
