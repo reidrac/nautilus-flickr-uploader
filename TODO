@@ -2,6 +2,5 @@
 - Package support for DEB
 - Add/remove pictures from the list with Drag and Drop
 - Don't freeze the UI when uploading files, creating thunbnails, etc
-- A nice icon
 - More translations to the desktop file
 - Don't use Gtk2::SimpleList anymore
