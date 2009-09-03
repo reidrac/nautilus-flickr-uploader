@@ -33,18 +33,21 @@ This is a simple tool to upload pics to Flickr from Nautilus file browser.
 rm -rf $RPM_BUILD_ROOT
 make pure_install DESTDIR=$RPM_BUILD_ROOT/usr
 
+%find_lang %{name}
+
 chmod -R u+w $RPM_BUILD_ROOT/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 
-%files
+%files -f %{name}.lang
 %defattr(-,root,root,-)
 %doc README TODO Changes COPYING INSTALL
 %{_bindir}/nautilus-flickr-uploader
 %{_datadir}/%{name}/
 %{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 
 
 %post
@@ -53,9 +56,11 @@ sed -i -e "s|./UI|%{_datadir}/%{name}/UI|g" %{_datadir}/%{name}/lib/Upload.pm
 sed -i -e "s|./UI|%{_datadir}/%{name}/UI|g" %{_datadir}/%{name}/lib/Account.pm
 sed -i -e "s|./bin|%{_bindir}|g" %{_datadir}/applications/nautilus-flickr-uploader.desktop
 update-desktop-database %{_datadir}/applications &> /dev/null || :
+gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 
 %postun
 update-desktop-database %{_datadir}/applications &> /dev/null || :
+gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 
 %changelog
 * Wed Aug 27 2009 Juan J. Martinez <jjm@usebox.net> 0.02-1
