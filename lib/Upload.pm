@@ -20,6 +20,8 @@ package Upload;
 use strict;
 use warnings;
 
+use Encode;
+
 use Upload::Callbacks;
 
 require Exporter;
@@ -143,7 +145,8 @@ sub LoadPhotos
 	my $image;
 	eval
 	{
-		$image = Gtk2::Gdk::Pixbuf->new_from_file( $file );
+		# Gtk2::Gdk::Pixbuf->new_from_file is unable to handle UTF filenames
+		$image = Gtk2::Gdk::Pixbuf->new_from_file( decode( 'utf8', $file ) );
 	};
 
 	if( !$@ && $image )
