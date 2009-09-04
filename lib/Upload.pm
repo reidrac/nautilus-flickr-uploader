@@ -47,7 +47,7 @@ our ( @FILES, $accountVerified, $thumbsOk, @IDS );
 
 sub _
 {
-	return gettext( shift );
+	return decode( 'utf8', gettext( shift ) );
 }
 
 #

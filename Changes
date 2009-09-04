@@ -1,4 +1,5 @@
 * Fri Sep 4 2009 Juan J. Martinez <jjm@usebox.net> 0.02-1
+- FIX: you need to decode the gettext output
 - FIX: Gtk2::Gdk::Pixbuf->new_from_file is unable to handle UTF filenames
 - FIX: use strict, warnings at main
 - NEW: application icon
