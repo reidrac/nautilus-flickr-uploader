@@ -63,8 +63,10 @@ update-desktop-database %{_datadir}/applications &> /dev/null || :
 gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 
 %changelog
-* Wed Aug 27 2009 Juan J. Martinez <jjm@usebox.net> 0.02-1
-- TODO
+* Fri Sep 4 2009 Juan J. Martinez <jjm@usebox.net> 0.02-1
+- sync to upstream 0.02
+- language support
+- icon
 * Wed Aug 26 2009 Juan J. Martinez <jjm@usebox.net> 0.01-1
 - first public release
 
