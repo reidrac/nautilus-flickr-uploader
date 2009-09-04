@@ -17,6 +17,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+use strict;
+use warnings;
+
 use Locale::gettext;
 use Getopt::Long;
 use Env qw( XDG_CONFIG_HOME HOME );
@@ -24,6 +27,8 @@ use YAML;
 
 use Upload;
 use Account;
+
+our ( $config, $config_file, $api );
 
 my $VERSION = '0.02';
 my $APPNAME = 'nautilus-flickr-uploader';
@@ -70,7 +75,7 @@ EndOfConf
 	}
 }
 
-my ($help, $account, $config, $config_file, $api);
+my ($help, $account);
 
 textdomain( 'nautilus-flickr-uploader' );
 
