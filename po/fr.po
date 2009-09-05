@@ -20,7 +20,7 @@ msgid ""
 "<b>This program requires your authorization before it can upload your photos "
 "to Flickr.</b>"
 msgstr ""
-"<b>Ce programme exige votre autorisation avant de pouvoir télécharger vos photos"
+"<b>Ce programme exige votre autorisation avant de pouvoir télécharger vos photos "
 "sur Flickr.</b>"
 
 #: UI/Account.glade.h:2
@@ -38,7 +38,7 @@ msgid ""
 "using <i>nautilus-flickr-uploader</i>."
 msgstr ""
 "L'autorisation c'est un processus simple qui a lieu a votre navigateur. Lorsque "
-"vous avez fini, retournez sur cette fenêtre pour terminer l'autorisation et pour"
+"vous avez fini, retournez sur cette fenêtre pour terminer l'autorisation et pour "
 "commencer à utiliser le <i>nautilus-flickr-uploader</i>."
 
 #: UI/Account.glade.h:4
