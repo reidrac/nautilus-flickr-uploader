@@ -134,7 +134,7 @@ msgid ""
 "<small>You can revoke this authorization at any time in you account page on "
 "Flickr.com.</small>"
 msgstr ""
-"<small>Vous pouvez annuler la autorisation quand vous voulez das la page votre compte sur"
+"<small>Vous pouvez annuler la autorisation quand vous voulez das la page votre compte sur "
 "Flickr.com.</small>"
 
 #: lib/Account/Callbacks.pm:79
