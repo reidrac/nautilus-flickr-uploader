@@ -42,8 +42,8 @@ msgstr ""
 "using <i>nautilus-flickr-uploader</i>."
 
 #: UI/Account.glade.h:4
-msgid "Nautilus Flicker Uploader - Flickr Authentication"
-msgstr "Nautilus Flicker Uploader - Flickr Authentication"
+msgid "Nautilus Flickr Uploader - Flickr Authentication"
+msgstr "Nautilus Flickr Uploader - Flickr Authentication"
 
 #: UI/Account.glade.h:5
 msgid "_Next"
@@ -54,8 +54,8 @@ msgid "<b>Bulk Actions</b>"
 msgstr "<b>Bulk Actions</b>"
 
 #: UI/Upload.glade.h:2
-msgid "<b>Fickr Account</b>"
-msgstr "<b>Fickr Account</b>"
+msgid "<b>Flickr Account</b>"
+msgstr "<b>Flickr Account</b>"
 
 #: UI/Upload.glade.h:3
 msgid "<b>Privacy</b>"

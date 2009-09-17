@@ -28,8 +28,8 @@ msgid "Authorizing is a simple process wich takes place in your web browser. Whe
 msgstr "L'autorisation c'est un processus simple qui a lieu a votre navigateur. Lorsque vous avez fini, retournez sur cette fenêtre pour terminer l'autorisation et pour commencer à utiliser le <i>nautilus-flickr-uploader</i>."
 
 #: UI/Account.glade.h:4
-msgid "Nautilus Flicker Uploader - Flickr Authentication"
-msgstr "Nautilus Flicker Uploader - Authentification Flickr"
+msgid "Nautilus Flickr Uploader - Flickr Authentication"
+msgstr "Nautilus Flickr Uploader - Authentification Flickr"
 
 #: UI/Account.glade.h:5
 msgid "_Next"
@@ -40,7 +40,7 @@ msgid "<b>Bulk Actions</b>"
 msgstr "<b>Action groupée</b>"
 
 #: UI/Upload.glade.h:2
-msgid "<b>Fickr Account</b>"
+msgid "<b>Flickr Account</b>"
 msgstr "<b>Compte Flickr </b>"
 
 #: UI/Upload.glade.h:3

@@ -1,5 +1,5 @@
 char *s = N_("<b>Bulk Actions</b>");
-char *s = N_("<b>Fickr Account</b>");
+char *s = N_("<b>Flickr Account</b>");
 char *s = N_("<b>Privacy</b>");
 char *s = N_("Change");
 char *s = N_("Family");
