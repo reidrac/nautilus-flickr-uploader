@@ -19,6 +19,8 @@ package Upload;
 
 use strict;
 use warnings;
+use threads;
+use threads::shared;
 
 use Encode;
 
@@ -43,7 +45,10 @@ use Flickr::API;
 use XML::Parser::Lite::Tree;
 use LWP::UserAgent;
 
-our ( @FILES, $accountVerified, $thumbsOk, @IDS );
+our ( @FILES, $accountVerified, $thumbsOk );
+
+my @IDS : shared;
+my %thread_queue : shared;
 
 sub _
 {
@@ -223,131 +228,178 @@ sub TestAccount
 }
 
 #
+# Thread to upload files in backgroud.
+#
+sub Thread
+{
+	while( 1 )
+	{
+		# there's a picture to upload?
+		if( %thread_queue )
+		{
+			my $tmp_file;
+			my $upload_file = $thread_queue{'file'};
+
+			# zero size means don't resize at all
+			if( $thread_queue{'resize'} )
+			{
+				$tmp_file = File::Temp->new( UNLINK => 1, TMPDIR => 1 );
+				if( $tmp_file )
+				{
+					# TODO: error checking
+					my $im = Image::Magick->new( );
+
+					$im->Read( $upload_file );
+					$im->Resize( geometry => $thread_queue{'resize'} );
+
+					$upload_file = $tmp_file->filename;
+					$im->Write( file => $tmp_file );
+					undef $im;
+					close( $tmp_file );
+				}
+				else
+				{
+					warn 'Warning: fail to create a temporary file';
+				}
+			}
+
+			my $lpw = LWP::UserAgent->new();
+
+			my $signature = Digest::MD5::md5_hex(
+				$thread_queue{'api_secret'} .'api_key' .$thread_queue{'api_key'}
+				.'auth_token' .$thread_queue{'token'}
+				.'is_family' .$thread_queue{'is_family'}
+				.'is_friend' .$thread_queue{'is_friend'}
+				.'is_public' .$thread_queue{'is_public'}
+				.'tags' .$thread_queue{'tags'}
+				.'title' .$thread_queue{'title'} );
+
+			my $response = $lpw->post(
+				'http://api.flickr.com/services/upload/',
+				Content_Type => 'multipart/form-data',
+				Content => [
+					api_sig => $signature ,
+					api_key => $thread_queue{'api_key'},
+					auth_token => $thread_queue{'token'},
+					title => $thread_queue{'title'},
+					is_family => $thread_queue{'is_family'},
+					is_public => $thread_queue{'is_public'},
+					is_friend => $thread_queue{'is_friend'},
+					tags => $thread_queue{'tags'},
+					photo => [ $upload_file ] ] );
+
+			my $xml = XML::Parser::Lite::Tree::instance( )->parse( $response->content );
+
+			if( !$response->is_success ||
+				$xml->{children}[1]{attributes}{stat} ne 'ok')
+			{
+				warn "Warning: failed to upload " .$thread_queue{'title'}
+					.': ' .$xml->{children}[1]{children}[1]{attributes}{msg};
+			}
+			else
+			{
+				push( @IDS, $xml->{children}[1]{children}[1]{children}[0]{content} );
+			}
+
+			# we're done
+			undef %thread_queue;
+		}
+		else
+		{
+			threads->yield( );
+		}
+	}
+}
+
+#
 # Upload one file per time.
 #
 sub UploadFiles
 {
 	my $index = shift;
 
-	if( $index < 0 )
+	# only when the thread is idle
+	if ( ! %thread_queue )
 	{
+		if( $index < 0 )
+		{
+			my $progressBar = $gladexml->get_widget( 'ProgressBar' );
+			$progressBar->set_fraction( 0 );
+			$progressBar->set_text( '' );
+			$progressBar->hide( );
+
+			if( !scalar( @IDS ) )
+			{
+				my $errorBox = $gladexml->get_widget( 'ErrorBox' );
+				$errorBox->show( );
+				my $errorLabel = $gladexml->get_widget( 'ErrorLabel' );
+				$errorLabel->set_markup( 
+					_( '<small>Something went wrong uploading the photos.</small>' ) );
+				return 0;
+			}
+
+			Gtk2->main_quit;
+
+			Upload::Callbacks::SaveConfiguration( );
+
+			exec( 'xdg-open', 
+				'http://www.flickr.com/tools/uploader_edit.gne?ids='
+				. join( ',', @IDS ) );
+		}
+
+		my $list = $gladexml->get_widget( 'PhotoView' );
 		my $progressBar = $gladexml->get_widget( 'ProgressBar' );
-		$progressBar->set_fraction( 0 );
-		$progressBar->set_text( '' );
-		$progressBar->hide( );
 
-		if( !scalar( @IDS ) )
+		my $file = $list->{data}->[$index];
+		my $total = scalar ( @{$list->{data}} );
+
+		$progressBar->set_text( $file->[1] );
+
+		my $new_size = 0;
+
+		my $resize = $gladexml->get_widget( 'ResizeCheckButton' );
+		if( $resize->get_active( ) )
 		{
-			my $errorBox = $gladexml->get_widget( 'ErrorBox' );
-			$errorBox->show( );
-			my $errorLabel = $gladexml->get_widget( 'ErrorLabel' );
-			$errorLabel->set_markup( 
-				_( '<small>Something went wrong uploading the photos.</small>' ) );
-			return 0;
-		}
-
-		Gtk2->main_quit;
-
-		Upload::Callbacks::SaveConfiguration( );
-
-		exec( 'xdg-open', 
-			'http://www.flickr.com/tools/uploader_edit.gne?ids='
-			. join( ',', @IDS ) );
-	}
-
-	my $tmp_file;
-
-	my $list = $gladexml->get_widget( 'PhotoView' );
-	my $progressBar = $gladexml->get_widget( 'ProgressBar' );
-
-	my $file = $list->{data}->[$index];
-	my $total = scalar ( @{$list->{data}} );
-	my $upload_file = $file->[2];
-
-	$progressBar->set_text( $file->[1] );
-
-	my $resize = $gladexml->get_widget( 'ResizeCheckButton' );
-	if( $resize->get_active( ) )
-	{
-		$tmp_file = File::Temp->new( UNLINK => 1, TMPDIR => 1 );
-		if( $tmp_file )
-		{
-			# TODO: error checking
-			my $im = Image::Magick->new( );
 			my $spin = $gladexml->get_widget( 'SizeSpinButton' );
-			my $new_size = scalar( $spin->get_value( ) );
-
-			$im->Read( $upload_file );
-			$im->Resize( geometry => $new_size );
-
-			$upload_file = $tmp_file->filename;
-			$im->Write( file => $tmp_file );
-			undef $im;
-			close( $tmp_file );
+			$new_size = scalar( $spin->get_value( ) );
 		}
-		else
+
+		my $tagsEntry = $gladexml->get_widget( 'TagsEntry' );
+		my $tags = $tagsEntry->get_text( );
+
+		my ( $is_public, $is_friend, $is_family ) = ( 1, 0, 0 );
+		my $radio = $gladexml->get_widget( "RadioFamily" );
+		if( $radio->get_active( ) )
 		{
-			warn 'Warning: fail to create a temporary file';
+			( $is_public, $is_friend, $is_family ) = ( 0, 0, 1 );
 		}
+		$radio = $gladexml->get_widget( "RadioFriends" );
+		if( $radio->get_active( ) )
+		{
+			( $is_public, $is_friend, $is_family ) = ( 0, 1, 0 );
+		}
+
+		# new picture for the upload thread
+		%thread_queue = (
+			'api_key' => $main::api->{'key'},
+			'api_secret' => $main::api->{'secret'},
+			'token' => $main::config->{'token'},
+			'is_public' => $is_public,
+			'is_friend' => $is_friend,
+			'is_family' => $is_family,
+			'tags' => $tags,
+			'title' => $file->[1],
+			'file' => $file->[2],
+			'resize' => $new_size
+			);
+
+		$progressBar->set_fraction( ( $total - $index ) / $total );
+
+		Glib::Idle->add( \&UploadFiles, $index-1 );
+		return 0;
 	}
 
-	my $tagsEntry = $gladexml->get_widget( 'TagsEntry' );
-	my $tags = $tagsEntry->get_text( );
-
-	my ( $is_public, $is_friend, $is_family ) = ( 1, 0, 0 );
-	my $radio = $gladexml->get_widget( "RadioFamily" );
-	if( $radio->get_active( ) )
-	{
-		( $is_public, $is_friend, $is_family ) = ( 0, 0, 1 );
-	}
-	$radio = $gladexml->get_widget( "RadioFriends" );
-	if( $radio->get_active( ) )
-	{
-		( $is_public, $is_friend, $is_family ) = ( 0, 1, 0 );
-	}
-
-	my $lpw = LWP::UserAgent->new();
-
-	my $signature = Digest::MD5::md5_hex(
-		$main::api->{'secret'} .'api_key' .$main::api->{'key'}
-		.'auth_token' .$main::config->{'token'}
-		.'is_family' .$is_family
-		.'is_friend' .$is_friend
-		.'is_public' .$is_public
-		.'tags' .$tags
-		.'title' .$file->[1] );
-
-	my $response = $lpw->post(
-		'http://api.flickr.com/services/upload/',
-		Content_Type => 'multipart/form-data',
-		Content => [
-			api_sig => $signature,
-			api_key => $main::api->{'key'},
-			auth_token => $main::config->{'token'},
-			title => $file->[1],
-			is_family => $is_family,
-			is_public => $is_public,
-			is_friend => $is_friend,
-			tags => $tags,
-			photo => [ $upload_file ] ] );
-
-	my $xml = XML::Parser::Lite::Tree::instance( )->parse( $response->content );
-
-	if( !$response->is_success ||
-		$xml->{children}[1]{attributes}{stat} ne 'ok')
-	{
-		warn "Warning: failed to upload " .$file->[1];
-	}
-	else
-	{
-		push( @IDS, $xml->{children}[1]{children}[1]{children}[0]{content} );
-	}
-
-	$progressBar->set_fraction( ( $total - $index ) / $total );
-
-	Glib::Idle->add( \&UploadFiles, $index-1 );
-
-	return 0;
+	return 1;
 }
 
 sub Init
@@ -370,8 +422,6 @@ sub Init
 	$slist->get_column( 2 )->set_visible( 0 );
 
 	@FILES = ExpandDirectories( @ARGV );
-
-	# TODO: login
 
 	Glib::Idle->add( \&LoadPhotos, $#FILES );
 

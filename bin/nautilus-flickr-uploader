@@ -19,6 +19,7 @@
 
 use strict;
 use warnings;
+use threads;
 
 use Locale::gettext;
 use Getopt::Long;
@@ -98,6 +99,10 @@ $main::config_file = ($XDG_CONFIG_HOME ? $XDG_CONFIG_HOME : $HOME .'/.config' )
 	.'/nautilus-flickr-uploader.yml';
 
 LoadConfiguration( );
+
+# this thread uploads the picures on demand
+my $upload_thread = threads->create( 'Upload::Thread' );
+$upload_thread->detach( );
 
 if( $account )
 {
