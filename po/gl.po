@@ -1,0 +1,144 @@
+# nautilus-flicker-uploader
+# Copyright (C) 2009 Juan J. Martinez <jjm@usebox.net>
+# This file is distributed under the same license as the nautilus-flicker-uploader package.
+# Juan J. Martinez, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus-flickr-uploader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-30 17:10+0200\n"
+"PO-Revision-Date: 2009-09-19 00:33+0200\n"
+"Last-Translator: David Rey <david.rey.costa at gmail dot com>\n"
+"Language-Team: Galician\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: UI/Account.glade.h:1
+msgid ""
+"<b>This program requires your authorization before it can upload your photos "
+"to Flickr.</b>"
+msgstr ""
+"<b>Este programa necesita da túa autorización antes de poder subi-las túas fotos "
+"a Flickr.</b>"
+
+#: UI/Account.glade.h:2
+msgid ""
+"<small>You must be connected to the Internet in order to authorize this "
+"program.</small>"
+msgstr ""
+"<small>Debes estar conectado a Internet para poder autoriza-lo programa.</small>"
+
+#: UI/Account.glade.h:3
+msgid ""
+"Authorizing is a simple process wich takes place in your web browser. When "
+"you're finished, return to this window to complete authorization and begin "
+"using <i>nautilus-flickr-uploader</i>."
+msgstr ""
+"A autorización é un proceso simple que se leva a cabo no teu navegador. "
+"Cando teñas terminado, volta a esta xanela a completar a autorización e "
+"comezar a usar <i>nautilus-flickr-uploader</i>."
+
+#: UI/Account.glade.h:4
+msgid "Nautilus Flickr Uploader - Flickr Authentication"
+msgstr "Nautilus Flickr Uploader - Autenticación en Flickr"
+
+#: UI/Account.glade.h:5
+msgid "_Next"
+msgstr "_Seguinte"
+
+#: UI/Upload.glade.h:1
+msgid "<b>Bulk Actions</b>"
+msgstr "<b>Accións en lote</b>"
+
+#: UI/Upload.glade.h:2
+msgid "<b>Flickr Account</b>"
+msgstr "<b>Conta en Flickr</b>"
+
+#: UI/Upload.glade.h:3
+msgid "<b>Privacy</b>"
+msgstr "<b>Privacidad</b>"
+
+#: UI/Upload.glade.h:4
+msgid "Change"
+msgstr "Cambiar"
+
+#: UI/Upload.glade.h:5
+msgid "Family"
+msgstr "Familia"
+
+#: UI/Upload.glade.h:6
+msgid "Friends"
+msgstr "Amigos"
+
+#: UI/Upload.glade.h:7
+msgid "Public"
+msgstr "Público"
+
+#: UI/Upload.glade.h:8
+msgid "Put your tags separated by spaces"
+msgstr "Pon as túas etiquetas separadas por espazos"
+
+#: UI/Upload.glade.h:9
+msgid "Resize:"
+msgstr "Redimensionar:"
+
+#: UI/Upload.glade.h:10
+msgid "Tags:"
+msgstr "Etiquetas:"
+
+#: UI/Upload.glade.h:11
+msgid "Upload Photos to Flickr"
+msgstr "Subir fotos a Flickr"
+
+#: UI/Upload.glade.h:12
+msgid "pixels"
+msgstr "pixeles"
+
+#: lib/Upload.pm:195
+msgid ""
+"The verification of you Flickr account\n"
+"has failed: "
+msgstr ""
+"A verificación da túa conta de Flickr\n"
+"fallou: "
+
+#: lib/Upload.pm:240
+msgid "<small>Something went wrong uploading the photos.</small>"
+msgstr "<small>Algo fallou subindo as fotos.</small>"
+
+#: lib/Upload.pm:379
+msgid "Authorizing..."
+msgstr "Autorizando..."
+
+#: lib/Upload.pm:389
+msgid "No account"
+msgstr "Sen conta"
+
+#: lib/Account/Callbacks.pm:66
+msgid ""
+"<b>Return to this window after you have finished the authorization process "
+"on Flickr.com</b>"
+msgstr ""
+"<b>Volta a esta xanela cando remates o proceso de autorización "
+"en Flickr.com</b>"
+
+#: lib/Account/Callbacks.pm:70
+msgid "Once you're done, please click the <i>Finish</i> button on this dialog."
+msgstr ""
+"Cando teñas terminado, fai click no botón <i>Finalizar</i> neste diálogo."
+
+#: lib/Account/Callbacks.pm:74
+msgid ""
+"<small>You can revoke this authorization at any time in you account page on "
+"Flickr.com.</small>"
+msgstr ""
+"<small>Podes revogar esta autorización en calquer momento na páxina da túa "
+"conta en Flickr.com.</small>"
+
+#: lib/Account/Callbacks.pm:79
+msgid "Finish"
+msgstr "Rematar"
+
