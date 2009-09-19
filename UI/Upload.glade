@@ -73,7 +73,7 @@
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox1">
+	<widget class="GtkHBox" id="MainBox">
 	  <property name="border_width">4</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>

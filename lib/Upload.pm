@@ -350,6 +350,12 @@ sub UploadFiles
 			my $errorLabel = $gladexml->get_widget( 'ErrorLabel' );
 			$errorLabel->set_markup( 
 				_( '<small>Something went wrong uploading the photos.</small>' ) );
+
+			my $box = $gladexml->get_widget( 'MainBox' );
+			$box->set_sensitive( 1 );
+
+			my $ok = $gladexml->get_widget( 'OkButton' );
+			$ok->set_sensitive( 1 );
 			return 0;
 		}
 

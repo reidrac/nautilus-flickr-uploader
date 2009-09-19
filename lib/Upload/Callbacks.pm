@@ -115,6 +115,9 @@ sub on_OkButton_clicked
 	my $ok = $gladexml->get_widget( 'OkButton' );
 	$ok->set_sensitive( 0 );
 
+	my $box = $gladexml->get_widget( 'MainBox' );
+	$box->set_sensitive( 0 );
+
 	my $progressBar = $gladexml->get_widget( 'ProgressBar' );
 	$progressBar->show( );
 
