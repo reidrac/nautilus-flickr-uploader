@@ -301,14 +301,29 @@ sub Thread
 				push( @IDS, $xml->{children}[1]{children}[1]{children}[0]{content} );
 			}
 
+			my $index = $thread_queue{'index'};
+
 			# we're done
 			undef %thread_queue;
+
+
 		}
 		else
 		{
 			threads->yield( );
 		}
 	}
+}
+
+sub ThreadPoll
+{
+	if( !%thread_queue )
+	{
+		Glib::Idle->add( \&UploadFiles, shift );
+		return 0;
+	}
+
+	return 1;
 }
 
 #
@@ -318,88 +333,83 @@ sub UploadFiles
 {
 	my $index = shift;
 
-	# only when the thread is idle
-	if ( ! %thread_queue )
+	if( $index < 0 )
 	{
-		if( $index < 0 )
-		{
-			my $progressBar = $gladexml->get_widget( 'ProgressBar' );
-			$progressBar->set_fraction( 0 );
-			$progressBar->set_text( '' );
-			$progressBar->hide( );
-
-			if( !scalar( @IDS ) )
-			{
-				my $errorBox = $gladexml->get_widget( 'ErrorBox' );
-				$errorBox->show( );
-				my $errorLabel = $gladexml->get_widget( 'ErrorLabel' );
-				$errorLabel->set_markup( 
-					_( '<small>Something went wrong uploading the photos.</small>' ) );
-				return 0;
-			}
-
-			Gtk2->main_quit;
-
-			Upload::Callbacks::SaveConfiguration( );
-
-			exec( 'xdg-open', 
-				'http://www.flickr.com/tools/uploader_edit.gne?ids='
-				. join( ',', @IDS ) );
-		}
-
-		my $list = $gladexml->get_widget( 'PhotoView' );
 		my $progressBar = $gladexml->get_widget( 'ProgressBar' );
+		$progressBar->set_fraction( 0 );
+		$progressBar->set_text( '' );
+		$progressBar->hide( );
 
-		my $file = $list->{data}->[$index];
-		my $total = scalar ( @{$list->{data}} );
-
-		$progressBar->set_text( $file->[1] );
-
-		my $new_size = 0;
-
-		my $resize = $gladexml->get_widget( 'ResizeCheckButton' );
-		if( $resize->get_active( ) )
+		if( !scalar( @IDS ) )
 		{
-			my $spin = $gladexml->get_widget( 'SizeSpinButton' );
-			$new_size = scalar( $spin->get_value( ) );
+			my $errorBox = $gladexml->get_widget( 'ErrorBox' );
+			$errorBox->show( );
+			my $errorLabel = $gladexml->get_widget( 'ErrorLabel' );
+			$errorLabel->set_markup( 
+				_( '<small>Something went wrong uploading the photos.</small>' ) );
+			return 0;
 		}
 
-		my $tagsEntry = $gladexml->get_widget( 'TagsEntry' );
-		my $tags = $tagsEntry->get_text( );
+		Gtk2->main_quit;
 
-		my ( $is_public, $is_friend, $is_family ) = ( 1, 0, 0 );
-		my $radio = $gladexml->get_widget( "RadioFamily" );
-		if( $radio->get_active( ) )
-		{
-			( $is_public, $is_friend, $is_family ) = ( 0, 0, 1 );
-		}
-		$radio = $gladexml->get_widget( "RadioFriends" );
-		if( $radio->get_active( ) )
-		{
-			( $is_public, $is_friend, $is_family ) = ( 0, 1, 0 );
-		}
+		Upload::Callbacks::SaveConfiguration( );
 
-		# new picture for the upload thread
-		%thread_queue = (
-			'api_key' => $main::api->{'key'},
-			'api_secret' => $main::api->{'secret'},
-			'token' => $main::config->{'token'},
-			'is_public' => $is_public,
-			'is_friend' => $is_friend,
-			'is_family' => $is_family,
-			'tags' => $tags,
-			'title' => $file->[1],
-			'file' => $file->[2],
-			'resize' => $new_size
-			);
-
-		$progressBar->set_fraction( ( $total - $index ) / $total );
-
-		Glib::Idle->add( \&UploadFiles, $index-1 );
-		return 0;
+		exec( 'xdg-open', 
+			'http://www.flickr.com/tools/uploader_edit.gne?ids='
+			. join( ',', @IDS ) );
 	}
 
-	return 1;
+	my $list = $gladexml->get_widget( 'PhotoView' );
+	my $progressBar = $gladexml->get_widget( 'ProgressBar' );
+
+	my $file = $list->{data}->[$index];
+	my $total = scalar ( @{$list->{data}} );
+
+	$progressBar->set_text( $file->[1] );
+
+	my $new_size = 0;
+
+	my $resize = $gladexml->get_widget( 'ResizeCheckButton' );
+	if( $resize->get_active( ) )
+	{
+		my $spin = $gladexml->get_widget( 'SizeSpinButton' );
+		$new_size = scalar( $spin->get_value( ) );
+	}
+
+	my $tagsEntry = $gladexml->get_widget( 'TagsEntry' );
+	my $tags = $tagsEntry->get_text( );
+
+	my ( $is_public, $is_friend, $is_family ) = ( 1, 0, 0 );
+	my $radio = $gladexml->get_widget( "RadioFamily" );
+	if( $radio->get_active( ) )
+	{
+		( $is_public, $is_friend, $is_family ) = ( 0, 0, 1 );
+	}
+	$radio = $gladexml->get_widget( "RadioFriends" );
+	if( $radio->get_active( ) )
+	{
+		( $is_public, $is_friend, $is_family ) = ( 0, 1, 0 );
+	}
+
+	# new picture for the upload thread
+	%thread_queue = (
+		'api_key' => $main::api->{'key'},
+		'api_secret' => $main::api->{'secret'},
+		'token' => $main::config->{'token'},
+		'is_public' => $is_public,
+		'is_friend' => $is_friend,
+		'is_family' => $is_family,
+		'tags' => $tags,
+		'title' => $file->[1],
+		'file' => $file->[2],
+		'resize' => $new_size,
+		);
+
+	$progressBar->set_fraction( ( $total - $index ) / $total );
+
+	Glib::Timeout->add( 250, 'Upload::ThreadPoll', $index-1 );
+
+	return 0;
 }
 
 sub Init
