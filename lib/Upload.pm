@@ -315,6 +315,9 @@ sub Thread
 	}
 }
 
+#
+# Check the thread queue each n msecs.
+#
 sub ThreadPoll
 {
 	if( !%thread_queue )
