@@ -118,6 +118,10 @@ sub on_OkButton_clicked
 	my $progressBar = $gladexml->get_widget( 'ProgressBar' );
 	$progressBar->show( );
 
+	# this thread uploads the picures on demand
+	my $upload_thread = threads->create( 'Upload::Thread' );
+	$upload_thread->detach( );
+
 	Glib::Idle->add( \&Upload::UploadFiles, $#{$list->{data}} );
 }
 
