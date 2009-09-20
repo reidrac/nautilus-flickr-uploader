@@ -658,6 +658,7 @@
 		  <property name="hover_selection">False</property>
 		  <property name="hover_expand">False</property>
 		  <signal name="key_release_event" handler="on_PhotoView_key_release_event" last_modification_time="Sat, 08 Aug 2009 16:46:41 GMT"/>
+		  <signal name="drag_data_received" handler="on_PhotoView_drag_data_received" last_modification_time="Sun, 20 Sep 2009 15:53:12 GMT"/>
 		</widget>
 	      </child>
 	    </widget>
