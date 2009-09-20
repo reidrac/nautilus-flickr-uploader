@@ -89,7 +89,11 @@ sub on_PhotoView_key_release_event
 		my @selected = $list->get_selected_indices( );
 		if( scalar( @selected ) )
 		{
-			splice( @{$list->{data}}, $selected[0], 1 );
+			@selected = sort { $b <=> $a } @selected;
+			foreach( @selected )
+			{
+				splice( @{$list->{data}}, $_, 1 );
+			}
 		}
 	}
 }
@@ -106,7 +110,7 @@ sub on_OkButton_clicked
 {
 	my $list = $gladexml->get_widget( 'PhotoView' );
 
-	if( !scalar( $list->{data} ) )
+	if( !scalar( @{$list->{data}} ) )
 	{
 		on_UploadDialog_close( );
 		return;

@@ -439,6 +439,7 @@ sub Init
 		    'path'     => 'text' );
 
 	$slist->get_column( 2 )->set_visible( 0 );
+	$slist->get_selection->set_mode( 'multiple' );
 
 	# we want to receive files from nautilus using drag and drop
 	$slist->drag_dest_set( ["drop","motion","highlight"],
