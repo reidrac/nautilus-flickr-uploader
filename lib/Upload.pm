@@ -440,6 +440,16 @@ sub Init
 
 	$slist->get_column( 2 )->set_visible( 0 );
 
+	# we want to receive files from nautilus using drag and drop
+	$slist->drag_dest_set( ["drop","motion","highlight"],
+		["copy","private","default","move","link","ask"] );
+
+	my $dndTargetList =Gtk2::TargetList->new( );
+	my $atom = Gtk2::Gdk::Atom->new("text/uri-list");
+
+	$dndTargetList->add( $atom, 0, 0 );
+	$slist->drag_dest_set_target_list( $dndTargetList );
+
 	@FILES = ExpandDirectories( @ARGV );
 
 	Glib::Idle->add( \&LoadPhotos, $#FILES );

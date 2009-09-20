@@ -128,4 +128,22 @@ sub on_OkButton_clicked
 	Glib::Idle->add( \&Upload::UploadFiles, $#{$list->{data}} );
 }
 
+sub on_PhotoView_drag_data_received
+{
+	my ($widget, $context, $widget_x, $widget_y, $data, $info, $time) = @_;
+	my @uris = $data->get_uris( );
+
+	foreach( @uris )
+	{
+		s/file:\/\///;
+	}
+
+	@Upload::FILES = Upload::ExpandDirectories( @uris );
+
+	my $progressBar = $gladexml->get_widget( 'ProgressBar' );
+	$progressBar->show( );
+
+	Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
+}
+
 1 ; 
