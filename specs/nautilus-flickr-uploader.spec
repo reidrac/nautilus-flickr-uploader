@@ -1,5 +1,5 @@
 Name:           nautilus-flickr-uploader
-Version:        0.03
+Version:        0.04
 Release:        1%{?dist}
 Summary:        Upload pics to Flickr from Nautilus
 
@@ -63,6 +63,8 @@ update-desktop-database %{_datadir}/applications &> /dev/null || :
 gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 
 %changelog
+* Thu Oct 15 2009 Juan J. Martinez <jjm@usebox.net> 0.04-1
+- added translations
 * Sun Sep 20 2009 Juan J. Martinez <jjm@usebox.net> 0.03-1
 - sync to upstream 0.03
 - added ga and de translations

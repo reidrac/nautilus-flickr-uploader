@@ -1,3 +1,8 @@
+* Thu Oct 15 2009 Juan J. Martinez <jjm@usebox.net> 0.04-1
+- NEW: polish translation, thanks to Piotr Drąg
+- NEW: gujarati translation, thanks to ankit
+- NEW: portuguese translation, thanks to Nuno Dias
+
 * Sun Sep 20 2009 Juan J. Martinez <jjm@usebox.net> 0.03-1
 - NEW: multiple selection and remove of photos in the upload list
 - NEW: drag and drop pictures/directories into the application
@@ -13,7 +18,8 @@
 - FIX: Gtk2::Gdk::Pixbuf->new_from_file is unable to handle UTF filenames
 - FIX: use strict, warnings at main
 - NEW: application icon
-- NEW: added preliminar gettext support (en, es, fr)
+- NEW: french translation, thanks to Alejandra Puerto
+- NEW: added preliminar gettext support (en, es)
 - FIX: save configuration changes (privacy, resize) after successfuly 
 uploading pictures 
 
