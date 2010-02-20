@@ -139,7 +139,9 @@ sub on_PhotoView_drag_data_received
 
 	foreach( @uris )
 	{
-        warn "Warning: unsupported URI: $_" unless s/file:\/\///;
+		# unscape URIs
+		s/%([0-9A-Fa-f]{2})/chr(hex($1))/eg;
+		warn "Warning: unsupported URI: $_" unless s/file:\/\///;
 	}
 
 	@Upload::FILES = Upload::ExpandDirectories( @uris );
