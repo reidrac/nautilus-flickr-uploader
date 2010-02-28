@@ -1,5 +1,5 @@
 Name:           nautilus-flickr-uploader
-Version:        0.04
+Version:        0.05
 Release:        1%{?dist}
 Summary:        Upload pics to Flickr from Nautilus
 
@@ -44,7 +44,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(-,root,root,-)
 %doc README TODO Changes COPYING INSTALL
-%{_bindir}/nautilus-flickr-uploader
+%{_bindir}/%{name}
 %{_datadir}/%{name}/
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
@@ -62,7 +62,10 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 update-desktop-database %{_datadir}/applications &> /dev/null || :
 gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 
+
 %changelog
+* Sun Feb 28 2010 Juan J. Martinez <jjm@usebox.net> 0.05-1
+- sync to upstream 0.05
 * Thu Oct 15 2009 Juan J. Martinez <jjm@usebox.net> 0.04-1
 - added translations
 * Sun Sep 20 2009 Juan J. Martinez <jjm@usebox.net> 0.03-1

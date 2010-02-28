@@ -1,3 +1,7 @@
+* Sun Feb 28 2010 Juan J. Martinez <jjm@usebox.net> 0.05-1
+- FIX: disable upload button when photo list is empty
+- FIX: unscape URIs from drag & drop
+
 * Thu Oct 15 2009 Juan J. Martinez <jjm@usebox.net> 0.04-1
 - NEW: polish translation, thanks to Piotr Drąg
 - NEW: gujarati translation, thanks to ankit
@@ -11,7 +15,7 @@
 - NEW: use a thread to upload the pictures, so the UI doesn't freeze
 - NEW: de translation, thanks to Marcus Nitzschke
 - FIX: 'Flickr' mistypes, reported by Marcus Nitzschke
-- FIX: corrections by Vincent Préau
+- FIX: fr corrections by Vincent Préau
 
 * Fri Sep 4 2009 Juan J. Martinez <jjm@usebox.net> 0.02-1
 - FIX: you need to decode the gettext output
