@@ -12,6 +12,8 @@ modules (and its dependencies):
    LWP::UserAgent
    Locale::gettext
 
+If you install from source, you may need msgfmt too (from gettext package).
+
 INSTALLATION
 
 To install this software type the following command as root:
