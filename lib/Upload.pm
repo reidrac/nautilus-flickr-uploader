@@ -288,17 +288,24 @@ sub Thread
 					tags => $thread_queue{'tags'},
 					photo => [ $upload_file ] ] );
 
-			my $xml = XML::Parser::Lite::Tree::instance( )->parse( $response->content );
-
-			if( !$response->is_success ||
-				$xml->{children}[1]{attributes}{stat} ne 'ok')
+			if( $response->is_success )
 			{
-				warn "Warning: failed to upload " .$thread_queue{'title'}
-					.': ' .$xml->{children}[1]{children}[1]{attributes}{msg};
+			    my $xml = XML::Parser::Lite::Tree::instance( )->parse( $response->content );
+			    
+			    if( !$response->is_success ||
+				    $xml->{children}[1]{attributes}{stat} ne 'ok')
+			    {
+				    warn "Warning: failed to upload " .$thread_queue{'title'}
+					    .': ' .$xml->{children}[1]{children}[1]{attributes}{msg};
+			    }
+			    else
+			    {
+				    push( @IDS, $xml->{children}[1]{children}[1]{children}[0]{content} );
+			    }
 			}
 			else
 			{
-				push( @IDS, $xml->{children}[1]{children}[1]{children}[0]{content} );
+				warn "Warning: failed to post to api.flickr.com: " .$response->status_line;
 			}
 
 			my $index = $thread_queue{'index'};
