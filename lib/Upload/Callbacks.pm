@@ -20,7 +20,7 @@ package Upload::Callbacks;
 use strict;
 use warnings;
 
-use vars qw( $gladexml );
+use vars qw( $gladexml $upload_thread );
 
 use Gtk2::Gdk::Keysyms;
 use YAML 'DumpFile';
@@ -28,6 +28,7 @@ use YAML 'DumpFile';
 sub Init
 {
 	$gladexml = $Upload::gladexml;
+	$upload_thread = undef;
 }
 
 sub SaveConfiguration()
@@ -133,8 +134,11 @@ sub on_OkButton_clicked
 	$progressBar->show( );
 
 	# this thread uploads the picures on demand
-	my $upload_thread = threads->create( 'Upload::Thread' );
-	$upload_thread->detach( );
+	if( !$upload_thread )
+	{
+	    $upload_thread = threads->create( 'Upload::Thread' );
+	    $upload_thread->detach( );
+	}
 
 	Glib::Idle->add( \&Upload::UploadFiles, $#{$list->{data}} );
 }
