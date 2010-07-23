@@ -259,7 +259,7 @@ sub Thread
 				}
 				else
 				{
-					warn 'Warning: fail to create a temporary file';
+					warn 'Warning: failed to create a temporary file';
 				}
 			}
 
@@ -278,7 +278,7 @@ sub Thread
 				'http://api.flickr.com/services/upload/',
 				Content_Type => 'multipart/form-data',
 				Content => [
-					api_sig => $signature ,
+					api_sig => $signature,
 					api_key => $thread_queue{'api_key'},
 					auth_token => $thread_queue{'token'},
 					title => $thread_queue{'title'},
@@ -312,8 +312,6 @@ sub Thread
 
 			# we're done
 			undef %thread_queue;
-
-
 		}
 		else
 		{
