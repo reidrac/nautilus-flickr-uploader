@@ -35,7 +35,7 @@ use Locale::gettext;
 
 use Gtk2 '-init' ;
 use Gtk2::GladeXML;
-use Gtk2::SimpleList;
+use Gtk2::Ex::Simple::List;
 
 use File::Basename;
 use File::Temp;
@@ -437,7 +437,7 @@ sub Init
 
 	$gladexml->signal_autoconnect_from_package( 'Upload::Callbacks' );
 
-	my $slist = Gtk2::SimpleList->new_from_treeview (
+	my $slist = Gtk2::Ex::Simple::List->new_from_treeview (
 	            $gladexml->get_widget( 'PhotoView' ),
 	            'image'    => 'pixbuf',
 		    'name'     => 'text',

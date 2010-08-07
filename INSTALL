@@ -3,7 +3,8 @@ REQUIRED
 Before installing this software, please check you have installed following
 modules (and its dependencies):
 
-   Gtk2 (with Gtk2::SimpleList)
+   Gtk2
+   Gtk2::Ex::Simple::List
    Gtk2::GladeXML
    YAML
    Flickr::API

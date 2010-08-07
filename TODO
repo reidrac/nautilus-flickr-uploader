@@ -2,4 +2,3 @@
 - Package support for DEB
 - Remove pictures from the list with Drag and Drop
 - More translations to the desktop file
-- Don't use Gtk2::SimpleList anymore
