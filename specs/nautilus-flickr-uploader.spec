@@ -64,7 +64,7 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 
 
 %changelog
-* xxx yyy zz 2010 Juan J. Martinez <jjm@usebox.net> 0.06-1
+* Sun Aug 8 2010 Juan J. Martinez <jjm@usebox.net> 0.06-1
 - sync to upstream 0.06
 - Gtk2::Ex::Simple::List instead of deprecated Gtk2::SimpleList
 - added translations

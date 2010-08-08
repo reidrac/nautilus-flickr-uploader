@@ -1,3 +1,9 @@
+* Sun Aug 8 2010 Juan J. Martinez <jjm@usebox.net> 0.06-1
+- NEW: arab translation, thanks to MaXeR
+- FIX: in case of error, don't create a new thread in next attempt
+- FIX: better error handling in case the HTTP POST fails
+- NEW: use Gtk2::Ex::Simple::List instead of deprecated Gtk2::SimpleList
+
 * Sun Feb 28 2010 Juan J. Martinez <jjm@usebox.net> 0.05-1
 - FIX: disable upload button when photo list is empty
 - FIX: unscape URIs from drag & drop
