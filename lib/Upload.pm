@@ -265,6 +265,10 @@ sub Thread
 
 			my $lpw = LWP::UserAgent->new();
 
+			# use the filename if the title is empty
+			my $title = $thread_queue{'title'} ? 
+				$thread_queue{'title'} : basename( $thread_queue{'file'} );
+
 			my $signature = Digest::MD5::md5_hex(
 				$thread_queue{'api_secret'} .'api_key' .$thread_queue{'api_key'}
 				.'auth_token' .$thread_queue{'token'}
@@ -272,7 +276,7 @@ sub Thread
 				.'is_friend' .$thread_queue{'is_friend'}
 				.'is_public' .$thread_queue{'is_public'}
 				.'tags' .$thread_queue{'tags'}
-				.'title' .$thread_queue{'title'} );
+				.'title' .$title );
 
 			my $response = $lpw->post(
 				'http://api.flickr.com/services/upload/',
@@ -281,7 +285,7 @@ sub Thread
 					api_sig => $signature,
 					api_key => $thread_queue{'api_key'},
 					auth_token => $thread_queue{'token'},
-					title => $thread_queue{'title'},
+					title => $title,
 					is_family => $thread_queue{'is_family'},
 					is_public => $thread_queue{'is_public'},
 					is_friend => $thread_queue{'is_friend'},
@@ -379,7 +383,7 @@ sub UploadFiles
 	my $file = $list->{data}->[$index];
 	my $total = scalar ( @{$list->{data}} );
 
-	$progressBar->set_text( $file->[1] );
+	$progressBar->set_text( basename( $file->[2] ) );
 
 	my $new_size = 0;
 
@@ -444,6 +448,7 @@ sub Init
 		    'path'     => 'text' );
 
 	$slist->get_column( 2 )->set_visible( 0 );
+	$slist->set_column_editable ( 1, 1 );
 	$slist->get_selection->set_mode( 'multiple' );
 
 	# we want to receive files from nautilus using drag and drop
