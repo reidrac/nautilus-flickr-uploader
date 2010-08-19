@@ -312,8 +312,6 @@ sub Thread
 				warn "Warning: failed to post to api.flickr.com: " .$response->status_line;
 			}
 
-			my $index = $thread_queue{'index'};
-
 			# we're done
 			undef %thread_queue;
 		}
