@@ -314,6 +314,7 @@ sub Thread
 
 			# we're done
 			undef %thread_queue;
+			threads->yield( );
 		}
 		else
 		{
