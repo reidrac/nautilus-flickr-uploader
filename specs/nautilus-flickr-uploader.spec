@@ -1,5 +1,5 @@
 Name:           nautilus-flickr-uploader
-Version:        0.06
+Version:        0.07
 Release:        1%{?dist}
 Summary:        Upload pics to Flickr from Nautilus
 
@@ -64,6 +64,8 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 
 
 %changelog
+* Thu Aug 26 2010 Juan J. Martinez <jjm@usebox.net> 0.07-1
+- sync to upstream 0.07
 * Sun Aug 8 2010 Juan J. Martinez <jjm@usebox.net> 0.06-1
 - sync to upstream 0.06
 - Gtk2::Ex::Simple::List instead of deprecated Gtk2::SimpleList
