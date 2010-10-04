@@ -2,7 +2,7 @@
 # Copyright (C) 2009 Juan J. Martinez <jjm@usebox.net>
 # This file is distributed under the same license as the nautilus-flicker-uploader package.
 # Juan J. Martinez, 2009.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-flickr-uploader\n"
@@ -37,7 +37,7 @@ msgstr "_Далее"
 
 #: UI/Upload.glade.h:1
 msgid "<b>Bulk Actions</b>"
-msgstr "<b>Bulk Actions</b>"
+msgstr "<b>Подписи</b>"
 
 #: UI/Upload.glade.h:2
 msgid "<b>Flickr Account</b>"
@@ -116,4 +116,3 @@ msgstr "<small>Вы можете отменить авторизацию в лю
 #: lib/Account/Callbacks.pm:79
 msgid "Finish"
 msgstr "Завершить"
-
