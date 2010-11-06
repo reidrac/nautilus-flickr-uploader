@@ -253,9 +253,9 @@ sub Thread
 					$im->Resize( geometry => $thread_queue{'resize'} );
 
 					$upload_file = $tmp_file->filename;
-					$im->Write( file => $tmp_file );
-					undef $im;
+					$im->Write( file => $tmp_file, filename => $upload_file );
 					close( $tmp_file );
+					undef $im;
 				}
 				else
 				{
