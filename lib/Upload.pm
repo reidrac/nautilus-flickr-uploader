@@ -49,6 +49,7 @@ our ( @FILES, $accountVerified, $thumbsOk );
 
 my @IDS : shared;
 my %thread_queue : shared;
+my $thread_mutex : shared;
 
 sub _
 {
@@ -235,15 +236,19 @@ sub Thread
 	while( 1 )
 	{
 		# there's a picture to upload?
-		if( %thread_queue )
+		if( $thread_mutex && %thread_queue )
 		{
+			$thread_mutex = 0;
+
 			my $tmp_file;
 			my $upload_file = $thread_queue{'file'};
 
 			# zero size means don't resize at all
 			if( $thread_queue{'resize'} )
 			{
-				$tmp_file = File::Temp->new( UNLINK => 1, TMPDIR => 1 );
+				$tmp_file = File::Temp->new(
+					TEMPLATE => 'NFU_resize_XXXXX',
+					UNLINK => 1, TMPDIR => 1 );
 				if( $tmp_file )
 				{
 					# TODO: error checking
@@ -290,7 +295,9 @@ sub Thread
 					is_public => $thread_queue{'is_public'},
 					is_friend => $thread_queue{'is_friend'},
 					tags => $thread_queue{'tags'},
-					photo => [ $upload_file ] ] );
+					photo => [ $upload_file,
+						basename( $thread_queue{'file'} ),
+					 ], ] );
 
 			if( $response->is_success )
 			{
@@ -421,6 +428,8 @@ sub UploadFiles
 		'file' => $file->[2],
 		'resize' => $new_size,
 		);
+
+	$thread_mutex = 1;
 
 	$progressBar->set_fraction( ( $total - $index ) / $total );
 
