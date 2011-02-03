@@ -404,15 +404,17 @@ sub UploadFiles
 	my $tags = $tagsEntry->get_text( );
 
 	my ( $is_public, $is_friend, $is_family ) = ( 1, 0, 0 );
-	my $radio = $gladexml->get_widget( "RadioFamily" );
+
+	my $radio = $gladexml->get_widget( "RadioPrivate" );
 	if( $radio->get_active( ) )
 	{
-		( $is_public, $is_friend, $is_family ) = ( 0, 0, 1 );
-	}
-	$radio = $gladexml->get_widget( "RadioFriends" );
-	if( $radio->get_active( ) )
-	{
-		( $is_public, $is_friend, $is_family ) = ( 0, 1, 0 );
+		$is_public = 0;
+
+		my $friends = $gladexml->get_widget( 'PrivateFriends' );
+		$is_friend = $friends->get_active( );
+
+		my $family = $gladexml->get_widget( 'PrivateFamily' );
+		$is_family = $family->get_active( );
 	}
 
 	# new picture for the upload thread
@@ -492,14 +494,26 @@ sub Init
 		$account->set_text( _( 'No account' ) );
 	}
 
-	my $radioButton = 'RadioPublic';
-	if ( $conf->{'privacy'} eq 'friends' )
+	my $friends = $gladexml->get_widget( 'PrivateFriends' );
+	$friends->set_sensitive( 0 );
+	if ( $conf->{'friends'} eq 'yes' )
 	{
-		$radioButton = 'RadioFriends';
+		$friends->set_active( 1 );
 	}
-	elsif ( $conf->{'privacy'} eq 'family' )
+
+	my $family = $gladexml->get_widget( 'PrivateFamily' );
+	$family->set_sensitive( 0 );
+	if ( $conf->{'family'} eq 'yes' )
 	{
-		$radioButton = 'RadioFamily';
+		$family->set_active( 1 );
+	}
+
+	my $radioButton = 'RadioPublic';
+	if ( $conf->{'privacy'} eq 'private' )
+	{
+		$radioButton = 'RadioPrivate';
+		$friends->set_sensitive( 1 );
+		$family->set_sensitive( 1 );
 	}
 	my $radio = $gladexml->get_widget( $radioButton );
 	$radio->set_active( 1 );

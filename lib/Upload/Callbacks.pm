@@ -37,15 +37,25 @@ sub SaveConfiguration()
 	my $conf = $main::config;
 
 	$conf->{'privacy'} = 'public';
-	my $radio = $gladexml->get_widget( 'RadioFriends' );
+	$conf->{'family'} = 'no';
+	$conf->{'friends'} = 'no';
+
+	my $radio = $gladexml->get_widget( 'RadioPrivate' );
 	if( $radio->get_active( ) )
 	{
-		$conf->{'privacy'} = 'friends';
+		$conf->{'privacy'} = 'private';
 	}
-	$radio = $gladexml->get_widget( 'RadioFamily' );
-	if( $radio->get_active( ) )
+
+	my $family = $gladexml->get_widget( 'PrivateFamily' );
+	if( $family->get_active( ) )
 	{
-		$conf->{'privacy'} = 'family';
+		$conf->{'family'} = 'yes';
+	}
+
+	my $friends = $gladexml->get_widget( 'PrivateFriends' );
+	if( $friends->get_active( ) )
+	{
+		$conf->{'friends'} = 'yes';
 	}
 
 	my $spin = $gladexml->get_widget( 'SizeSpinButton' );
@@ -161,6 +171,17 @@ sub on_PhotoView_drag_data_received
 	$progressBar->show( );
 
 	Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
+}
+
+sub on_RadioPublic_toggled
+{
+	my $widget = shift;
+	my $private = !$widget->get_active( );
+
+	my $friends = $gladexml->get_widget( 'PrivateFriends' );
+	$friends->set_sensitive( $private );
+	my $family = $gladexml->get_widget( 'PrivateFamily' );
+	$family->set_sensitive( $private );
 }
 
 1 ; 

@@ -69,6 +69,8 @@ sub LoadConfiguration()
 username:
 token:
 privacy: public
+family: no
+friends: no
 resize: no
 size: 1024
 EndOfConf
