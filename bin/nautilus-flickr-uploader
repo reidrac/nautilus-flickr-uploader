@@ -37,6 +37,7 @@ sub Help
 {
 	print <<EOH
 $APPNAME v$VERSION
+Copyright (C) 2009-2011  Juan J. Martinez <jjm\@usebox.net>
 
 Usage:
 
@@ -48,6 +49,8 @@ Options:
    --account    Show account dialog
 
 This product uses the Flickr API but is not endorsed or certified by Flickr.
+
+Project URL: http://www.usebox.net/jjm/nautilus-flickr-uploader/
 
 EOH
 
