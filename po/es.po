@@ -141,3 +141,10 @@ msgstr ""
 #: lib/Account/Callbacks.pm:79
 msgid "Finish"
 msgstr "Finalizar"
+
+msgid "Add files to upload"
+msgstr "Añadir ficheros para subir"
+
+msgid "Image files"
+msgstr "Ficheros de imágenes"
+

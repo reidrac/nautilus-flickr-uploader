@@ -134,3 +134,9 @@ msgstr "<small>તમે તમારા Flickr.com ના ખાતા પા�
 msgid "Finish"
 msgstr "સમાપ્ત"
 
+msgid "Add files to upload"
+msgstr "Add files to upload"
+
+msgid "Image files"
+msgstr "Image files"
+

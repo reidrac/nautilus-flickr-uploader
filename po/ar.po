@@ -117,3 +117,10 @@ msgstr "<small>يمكنك إلغاء التوثيق في أي وقت من خلا
 #: lib/Account/Callbacks.pm:79
 msgid "Finish"
 msgstr "إنهاء"
+
+msgid "Add files to upload"
+msgstr "Add files to upload"
+
+msgid "Image files"
+msgstr "Image files"
+

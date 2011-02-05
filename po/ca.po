@@ -117,3 +117,9 @@ msgstr ""
 msgid "Finish"
 msgstr "Finalitza"
 
+msgid "Add files to upload"
+msgstr "Afegir fitxers per a pujar"
+
+msgid "Image files"
+msgstr "Fitxers de imatges"
+

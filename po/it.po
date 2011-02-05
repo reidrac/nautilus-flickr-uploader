@@ -121,3 +121,9 @@ msgstr "<small>È possibile revocare questa autorizzazione in qualsiasi momento 
 msgid "Finish"
 msgstr "Termina"
 
+msgid "Add files to upload"
+msgstr "Add files to upload"
+
+msgid "Image files"
+msgstr "Image files"
+

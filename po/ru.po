@@ -116,3 +116,10 @@ msgstr "<small>Вы можете отменить авторизацию в лю
 #: lib/Account/Callbacks.pm:79
 msgid "Finish"
 msgstr "Завершить"
+
+msgid "Add files to upload"
+msgstr "Add files to upload"
+
+msgid "Image files"
+msgstr "Image files"
+
