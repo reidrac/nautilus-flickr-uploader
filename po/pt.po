@@ -143,8 +143,8 @@ msgid "Finish"
 msgstr "Concluir"
 
 msgid "Add files to upload"
-msgstr "Add files to upload"
+msgstr ""
 
 msgid "Image files"
-msgstr "Image files"
+msgstr ""
 
