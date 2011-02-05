@@ -106,12 +106,12 @@ sub on_PhotoView_key_release_event
 				splice( @{$list->{data}}, $_, 1 );
 			}
             
-            # disable OK button if there aren't photos to upload
-            if( !scalar( @{$list->{data}} ) )
-            {
-                my $ok = $gladexml->get_widget( 'OkButton' );
-                $ok->set_sensitive( 0 );
-            }
+            		# disable OK button if there aren't photos to upload
+            		if( !scalar( @{$list->{data}} ) )
+            		{
+                		my $ok = $gladexml->get_widget( 'OkButton' );
+                		$ok->set_sensitive( 0 );
+            		}
 		}
 	}
 }
@@ -133,6 +133,9 @@ sub on_OkButton_clicked
 		on_UploadDialog_close( );
 		return;
 	}
+
+	my $add = $gladexml->get_widget( 'AddPicButton' );
+	$add->set_sensitive( 0 );
 
 	my $ok = $gladexml->get_widget( 'OkButton' );
 	$ok->set_sensitive( 0 );
@@ -182,6 +185,59 @@ sub on_RadioPublic_toggled
 	$friends->set_sensitive( $private );
 	my $family = $gladexml->get_widget( 'PrivateFamily' );
 	$family->set_sensitive( $private );
+}
+
+sub on_AddPicButton_clicked
+{
+	my $widget = shift;
+	my $dialog = Gtk2::FileChooserDialog->new( _('Add files to upload'),
+		$widget->get_toplevel( ), 'open', ( 'gtk-add', 'ok'),
+			('gtk-cancel', 'cancel') );
+
+	my $filter = Gtk2::FileFilter->new( );
+	$filter->set_name( _('Image files') );
+	$filter->add_mime_type('image/jpeg');
+	$filter->add_mime_type('image/gif');
+	$filter->add_mime_type('image/png');
+
+	$dialog->add_filter( $filter );
+	$dialog->set_select_multiple( 1 );
+
+	my $preview = Gtk2::Image->new( );
+	$dialog->set_preview_widget( $preview );
+	$dialog->signal_connect( update_preview => sub {
+		$dialog->set_preview_widget_active( 0 );
+		my $filename = $dialog->get_preview_filename( );
+		if( !$filename || ! -f $filename )
+		{
+			return;
+		}
+		
+		my $image;
+		eval
+		{
+			$image = Gtk2::Gdk::Pixbuf->new_from_file_at_scale(
+				$filename, 192, 192, 1 );
+		};
+		if( !$@ && $image )
+		{
+			$preview->set_from_pixbuf( $image );
+			$dialog->set_preview_widget_active( 1 );
+		}
+	});
+
+	if( $dialog->run( ) eq 'ok' )
+	{
+		my @files = $dialog->get_filenames( );
+		@Upload::FILES = Upload::ExpandDirectories( @files );
+
+		my $progressBar = $gladexml->get_widget( 'ProgressBar' );
+		$progressBar->show( );
+
+		Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
+	}
+
+	$dialog->destroy( );
 }
 
 1 ; 

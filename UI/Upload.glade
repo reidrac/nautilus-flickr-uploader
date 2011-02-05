@@ -390,20 +390,52 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkScrolledWindow" id="ScrollPhotos">
+              <widget class="GtkVBox" id="vbox4">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hscrollbar_policy">automatic</property>
-                <property name="vscrollbar_policy">automatic</property>
-                <property name="shadow_type">in</property>
+                <property name="orientation">vertical</property>
                 <child>
-                  <widget class="GtkTreeView" id="PhotoView">
+                  <widget class="GtkAlignment" id="alignment6">
+                    <property name="visible">True</property>
+                    <property name="xalign">1</property>
+                    <property name="xscale">0</property>
+                    <child>
+                      <widget class="GtkButton" id="AddPicButton">
+                        <property name="label">gtk-add</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="relief">none</property>
+                        <property name="use_stock">True</property>
+                        <property name="focus_on_click">False</property>
+                        <signal name="clicked" handler="on_AddPicButton_clicked"/>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkScrolledWindow" id="ScrollPhotos">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="headers_visible">False</property>
-                    <signal name="drag_data_received" handler="on_PhotoView_drag_data_received"/>
-                    <signal name="key_release_event" handler="on_PhotoView_key_release_event"/>
+                    <property name="hscrollbar_policy">automatic</property>
+                    <property name="vscrollbar_policy">automatic</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <widget class="GtkTreeView" id="PhotoView">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="headers_visible">False</property>
+                        <signal name="drag_data_received" handler="on_PhotoView_drag_data_received"/>
+                        <signal name="key_release_event" handler="on_PhotoView_key_release_event"/>
+                      </widget>
+                    </child>
                   </widget>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
               </widget>
               <packing>

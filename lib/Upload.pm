@@ -369,6 +369,9 @@ sub UploadFiles
 			my $box = $gladexml->get_widget( 'MainBox' );
 			$box->set_sensitive( 1 );
 
+			my $add = $gladexml->get_widget( 'AddPicButton' );
+			$add->set_sensitive( 1 );
+
 			my $ok = $gladexml->get_widget( 'OkButton' );
 			$ok->set_sensitive( 1 );
 			return 0;
