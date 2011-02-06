@@ -1,4 +1,4 @@
-* ?
+* Sun Feb 6 2011 Juan J. Martinez <jjm@usebox.net> 0.09-1
 - NEW: Add button to open a file chooser dialog to add new files to
 the upload list
 - FIX: Better privacy support providing the same functionality as Flickr
