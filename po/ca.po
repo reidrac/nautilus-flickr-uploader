@@ -123,3 +123,6 @@ msgstr "Afegir fitxers per a pujar"
 msgid "Image files"
 msgstr "Fitxers de imatges"
 
+msgid "Private"
+msgstr ""
+

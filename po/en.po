@@ -147,3 +147,6 @@ msgstr "Add files to upload"
 msgid "Image files"
 msgstr "Image files"
 
+msgid "Private"
+msgstr "Private"
+

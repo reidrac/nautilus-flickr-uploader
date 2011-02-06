@@ -75,7 +75,7 @@ msgstr "Amigos"
 
 #: UI/Upload.glade.h:7
 msgid "Public"
-msgstr "Publico"
+msgstr "Público"
 
 #: UI/Upload.glade.h:8
 msgid "Put your tags separated by spaces"
@@ -147,4 +147,7 @@ msgstr "Añadir ficheros para subir"
 
 msgid "Image files"
 msgstr "Ficheros de imágenes"
+
+msgid "Private"
+msgstr "Privado"
 
