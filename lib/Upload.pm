@@ -469,6 +469,8 @@ sub Init
 	};
 	if( !$@ && $service )
 	{
+		exit( 0 ) if( !@ARGV );
+
 		my $ob = $service->get_object( '/net/usebox/nautilusFlickrUploader',
 			'net.usebox.nautilusFlickrUploader.remote' );
 		my $res = $ob->add( join( '*', @ARGV ) );
