@@ -12,6 +12,8 @@ modules (and its dependencies):
    Image::Magick
    LWP::UserAgent
    Locale::gettext
+   Net::DBus
+   Net::DBus::GLib
 
 If you install from source, you may need msgfmt too (from gettext package).
 

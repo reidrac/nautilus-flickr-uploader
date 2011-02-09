@@ -29,9 +29,12 @@ use Upload::Callbacks;
 require Exporter;
 use vars qw ( @EXPORT_OK );
 @EXPORT_OK = qw ( $gladexml );
-use vars qw( $gladexml );
+use vars qw( $gladexml $sdbus $serviceObject $busy );
 
 use Locale::gettext;
+
+use Net::DBus::GLib;
+use Service;
 
 use Gtk2 '-init' ;
 use Gtk2::GladeXML;
@@ -139,8 +142,20 @@ sub LoadPhotos
 
 		$thumbsOk = 1;
 
+		$busy = 0;
+		my $add = $gladexml->get_widget( 'AddPicButton' );
+		$add->set_sensitive( 1 );
+		my $change = $gladexml->get_widget( 'ChangeUserButton' );
+		$change->set_sensitive( 1 );
+
 		return 0;
 	}
+
+	$busy = 1;
+	my $add = $gladexml->get_widget( 'AddPicButton' );
+	$add->set_sensitive( 0 );
+	my $change = $gladexml->get_widget( 'ChangeUserButton' );
+	$change->set_sensitive( 0 );
 
 	my $file = $FILES[ $index ];
 
@@ -445,10 +460,30 @@ sub UploadFiles
 
 sub Init
 {
+	$sdbus = Net::DBus::GLib->session;
+
+	my $service;
+	eval
+	{
+		$service = $sdbus->get_service( 'net.usebox.nautilusFlickrUploader' );
+	};
+	if( !$@ && $service )
+	{
+		my $ob = $service->get_object( '/net/usebox/nautilusFlickrUploader',
+			'net.usebox.nautilusFlickrUploader.remote' );
+		my $res = $ob->add( join( '*', @ARGV ) );
+		warn 'remote service failed while submitting files' if !$res;
+		exit( $res != 1 );
+	}
+
+	$service = $sdbus->export_service( 'net.usebox.nautilusFlickrUploader' );
+	$serviceObject = Service->new($service);
+
 	$gladexml = Gtk2::GladeXML->new( './UI/Upload.glade' );
 
 	$accountVerified = 0;
 	$thumbsOk = 0;
+	$busy = 0;
 
 	Upload::Callbacks::Init( );
 

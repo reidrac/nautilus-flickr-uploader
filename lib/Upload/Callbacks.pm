@@ -158,6 +158,11 @@ sub on_OkButton_clicked
 
 sub on_PhotoView_drag_data_received
 {
+	if( $Upload::busy )
+	{
+		return;
+	}
+
 	my ($widget, $context, $widget_x, $widget_y, $data, $info, $time) = @_;
 	my @uris = $data->get_uris( );
 
@@ -189,6 +194,8 @@ sub on_RadioPublic_toggled
 
 sub on_AddPicButton_clicked
 {
+	$Upload::busy = 1;
+
 	my $widget = shift;
 	my $dialog = Gtk2::FileChooserDialog->new( _('Add files to upload'),
 		$widget->get_toplevel( ), 'open', ( 'gtk-add', 'ok'),
@@ -238,6 +245,8 @@ sub on_AddPicButton_clicked
 	}
 
 	$dialog->destroy( );
+
+	$Upload::busy = 0;
 }
 
 1 ; 
