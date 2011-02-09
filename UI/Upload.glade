@@ -11,6 +11,7 @@
     <property name="icon_name">nautilus-flickr-uploader</property>
     <property name="type_hint">dialog</property>
     <property name="has_separator">True</property>
+    <signal name="focus_in_event" handler="on_UploadDialog_focus_in_event"/>
     <signal name="delete_event" handler="on_UploadDialog_close"/>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox1">

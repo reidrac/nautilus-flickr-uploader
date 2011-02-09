@@ -53,6 +53,9 @@ sub add
 
 	Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
 
+	my $window = $Upload::gladexml->get_widget( 'UploadDialog' );
+	$window->set_urgency_hint( 1 );
+
 	return 1;
 }
 

@@ -79,6 +79,12 @@ sub on_UploadDialog_close
 	SaveConfiguration( );
 }
 
+sub on_UploadDialog_focus_in_event
+{
+	my $window = $gladexml->get_widget( 'UploadDialog' );
+	$window->set_urgency_hint( 0 );
+}
+
 sub on_ResizeCheckButton_toggled
 {
 	my $check = $gladexml->get_widget( 'ResizeCheckButton' );
