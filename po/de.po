@@ -120,12 +120,13 @@ msgstr "<small>Sie können die Autorisierung jederzeit auf ihrer Konto-Seite auf
 msgid "Finish"
 msgstr "Abschließen"
 
+# Needs review
 msgid "Add files to upload"
-msgstr ""
+msgstr "Dateien hinzufügen"
 
 msgid "Image files"
-msgstr ""
+msgstr "Bilddateien"
 
 msgid "Private"
-msgstr ""
+msgstr "Privat"
 

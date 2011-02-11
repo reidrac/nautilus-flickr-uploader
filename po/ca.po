@@ -124,5 +124,5 @@ msgid "Image files"
 msgstr "Fitxers de imatges"
 
 msgid "Private"
-msgstr ""
+msgstr "Privat"
 

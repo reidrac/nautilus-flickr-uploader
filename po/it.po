@@ -122,11 +122,11 @@ msgid "Finish"
 msgstr "Termina"
 
 msgid "Add files to upload"
-msgstr ""
+msgstr "Seleziona file da aggiungere"
 
 msgid "Image files"
-msgstr ""
+msgstr "File immagine"
 
 msgid "Private"
-msgstr ""
+msgstr "Privato"
 

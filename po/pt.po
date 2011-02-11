@@ -142,12 +142,13 @@ msgstr ""
 msgid "Finish"
 msgstr "Concluir"
 
+# Needs review
 msgid "Add files to upload"
-msgstr ""
+msgstr "Adicionar ficheiros"
 
 msgid "Image files"
-msgstr ""
+msgstr "Ficheiros de Imagem"
 
 msgid "Private"
-msgstr ""
+msgstr "Privado"
 

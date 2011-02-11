@@ -143,11 +143,11 @@ msgid "Finish"
 msgstr "Rematar"
 
 msgid "Add files to upload"
-msgstr ""
+msgstr "Escolla ficheiros a engadir"
 
 msgid "Image files"
-msgstr ""
+msgstr "Ficheiros de imaxe"
 
 msgid "Private"
-msgstr ""
+msgstr "Privado"
 
