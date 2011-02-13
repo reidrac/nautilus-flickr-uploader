@@ -1,3 +1,8 @@
+* Sun Feb 13 2011 Juan J. Martinez <jjm@usebox.net> 0.10-1
+- NEW: DBus service (avoid more than one instence running)
+- FIX: better consistency when adding pictures from different sources
+- FIX: translations synced (es, fr, de, it, ga and pt)
+
 * Sun Feb 6 2011 Juan J. Martinez <jjm@usebox.net> 0.09-1
 - NEW: Add button to open a file chooser dialog to add new files to
 the upload list
