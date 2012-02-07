@@ -26,6 +26,8 @@ use YAML 'DumpFile';
 
 my $frob;
 my $step = 0;
+my $req_token;
+my $req_token_secret;
 
 sub Init
 {
@@ -49,13 +51,39 @@ sub on_AccountDialog_close
 sub on_NextButton_clicked
 {
 	my $conf = $main::config;
-	my $api = Flickr::API->new( $main::api );
+    my $ua = LWP::UserAgent->new;
 
 	if( !$step )
 	{
-		my $response = $api->execute_method('flickr.auth.getFrob');
-		$frob = $response->{tree}{children}[1]{children}[0]{content};
-		my $url = $api->request_auth_url('write', $frob);
+        my $request = Net::OAuth->request( 'request token' )->new(
+            consumer_key => $main::api->{'key'},
+            consumer_secret => $main::api->{'secret'},
+            request_url => 'http://www.flickr.com/services/oauth/request_token',
+            request_method => 'GET',
+            signature_method => 'HMAC-SHA1',
+            timestamp => time(),
+            nonce => 'rtk' .time(),
+            callback => 'oob',
+            );
+
+        $request->sign;
+
+        my $response = $ua->get($request->to_url);
+
+        if( !$response->is_success ) {
+            my $mainTextLabel = $gladexml->get_widget( 'MainTextLabel' );
+            $mainTextLabel->set_markup( _( "Flickr API it's not available"
+                ." at the moment: error " .$response->code ) );
+            $step = 0;
+            die "Flickr API it's not available: error " .$response->code;
+        }
+
+        $response = Net::OAuth->response( 'request token' )->from_post_body( $response->content );
+		$req_token = $response->token;
+		$req_token_secret = $response->token_secret;
+
+		my $url = "http://www.flickr.com/services/oauth/authorize?oauth_token="
+                  .$response->token ."&perms=write";
 
 		# I believe this system usage is safe (AFAIK no shell involved)
 		system( 'xdg-open', $url );
@@ -77,12 +105,43 @@ sub on_NextButton_clicked
 		# TODO: add the mnemonic?
 		my $nextButton = $gladexml->get_widget( 'NextButton' );
 		$nextButton->set_label( _( 'Finish' ) );
+
+		my $verifiedLabel = $gladexml->get_widget( 'VerifiedLabel' );
+        $verifiedLabel->set_sensitive( 1 );
+
+		my $verifiedEntry = $gladexml->get_widget( 'VerifiedEntry' );
+        $verifiedEntry->set_sensitive( 1 );
 	}
 	else
 	{
-		my $response = $api->execute_method('flickr.auth.getToken', {'frob' => $frob});
-		$main::config->{'token'} = $response->{tree}{children}[1]{children}[1]{children}[0]{content};
-		$main::config->{'username'} = $response->{tree}{children}[1]{children}[5]{attributes}{username};
+		my $verifiedEntry = $gladexml->get_widget( 'VerifiedEntry' );
+        my $verified = $verifiedEntry->get_text( );
+
+        if( !$verified ) {
+            warn "Warning: No verification code";
+            return;
+        }
+
+        my $request = Net::OAuth->request( 'access token' )->new(
+            consumer_key => $main::api->{'key'},
+            consumer_secret => $main::api->{'secret'},
+            token => $req_token,
+            token_secret => $req_token_secret,
+            request_url => 'http://www.flickr.com/services/oauth/access_token',
+            request_method => 'GET',
+            signature_method => 'HMAC-SHA1',
+            timestamp => time(),
+            nonce => 'atk' .time(),
+            verifier => $verified,
+            );
+
+        $request->sign;
+
+        my $response = $ua->get($request->to_url);
+        $response = Net::OAuth->response( 'access token' )->from_post_body( $response->content );
+		$main::config->{'token'} = $response->token;
+		$main::config->{'token_secret'} = $response->token_secret;
+		$main::config->{'username'} = $response->username;
 
 		DumpFile( $main::config_file,  \%$conf ) or
 			warn 'Warning: failed to write de configuration';

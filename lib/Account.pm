@@ -30,7 +30,15 @@ use vars qw( $gladexml );
 use Gtk2 '-init' ;
 use Gtk2::GladeXML;
 
-use Flickr::API;
+use Net::OAuth;
+$Net::OAuth::PROTOCOL_VERSION = Net::OAuth::PROTOCOL_VERSION_1_0A;
+
+# we want the OAuth lib to parse the non-standard username parameter
+use Net::OAuth::AccessTokenResponse;
+Net::OAuth::AccessTokenResponse->add_extension_param_pattern( '^username' );
+Net::OAuth::AccessTokenResponse->add_required_message_params( 'username' );
+
+use HTTP::Request::Common;
 
 sub Init
 {
