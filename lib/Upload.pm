@@ -44,6 +44,9 @@ use File::Basename;
 use File::Temp;
 use Image::Magick;
 
+use Net::OAuth;
+$Net::OAuth::PROTOCOL_VERSION = Net::OAuth::PROTOCOL_VERSION_1_0A;
+
 use Flickr::API;
 use XML::Parser::Lite::Tree;
 use LWP::UserAgent;
@@ -200,8 +203,9 @@ sub TestAccount
 {
 	my $conf = $main::config;
 	my $api = Flickr::API->new( $main::api );
-	my $response = $api->execute_method( 'flickr.auth.checkToken',
-		{ "auth_token" => $conf->{'token'} } );
+	my $response = $api->execute_method( 'flickr.auth.oauth.checkToken',
+		{ "oauth_token" => $conf->{'token'},
+          "api_key" => $main::api->{'key'}, } );
 
 	my $account = $gladexml->get_widget( 'UserLabel' );
 
@@ -289,27 +293,37 @@ sub Thread
 			my $title = $thread_queue{'title'} ? 
 				$thread_queue{'title'} : basename( $thread_queue{'file'} );
 
-			my $signature = Digest::MD5::md5_hex(
-				$thread_queue{'api_secret'} .'api_key' .$thread_queue{'api_key'}
-				.'auth_token' .$thread_queue{'token'}
-				.'is_family' .$thread_queue{'is_family'}
-				.'is_friend' .$thread_queue{'is_friend'}
-				.'is_public' .$thread_queue{'is_public'}
-				.'tags' .$thread_queue{'tags'}
-				.'title' .$title );
+            my $request = Net::OAuth->request("protected resource")->new(
+                consumer_key => $thread_queue{'api_key'},
+                consumer_secret => $thread_queue{'api_secret'},
+                token => $thread_queue{'token'},
+                token_secret => $thread_queue{'token_secret'},
+                request_url => 'http://api.flickr.com/services/upload/',
+                request_method => 'POST',
+                signature_method => 'HMAC-SHA1',
+                timestamp => time(),
+                nonce => $title .'.' .time(),
+                extra_params => {
+					is_family => $thread_queue{'is_family'},
+					is_friend => $thread_queue{'is_friend'},
+					is_public => $thread_queue{'is_public'},
+					tags => $thread_queue{'tags'},
+					title => $title,
+                    },
+                );
+
+            $request->sign;
 
 			my $response = $lpw->post(
 				'http://api.flickr.com/services/upload/',
 				Content_Type => 'multipart/form-data',
+                Authorization => $request->to_authorization_header,
 				Content => [
-					api_sig => $signature,
-					api_key => $thread_queue{'api_key'},
-					auth_token => $thread_queue{'token'},
-					title => $title,
 					is_family => $thread_queue{'is_family'},
-					is_public => $thread_queue{'is_public'},
 					is_friend => $thread_queue{'is_friend'},
+					is_public => $thread_queue{'is_public'},
 					tags => $thread_queue{'tags'},
+					title => $title,
 					photo => [ $upload_file,
 						basename( $thread_queue{'file'} ),
 					 ], ] );
@@ -440,6 +454,7 @@ sub UploadFiles
 		'api_key' => $main::api->{'key'},
 		'api_secret' => $main::api->{'secret'},
 		'token' => $main::config->{'token'},
+		'token_secret' => $main::config->{'token_secret'},
 		'is_public' => $is_public,
 		'is_friend' => $is_friend,
 		'is_family' => $is_family,
