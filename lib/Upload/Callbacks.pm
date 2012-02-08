@@ -112,12 +112,12 @@ sub on_PhotoView_key_release_event
                 splice( @{$list->{data}}, $_, 1 );
             }
             
-                    # disable OK button if there aren't photos to upload
-                    if( !scalar( @{$list->{data}} ) )
-                    {
-                        my $ok = $gladexml->get_widget( 'OkButton' );
-                        $ok->set_sensitive( 0 );
-                    }
+            # disable OK button if there aren't photos to upload
+            if( !scalar( @{$list->{data}} ) )
+            {
+                my $ok = $gladexml->get_widget( 'OkButton' );
+                $ok->set_sensitive( 0 );
+            }
         }
     }
 }
