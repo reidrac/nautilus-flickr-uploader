@@ -31,30 +31,30 @@ my $req_token_secret;
 
 sub Init
 {
-	$gladexml = $Account::gladexml;
+    $gladexml = $Account::gladexml;
 }
 
 sub on_AccountDialog_close
 {
-	if( !$Upload::gladexml )
-	{
-		Gtk2->main_quit;
-	}
-	else
-	{
-		my $dialog = $gladexml->get_widget( 'AccountDialog' );
-		$dialog->destroy( );
-		$Account::gladexml = undef;
-	}
+    if( !$Upload::gladexml )
+    {
+        Gtk2->main_quit;
+    }
+    else
+    {
+        my $dialog = $gladexml->get_widget( 'AccountDialog' );
+        $dialog->destroy( );
+        $Account::gladexml = undef;
+    }
 }
 
 sub on_NextButton_clicked
 {
-	my $conf = $main::config;
+    my $conf = $main::config;
     my $ua = LWP::UserAgent->new;
 
-	if( !$step )
-	{
+    if( !$step )
+    {
         my $request = Net::OAuth->request( 'request token' )->new(
             consumer_key => $main::api->{'key'},
             consumer_secret => $main::api->{'secret'},
@@ -79,42 +79,42 @@ sub on_NextButton_clicked
         }
 
         $response = Net::OAuth->response( 'request token' )->from_post_body( $response->content );
-		$req_token = $response->token;
-		$req_token_secret = $response->token_secret;
+        $req_token = $response->token;
+        $req_token_secret = $response->token_secret;
 
-		my $url = "http://www.flickr.com/services/oauth/authorize?oauth_token="
+        my $url = "http://www.flickr.com/services/oauth/authorize?oauth_token="
                   .$response->token ."&perms=write";
 
-		# I believe this system usage is safe (AFAIK no shell involved)
-		system( 'xdg-open', $url );
+        # I believe this system usage is safe (AFAIK no shell involved)
+        system( 'xdg-open', $url );
 
-		$step++;
+        $step++;
 
-		my $titleLabel = $gladexml->get_widget( 'TitleLabel' );
-		$titleLabel->set_markup( _( '<b>Return to this window after you'
-		.' have finished the authorization process on Flickr.com</b>' ) );
+        my $titleLabel = $gladexml->get_widget( 'TitleLabel' );
+        $titleLabel->set_markup( _( '<b>Return to this window after you'
+        .' have finished the authorization process on Flickr.com</b>' ) );
 
-		my $mainTextLabel = $gladexml->get_widget( 'MainTextLabel' );
-		$mainTextLabel->set_markup( _( 'Once you\'re done, please enter the'
+        my $mainTextLabel = $gladexml->get_widget( 'MainTextLabel' );
+        $mainTextLabel->set_markup( _( 'Once you\'re done, please enter the'
         .' verification code and click the <i>Finish</i> button on this dialog.' ) );
 
-		my $tipLabel = $gladexml->get_widget( 'TipLabel' );
-		$tipLabel->set_markup( _( '<small>You can revoke this authorization'
-		.' at any time in you account page on Flickr.com.</small>' ) );
+        my $tipLabel = $gladexml->get_widget( 'TipLabel' );
+        $tipLabel->set_markup( _( '<small>You can revoke this authorization'
+        .' at any time in you account page on Flickr.com.</small>' ) );
 
-		# TODO: add the mnemonic?
-		my $nextButton = $gladexml->get_widget( 'NextButton' );
-		$nextButton->set_label( _( 'Finish' ) );
+        # TODO: add the mnemonic?
+        my $nextButton = $gladexml->get_widget( 'NextButton' );
+        $nextButton->set_label( _( 'Finish' ) );
 
-		my $verifiedLabel = $gladexml->get_widget( 'VerifiedLabel' );
+        my $verifiedLabel = $gladexml->get_widget( 'VerifiedLabel' );
         $verifiedLabel->set_sensitive( 1 );
 
-		my $verifiedEntry = $gladexml->get_widget( 'VerifiedEntry' );
+        my $verifiedEntry = $gladexml->get_widget( 'VerifiedEntry' );
         $verifiedEntry->set_sensitive( 1 );
-	}
-	else
-	{
-		my $verifiedEntry = $gladexml->get_widget( 'VerifiedEntry' );
+    }
+    else
+    {
+        my $verifiedEntry = $gladexml->get_widget( 'VerifiedEntry' );
         my $verified = $verifiedEntry->get_text( );
 
         if( !$verified ) {
@@ -139,26 +139,26 @@ sub on_NextButton_clicked
 
         my $response = $ua->get($request->to_url);
         $response = Net::OAuth->response( 'access token' )->from_post_body( $response->content );
-		$main::config->{'token'} = $response->token;
-		$main::config->{'token_secret'} = $response->token_secret;
-		$main::config->{'username'} = $response->username;
+        $main::config->{'token'} = $response->token;
+        $main::config->{'token_secret'} = $response->token_secret;
+        $main::config->{'username'} = $response->username;
 
-		DumpFile( $main::config_file,  \%$conf ) or
-			warn 'Warning: failed to write de configuration';
+        DumpFile( $main::config_file,  \%$conf ) or
+            warn 'Warning: failed to write de configuration';
 
-		my $dialog = $gladexml->get_widget( 'AccountDialog' );
-		$dialog->destroy( );
-		$Account::gladexml = undef;
+        my $dialog = $gladexml->get_widget( 'AccountDialog' );
+        $dialog->destroy( );
+        $Account::gladexml = undef;
 
-		# start over
-		$step = 0;
+        # start over
+        $step = 0;
 
-		if( !$Upload::gladexml )
-		{
-			Upload::Init( );
-		}
-		Glib::Idle->add( \&Upload::TestAccount );
-	}
+        if( !$Upload::gladexml )
+        {
+            Upload::Init( );
+        }
+        Glib::Idle->add( \&Upload::TestAccount );
+    }
 }
 
 1 ; 

@@ -25,38 +25,38 @@ dbus_method("add", ["string"], ["bool"]);
 
 sub new
 {
-	my $class = shift;
-	my $service = shift;
-	my $self = $class->SUPER::new($service, "/net/usebox/nautilusFlickrUploader");
+    my $class = shift;
+    my $service = shift;
+    my $self = $class->SUPER::new($service, "/net/usebox/nautilusFlickrUploader");
 
-	bless $self, $class;
+    bless $self, $class;
 
-	return $self;
+    return $self;
 }
 
 sub add
 {
-	my $self = shift;
-	my $files = shift;
+    my $self = shift;
+    my $files = shift;
 
-	if( $Upload::busy )
-	{
-		return 0;
-	}
+    if( $Upload::busy )
+    {
+        return 0;
+    }
 
-	my @files = split( '\*', $files );
+    my @files = split( '\*', $files );
 
-	@Upload::FILES = Upload::ExpandDirectories( @files );
+    @Upload::FILES = Upload::ExpandDirectories( @files );
 
-	my $progressBar = $Upload::gladexml->get_widget( 'ProgressBar' );
-	$progressBar->show( );
+    my $progressBar = $Upload::gladexml->get_widget( 'ProgressBar' );
+    $progressBar->show( );
 
-	Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
+    Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
 
-	my $window = $Upload::gladexml->get_widget( 'UploadDialog' );
-	$window->set_urgency_hint( 1 );
+    my $window = $Upload::gladexml->get_widget( 'UploadDialog' );
+    $window->set_urgency_hint( 1 );
 
-	return 1;
+    return 1;
 }
 
 1 ;

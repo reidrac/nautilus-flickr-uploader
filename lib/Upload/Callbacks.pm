@@ -27,232 +27,232 @@ use YAML 'DumpFile';
 
 sub Init
 {
-	$gladexml = $Upload::gladexml;
-	$upload_thread = undef;
+    $gladexml = $Upload::gladexml;
+    $upload_thread = undef;
 }
 
 sub SaveConfiguration()
 {
-	# get current configuration from the GUI and store it in a file
-	my $conf = $main::config;
+    # get current configuration from the GUI and store it in a file
+    my $conf = $main::config;
 
-	$conf->{'privacy'} = 'public';
-	$conf->{'family'} = 'no';
-	$conf->{'friends'} = 'no';
+    $conf->{'privacy'} = 'public';
+    $conf->{'family'} = 'no';
+    $conf->{'friends'} = 'no';
 
-	my $radio = $gladexml->get_widget( 'RadioPrivate' );
-	if( $radio->get_active( ) )
-	{
-		$conf->{'privacy'} = 'private';
-	}
+    my $radio = $gladexml->get_widget( 'RadioPrivate' );
+    if( $radio->get_active( ) )
+    {
+        $conf->{'privacy'} = 'private';
+    }
 
-	my $family = $gladexml->get_widget( 'PrivateFamily' );
-	if( $family->get_active( ) )
-	{
-		$conf->{'family'} = 'yes';
-	}
+    my $family = $gladexml->get_widget( 'PrivateFamily' );
+    if( $family->get_active( ) )
+    {
+        $conf->{'family'} = 'yes';
+    }
 
-	my $friends = $gladexml->get_widget( 'PrivateFriends' );
-	if( $friends->get_active( ) )
-	{
-		$conf->{'friends'} = 'yes';
-	}
+    my $friends = $gladexml->get_widget( 'PrivateFriends' );
+    if( $friends->get_active( ) )
+    {
+        $conf->{'friends'} = 'yes';
+    }
 
-	my $spin = $gladexml->get_widget( 'SizeSpinButton' );
-	$conf->{'size'} = scalar( $spin->get_value( ) );
+    my $spin = $gladexml->get_widget( 'SizeSpinButton' );
+    $conf->{'size'} = scalar( $spin->get_value( ) );
 
-	$conf->{'resize'} = 'no';
-	my $resize = $gladexml->get_widget( 'ResizeCheckButton' );
-	if( $resize->get_active( ) )
-	{
-		$conf->{'resize'} = 'yes';
-	}
+    $conf->{'resize'} = 'no';
+    my $resize = $gladexml->get_widget( 'ResizeCheckButton' );
+    if( $resize->get_active( ) )
+    {
+        $conf->{'resize'} = 'yes';
+    }
 
-	DumpFile( $main::config_file,  \%$conf ) or
-		warn 'Warning: failed to write de configuration';
+    DumpFile( $main::config_file,  \%$conf ) or
+        warn 'Warning: failed to write de configuration';
 }
 
 sub on_UploadDialog_close
 {
-	Gtk2->main_quit;
+    Gtk2->main_quit;
 
-	SaveConfiguration( );
+    SaveConfiguration( );
 }
 
 sub on_UploadDialog_focus_in_event
 {
-	my $window = $gladexml->get_widget( 'UploadDialog' );
-	$window->set_urgency_hint( 0 );
+    my $window = $gladexml->get_widget( 'UploadDialog' );
+    $window->set_urgency_hint( 0 );
 }
 
 sub on_ResizeCheckButton_toggled
 {
-	my $check = $gladexml->get_widget( 'ResizeCheckButton' );
-	my $spin = $gladexml->get_widget( 'SizeSpinButton' );
-	my $pixels = $gladexml->get_widget( 'PixelsLabel' );
+    my $check = $gladexml->get_widget( 'ResizeCheckButton' );
+    my $spin = $gladexml->get_widget( 'SizeSpinButton' );
+    my $pixels = $gladexml->get_widget( 'PixelsLabel' );
 
-	$spin->set_sensitive( $check->get_active );
-	$pixels->set_sensitive( $check->get_active );
+    $spin->set_sensitive( $check->get_active );
+    $pixels->set_sensitive( $check->get_active );
 }
 
 sub on_PhotoView_key_release_event
 {
-	my ( $widget, $event ) = @_;
+    my ( $widget, $event ) = @_;
 
-	if( $event->keyval == $Gtk2::Gdk::Keysyms{Delete} )
-	{
-		my $list = $gladexml->get_widget( 'PhotoView' );
+    if( $event->keyval == $Gtk2::Gdk::Keysyms{Delete} )
+    {
+        my $list = $gladexml->get_widget( 'PhotoView' );
 
-		my @selected = $list->get_selected_indices( );
-		if( scalar( @selected ) )
-		{
-			@selected = sort { $b <=> $a } @selected;
-			foreach( @selected )
-			{
-				splice( @{$list->{data}}, $_, 1 );
-			}
+        my @selected = $list->get_selected_indices( );
+        if( scalar( @selected ) )
+        {
+            @selected = sort { $b <=> $a } @selected;
+            foreach( @selected )
+            {
+                splice( @{$list->{data}}, $_, 1 );
+            }
             
-            		# disable OK button if there aren't photos to upload
-            		if( !scalar( @{$list->{data}} ) )
-            		{
-                		my $ok = $gladexml->get_widget( 'OkButton' );
-                		$ok->set_sensitive( 0 );
-            		}
-		}
-	}
+                    # disable OK button if there aren't photos to upload
+                    if( !scalar( @{$list->{data}} ) )
+                    {
+                        my $ok = $gladexml->get_widget( 'OkButton' );
+                        $ok->set_sensitive( 0 );
+                    }
+        }
+    }
 }
 
 sub on_ChangeUserButton_clicked
 {
-	if( !$Account::gladexml )
-	{
-		Account::Init( );
-	}
+    if( !$Account::gladexml )
+    {
+        Account::Init( );
+    }
 }
 
 sub on_OkButton_clicked
 {
-	my $list = $gladexml->get_widget( 'PhotoView' );
+    my $list = $gladexml->get_widget( 'PhotoView' );
 
-	if( !scalar( @{$list->{data}} ) )
-	{
-		on_UploadDialog_close( );
-		return;
-	}
+    if( !scalar( @{$list->{data}} ) )
+    {
+        on_UploadDialog_close( );
+        return;
+    }
 
-	my $add = $gladexml->get_widget( 'AddPicButton' );
-	$add->set_sensitive( 0 );
+    my $add = $gladexml->get_widget( 'AddPicButton' );
+    $add->set_sensitive( 0 );
 
-	my $ok = $gladexml->get_widget( 'OkButton' );
-	$ok->set_sensitive( 0 );
+    my $ok = $gladexml->get_widget( 'OkButton' );
+    $ok->set_sensitive( 0 );
 
-	my $box = $gladexml->get_widget( 'MainBox' );
-	$box->set_sensitive( 0 );
+    my $box = $gladexml->get_widget( 'MainBox' );
+    $box->set_sensitive( 0 );
 
-	my $progressBar = $gladexml->get_widget( 'ProgressBar' );
-	$progressBar->show( );
+    my $progressBar = $gladexml->get_widget( 'ProgressBar' );
+    $progressBar->show( );
 
-	# this thread uploads the picures on demand
-	if( !$upload_thread )
-	{
-	    $upload_thread = threads->create( 'Upload::Thread' );
-	    $upload_thread->detach( );
-	}
+    # this thread uploads the picures on demand
+    if( !$upload_thread )
+    {
+        $upload_thread = threads->create( 'Upload::Thread' );
+        $upload_thread->detach( );
+    }
 
-	Glib::Idle->add( \&Upload::UploadFiles, $#{$list->{data}} );
+    Glib::Idle->add( \&Upload::UploadFiles, $#{$list->{data}} );
 }
 
 sub on_PhotoView_drag_data_received
 {
-	if( $Upload::busy )
-	{
-		return;
-	}
+    if( $Upload::busy )
+    {
+        return;
+    }
 
-	my ($widget, $context, $widget_x, $widget_y, $data, $info, $time) = @_;
-	my @uris = $data->get_uris( );
+    my ($widget, $context, $widget_x, $widget_y, $data, $info, $time) = @_;
+    my @uris = $data->get_uris( );
 
-	foreach( @uris )
-	{
-		# unscape URIs
-		s/%([0-9A-Fa-f]{2})/chr(hex($1))/eg;
-		warn "Warning: unsupported URI: $_" unless s/file:\/\///;
-	}
+    foreach( @uris )
+    {
+        # unscape URIs
+        s/%([0-9A-Fa-f]{2})/chr(hex($1))/eg;
+        warn "Warning: unsupported URI: $_" unless s/file:\/\///;
+    }
 
-	@Upload::FILES = Upload::ExpandDirectories( @uris );
+    @Upload::FILES = Upload::ExpandDirectories( @uris );
 
-	my $progressBar = $gladexml->get_widget( 'ProgressBar' );
-	$progressBar->show( );
+    my $progressBar = $gladexml->get_widget( 'ProgressBar' );
+    $progressBar->show( );
 
-	Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
+    Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
 }
 
 sub on_RadioPublic_toggled
 {
-	my $widget = shift;
-	my $private = !$widget->get_active( );
+    my $widget = shift;
+    my $private = !$widget->get_active( );
 
-	my $friends = $gladexml->get_widget( 'PrivateFriends' );
-	$friends->set_sensitive( $private );
-	my $family = $gladexml->get_widget( 'PrivateFamily' );
-	$family->set_sensitive( $private );
+    my $friends = $gladexml->get_widget( 'PrivateFriends' );
+    $friends->set_sensitive( $private );
+    my $family = $gladexml->get_widget( 'PrivateFamily' );
+    $family->set_sensitive( $private );
 }
 
 sub on_AddPicButton_clicked
 {
-	$Upload::busy = 1;
+    $Upload::busy = 1;
 
-	my $widget = shift;
-	my $dialog = Gtk2::FileChooserDialog->new( _('Add files to upload'),
-		$widget->get_toplevel( ), 'open', ( 'gtk-add', 'ok'),
-			('gtk-cancel', 'cancel') );
+    my $widget = shift;
+    my $dialog = Gtk2::FileChooserDialog->new( _('Add files to upload'),
+        $widget->get_toplevel( ), 'open', ( 'gtk-add', 'ok'),
+            ('gtk-cancel', 'cancel') );
 
-	my $filter = Gtk2::FileFilter->new( );
-	$filter->set_name( _('Image files') );
-	$filter->add_mime_type('image/jpeg');
-	$filter->add_mime_type('image/gif');
-	$filter->add_mime_type('image/png');
+    my $filter = Gtk2::FileFilter->new( );
+    $filter->set_name( _('Image files') );
+    $filter->add_mime_type('image/jpeg');
+    $filter->add_mime_type('image/gif');
+    $filter->add_mime_type('image/png');
 
-	$dialog->add_filter( $filter );
-	$dialog->set_select_multiple( 1 );
+    $dialog->add_filter( $filter );
+    $dialog->set_select_multiple( 1 );
 
-	my $preview = Gtk2::Image->new( );
-	$dialog->set_preview_widget( $preview );
-	$dialog->signal_connect( update_preview => sub {
-		$dialog->set_preview_widget_active( 0 );
-		my $filename = $dialog->get_preview_filename( );
-		if( !$filename || ! -f $filename )
-		{
-			return;
-		}
-		
-		my $image;
-		eval
-		{
-			$image = Gtk2::Gdk::Pixbuf->new_from_file_at_scale(
-				$filename, 192, 192, 1 );
-		};
-		if( !$@ && $image )
-		{
-			$preview->set_from_pixbuf( $image );
-			$dialog->set_preview_widget_active( 1 );
-		}
-	});
+    my $preview = Gtk2::Image->new( );
+    $dialog->set_preview_widget( $preview );
+    $dialog->signal_connect( update_preview => sub {
+        $dialog->set_preview_widget_active( 0 );
+        my $filename = $dialog->get_preview_filename( );
+        if( !$filename || ! -f $filename )
+        {
+            return;
+        }
+        
+        my $image;
+        eval
+        {
+            $image = Gtk2::Gdk::Pixbuf->new_from_file_at_scale(
+                $filename, 192, 192, 1 );
+        };
+        if( !$@ && $image )
+        {
+            $preview->set_from_pixbuf( $image );
+            $dialog->set_preview_widget_active( 1 );
+        }
+    });
 
-	if( $dialog->run( ) eq 'ok' )
-	{
-		my @files = $dialog->get_filenames( );
-		@Upload::FILES = Upload::ExpandDirectories( @files );
+    if( $dialog->run( ) eq 'ok' )
+    {
+        my @files = $dialog->get_filenames( );
+        @Upload::FILES = Upload::ExpandDirectories( @files );
 
-		my $progressBar = $gladexml->get_widget( 'ProgressBar' );
-		$progressBar->show( );
+        my $progressBar = $gladexml->get_widget( 'ProgressBar' );
+        $progressBar->show( );
 
-		Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
-	}
+        Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
+    }
 
-	$dialog->destroy( );
+    $dialog->destroy( );
 
-	$Upload::busy = 0;
+    $Upload::busy = 0;
 }
 
 1 ; 

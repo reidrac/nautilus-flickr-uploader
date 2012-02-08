@@ -42,11 +42,11 @@ use HTTP::Request::Common;
 
 sub Init
 {
-	$gladexml = Gtk2::GladeXML->new( './UI/Account.glade' );
+    $gladexml = Gtk2::GladeXML->new( './UI/Account.glade' );
 
-	Account::Callbacks::Init( );
+    Account::Callbacks::Init( );
 
-	$gladexml->signal_autoconnect_from_package( 'Account::Callbacks' );
+    $gladexml->signal_autoconnect_from_package( 'Account::Callbacks' );
 }
 
 1 ; 
