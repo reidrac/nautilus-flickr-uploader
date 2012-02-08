@@ -95,8 +95,8 @@ sub on_NextButton_clicked
 		.' have finished the authorization process on Flickr.com</b>' ) );
 
 		my $mainTextLabel = $gladexml->get_widget( 'MainTextLabel' );
-		$mainTextLabel->set_markup( _( 'Once you\'re done, please click the'
-		.' <i>Finish</i> button on this dialog.' ) );
+		$mainTextLabel->set_markup( _( 'Once you\'re done, please enter the'
+        .' verification code and click the <i>Finish</i> button on this dialog.' ) );
 
 		my $tipLabel = $gladexml->get_widget( 'TipLabel' );
 		$tipLabel->set_markup( _( '<small>You can revoke this authorization'
