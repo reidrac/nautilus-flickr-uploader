@@ -24,7 +24,6 @@ use vars qw( $gladexml );
 
 use YAML 'DumpFile';
 
-my $frob;
 my $step = 0;
 my $req_token;
 my $req_token_secret;
@@ -72,10 +71,10 @@ sub on_NextButton_clicked
 
         if( !$response->is_success ) {
             my $mainTextLabel = $gladexml->get_widget( 'MainTextLabel' );
-            $mainTextLabel->set_markup( _( "Flickr API it's not available"
+            $mainTextLabel->set_markup( _( "Flickr API it is not available"
                 ." at the moment: error " .$response->code ) );
             $step = 0;
-            die "Flickr API it's not available: error " .$response->code;
+            die "Flickr API it is not available: error " .$response->code;
         }
 
         $response = Net::OAuth->response( 'request token' )->from_post_body( $response->content );
@@ -118,7 +117,7 @@ sub on_NextButton_clicked
         my $verified = $verifiedEntry->get_text( );
 
         if( !$verified ) {
-            warn "Warning: No verification code";
+            warn "Warning: no verification code entered";
             return;
         }
 
