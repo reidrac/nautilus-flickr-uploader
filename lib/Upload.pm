@@ -220,7 +220,7 @@ sub TestAccount
         $errorBox->show( );
         my $errorLabel = $gladexml->get_widget( 'ErrorLabel' );
         $errorLabel->set_markup( 
-            '<small>' ._( "The verification of you Flickr account\nhas failed: " ) 
+            '<small>' ._( "The verification of your Flickr account\nhas failed: " ) 
             .$response->{error_message} .'.</small>' );
 
         warn 'Warning: the verification of your Flickr account has failed';
@@ -507,10 +507,11 @@ sub Init
     $gladexml->signal_autoconnect_from_package( 'Upload::Callbacks' );
 
     my $slist = Gtk2::Ex::Simple::List->new_from_treeview (
-                $gladexml->get_widget( 'PhotoView' ),
-                'image'    => 'pixbuf',
+            $gladexml->get_widget( 'PhotoView' ),
+            'image'    => 'pixbuf',
             'name'     => 'text',
-            'path'     => 'text' );
+            'path'     => 'text',
+        );
 
     $slist->get_column( 2 )->set_visible( 0 );
     $slist->set_column_editable ( 1, 1 );
