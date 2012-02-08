@@ -12,7 +12,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl(Gtk2), perl(Gtk2::GladeXML), perl(Gtk2::Ex::Simple::List)
 BuildRequires:  perl(YAML)
-BuildRequires:  perl(Flickr::API), perl(XML::Parser::Lite::Tree)
+BuildRequires:  perl(Net::OAuth), perl(Flickr::API), perl(XML::Parser::Lite::Tree)
 BuildRequires:  perl(Image::Magick)
 BuildRequires:  perl(LWP::UserAgent)
 BuildRequires:  perl(Net::DBus), perl(Net::DBus::GLib)
