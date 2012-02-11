@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-flickr-uploader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-30 17:10+0200\n"
+"POT-Creation-Date: 2012-02-11 16:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Juan J. Martinez <jjm@usebox.net>\n"
 "Language-Team: English <en@li.org>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,20 +33,25 @@ msgstr ""
 "program.</small>"
 
 #: UI/Account.glade.h:3
+#, fuzzy
 msgid ""
 "Authorizing is a simple process wich takes place in your web browser. When "
-"you're finished, return to this window to complete authorization and begin "
-"using <i>nautilus-flickr-uploader</i>."
+"you're finished, return to this window to complete authorization entering "
+"the verification code."
 msgstr ""
 "Authorizing is a simple process wich takes place in your web browser. When "
-"you're finished, return to this window to complete authorization and begin "
-"using <i>nautilus-flickr-uploader</i>."
+"you're finished, return to this window to complete authorization entering "
+"the verification code."
 
 #: UI/Account.glade.h:4
 msgid "Nautilus Flickr Uploader - Flickr Authentication"
 msgstr "Nautilus Flickr Uploader - Flickr Authentication"
 
 #: UI/Account.glade.h:5
+msgid "Verification Code:"
+msgstr "Verification Code:"
+
+#: UI/Account.glade.h:6
 msgid "_Next"
 msgstr "_Next"
 
@@ -97,39 +103,49 @@ msgstr "Upload Photos to Flickr"
 msgid "pixels"
 msgstr "pixels"
 
-#: lib/Upload.pm:195
+#: lib/Upload.pm:223
+#, fuzzy
 msgid ""
-"The verification of you Flickr account\n"
+"The verification of your Flickr account\n"
 "has failed: "
 msgstr ""
 "The verification of you Flickr account\n"
 "has failed: "
 
-#: lib/Upload.pm:240
+#: lib/Upload.pm:396
 msgid "<small>Something went wrong uploading the photos.</small>"
 msgstr "<small>Something went wrong uploading the photos.</small>"
 
-#: lib/Upload.pm:379
+#: lib/Upload.pm:540
 msgid "Authorizing..."
 msgstr "Authorizing..."
 
-#: lib/Upload.pm:389
+#: lib/Upload.pm:550
 msgid "No account"
 msgstr "No account"
 
-#: lib/Account/Callbacks.pm:66
-msgid ""
-"<b>Return to this window after you have finished the authorization process "
-"on Flickr.com</b>"
-msgstr ""
-"<b>Return to this window after you have finished the authorization process "
-"on Flickr.com</b>"
-
-#: lib/Account/Callbacks.pm:70
-msgid "Once you're done, please click the <i>Finish</i> button on this dialog."
-msgstr "Once you're done, please click the <i>Finish</i> button on this dialog."
-
 #: lib/Account/Callbacks.pm:74
+msgid "Flickr API it is not available at the moment: error "
+msgstr ""
+
+#: lib/Account/Callbacks.pm:93
+msgid ""
+"<b>Return to this window after you have finished the authorization process "
+"on Flickr.com</b>"
+msgstr ""
+"<b>Return to this window after you have finished the authorization process "
+"on Flickr.com</b>"
+
+#: lib/Account/Callbacks.pm:97
+#, fuzzy
+msgid ""
+"Once you're done, please enter the verification code and click the "
+"<i>Finish</i> button on this dialog."
+msgstr ""
+"Once you're done, please enter the verification code and click the "
+"<i>Finish</i> button on this dialog."
+
+#: lib/Account/Callbacks.pm:101
 msgid ""
 "<small>You can revoke this authorization at any time in you account page on "
 "Flickr.com.</small>"
@@ -137,16 +153,19 @@ msgstr ""
 "<small>You can revoke this authorization at any time in you account page on "
 "Flickr.com.</small>"
 
-#: lib/Account/Callbacks.pm:79
+#: lib/Account/Callbacks.pm:106
 msgid "Finish"
 msgstr "Finish"
 
+#: lib/Upload/Callbacks.pm:206
 msgid "Add files to upload"
 msgstr "Add files to upload"
 
+#: lib/Upload/Callbacks.pm:211
 msgid "Image files"
 msgstr "Image files"
 
+#: 
 msgid "Private"
 msgstr "Private"
 

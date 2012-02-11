@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-flickr-uploader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-30 17:10+0200\n"
+"POT-Creation-Date: 2012-02-11 16:26+0000\n"
 "PO-Revision-Date: 2009-08-30 17:29+0200\n"
 "Last-Translator: Juan J. Martínez <jjm@usebox.net>\n"
 "Language-Team: Spanish\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,23 +30,29 @@ msgid ""
 "<small>You must be connected to the Internet in order to authorize this "
 "program.</small>"
 msgstr ""
-"<small>Debes estar conectado a Internet para poder autorizar al programa.</small>"
+"<small>Debes estar conectado a Internet para poder autorizar al programa.</"
+"small>"
 
 #: UI/Account.glade.h:3
+#, fuzzy
 msgid ""
 "Authorizing is a simple process wich takes place in your web browser. When "
-"you're finished, return to this window to complete authorization and begin "
-"using <i>nautilus-flickr-uploader</i>."
+"you're finished, return to this window to complete authorization entering "
+"the verification code."
 msgstr ""
 "La autorización es un proceso simple que se lleva a cabo en tu navegador. "
-"Cuando hayas terminado, vuelve a esta ventana a completar la autorización y "
-"comenzar a usar <i>nautilus-flickr-uploader</i>."
+"Cuando hayas terminado, vuelve a esta ventana a completar la autorización "
+"introduciendo el código de verificación."
 
 #: UI/Account.glade.h:4
 msgid "Nautilus Flickr Uploader - Flickr Authentication"
 msgstr "Nautilus Flickr Uploader - Autenticación en Flickr"
 
 #: UI/Account.glade.h:5
+msgid "Verification Code:"
+msgstr "Código de verificación:"
+
+#: UI/Account.glade.h:6
 msgid "_Next"
 msgstr "_Siguiente"
 
@@ -97,27 +104,32 @@ msgstr "Subir fotos a Flickr"
 msgid "pixels"
 msgstr "pixeles"
 
-#: lib/Upload.pm:195
+#: lib/Upload.pm:223
+#, fuzzy
 msgid ""
-"The verification of you Flickr account\n"
+"The verification of your Flickr account\n"
 "has failed: "
 msgstr ""
 "Ha fallado la verificación de tu cuenta\n"
 "de Flickr: "
 
-#: lib/Upload.pm:240
+#: lib/Upload.pm:396
 msgid "<small>Something went wrong uploading the photos.</small>"
 msgstr "<small>Ha fallado algo subiendo las fotos.</small>"
 
-#: lib/Upload.pm:379
+#: lib/Upload.pm:540
 msgid "Authorizing..."
 msgstr "Autorizando..."
 
-#: lib/Upload.pm:389
+#: lib/Upload.pm:550
 msgid "No account"
 msgstr "Sin cuenta"
 
-#: lib/Account/Callbacks.pm:66
+#: lib/Account/Callbacks.pm:74
+msgid "Flickr API it is not available at the moment: error "
+msgstr "El API de Flickr no está disponible en este momento: error "
+
+#: lib/Account/Callbacks.pm:93
 msgid ""
 "<b>Return to this window after you have finished the authorization process "
 "on Flickr.com</b>"
@@ -125,26 +137,32 @@ msgstr ""
 "<b>Vuelve a esta ventana cuando hayas finalizado el proceso de autorización "
 "en Flickr.com</b>"
 
-#: lib/Account/Callbacks.pm:70
-msgid "Once you're done, please click the <i>Finish</i> button on this dialog."
+#: lib/Account/Callbacks.pm:97
+#, fuzzy
+msgid ""
+"Once you're done, please enter the verification code and click the "
+"<i>Finish</i> button on this dialog."
 msgstr ""
-"Cuando hayas terminado, haz click en el botón <i>Finalizar</i> en este diálogo."
+"Cuando hayas terminado introduce el código de verificación y haz "
+"click en el botón <i>Finalizar</i> en este diálogo."
 
-#: lib/Account/Callbacks.pm:74
+#: lib/Account/Callbacks.pm:101
 msgid ""
 "<small>You can revoke this authorization at any time in you account page on "
 "Flickr.com.</small>"
 msgstr ""
-"<small>Puedes revocar esta autorización en cualquier momento en la página de tu "
-"cuenta en Flickr.com.</small>"
+"<small>Puedes revocar esta autorización en cualquier momento en la página de "
+"tu cuenta en Flickr.com.</small>"
 
-#: lib/Account/Callbacks.pm:79
+#: lib/Account/Callbacks.pm:106
 msgid "Finish"
 msgstr "Finalizar"
 
+#: lib/Upload/Callbacks.pm:206
 msgid "Add files to upload"
 msgstr "Añadir ficheros para subir"
 
+#: lib/Upload/Callbacks.pm:211
 msgid "Image files"
 msgstr "Ficheros de imágenes"
 
