@@ -5,10 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-30 17:10+0200\n"
+"POT-Creation-Date: 2012-02-11 16:26+0000\n"
 "PO-Revision-Date: 2009-09-22 13:46+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <fedora-trans-pl@redhat.com>\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,8 +19,8 @@ msgid ""
 "<b>This program requires your authorization before it can upload your photos "
 "to Flickr.</b>"
 msgstr ""
-"<b>Ten program wymaga upoważnienia przed wysyłaniem zdjęć do serwisu "
-"Flickr.</b>"
+"<b>Ten program wymaga upoważnienia przed wysyłaniem zdjęć do serwisu Flickr."
+"</b>"
 
 #: UI/Account.glade.h:2
 msgid ""
@@ -29,20 +30,23 @@ msgstr ""
 "<small>Należy być połączonym z Internetem, aby upoważnić ten program.</small>"
 
 #: UI/Account.glade.h:3
+#, fuzzy
 msgid ""
 "Authorizing is a simple process wich takes place in your web browser. When "
-"you're finished, return to this window to complete authorization and begin "
-"using <i>nautilus-flickr-uploader</i>."
+"you're finished, return to this window to complete authorization entering "
+"the verification code."
 msgstr ""
-"Upoważnianie jest prostym procesem, który jest przeprowadzany w przeglądarce "
-"WWW. Po zakończeniu należy wrócić do tego okna, aby  ukończyć upoważnienie i "
-"zacząć używanie programu <i>nautilus-flickr-uploader</i>."
+""
 
 #: UI/Account.glade.h:4
 msgid "Nautilus Flickr Uploader - Flickr Authentication"
 msgstr "Nautilus Flickr Uploader - upoważnienie serwisu Flickr"
 
 #: UI/Account.glade.h:5
+msgid "Verification Code:"
+msgstr ""
+
+#: UI/Account.glade.h:6
 msgid "_Next"
 msgstr "_Dalej"
 
@@ -94,27 +98,32 @@ msgstr "Wysyłanie zdjęć do serwisu Flickr"
 msgid "pixels"
 msgstr "piksele"
 
-#: lib/Upload.pm:195
+#: lib/Upload.pm:223
+#, fuzzy
 msgid ""
-"The verification of you Flickr account\n"
+"The verification of your Flickr account\n"
 "has failed: "
 msgstr ""
 "Sprawdzenia konta w serwisie Flickr\n"
 "nie powiodło się: "
 
-#: lib/Upload.pm:240
+#: lib/Upload.pm:396
 msgid "<small>Something went wrong uploading the photos.</small>"
 msgstr "<small>Coś poszło źle podczas wysyłania zdjęć.</small>"
 
-#: lib/Upload.pm:379
+#: lib/Upload.pm:540
 msgid "Authorizing..."
 msgstr "Upoważnianie..."
 
-#: lib/Upload.pm:389
+#: lib/Upload.pm:550
 msgid "No account"
 msgstr "Brak konta"
 
-#: lib/Account/Callbacks.pm:66
+#: lib/Account/Callbacks.pm:74
+msgid "Flickr API it is not available at the moment: error "
+msgstr ""
+
+#: lib/Account/Callbacks.pm:93
 msgid ""
 "<b>Return to this window after you have finished the authorization process "
 "on Flickr.com</b>"
@@ -122,12 +131,15 @@ msgstr ""
 "<b>Należy wrócić do tego okna po ukończeniu procesu upoważniania w serwisie "
 "Flickr.com</b>"
 
-#: lib/Account/Callbacks.pm:70
-msgid "Once you're done, please click the <i>Finish</i> button on this dialog."
+#: lib/Account/Callbacks.pm:97
+#, fuzzy
+msgid ""
+"Once you're done, please enter the verification code and click the "
+"<i>Finish</i> button on this dialog."
 msgstr ""
-"Po ukończeniu proszę nacisnąć przycisk <i>Zakończ</i> w tym oknie dialogowym."
+""
 
-#: lib/Account/Callbacks.pm:74
+#: lib/Account/Callbacks.pm:101
 msgid ""
 "<small>You can revoke this authorization at any time in you account page on "
 "Flickr.com.</small>"
@@ -135,16 +147,19 @@ msgstr ""
 "<small>Można unieważnić te upoważnienie w dowolnym czasie na stronie konta w "
 "serwisie Flickr.com.</small>"
 
-#: lib/Account/Callbacks.pm:79
+#: lib/Account/Callbacks.pm:106
 msgid "Finish"
 msgstr "Zakończ"
 
+#: lib/Upload/Callbacks.pm:206
 msgid "Add files to upload"
 msgstr ""
 
+#: lib/Upload/Callbacks.pm:211
 msgid "Image files"
 msgstr ""
 
+#: 
 msgid "Private"
 msgstr ""
 

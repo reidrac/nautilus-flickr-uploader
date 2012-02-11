@@ -2,36 +2,51 @@
 # Copyright (C) 2009 Juan J. Martinez <jjm@usebox.net>
 # This file is distributed under the same license as the nautilus-flicker-uploader package.
 # Juan J. Martinez, 2009.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-flickr-uploader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-30 17:10+0200\n"
+"POT-Creation-Date: 2012-02-11 16:26+0000\n"
 "PO-Revision-Date: 2010-10-02 15:08-0500\n"
 "Last-Translator: \n"
 "Language-Team: English <en@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: UI/Account.glade.h:1
-msgid "<b>This program requires your authorization before it can upload your photos to Flickr.</b>"
+msgid ""
+"<b>This program requires your authorization before it can upload your photos "
+"to Flickr.</b>"
 msgstr "<b>Эта программа требует авторизации для загрузки фото на Flickr.</b>"
 
 #: UI/Account.glade.h:2
-msgid "<small>You must be connected to the Internet in order to authorize this program.</small>"
-msgstr "<small>Необходимо подключение к Интернету для авторизации программы.</small>"
+msgid ""
+"<small>You must be connected to the Internet in order to authorize this "
+"program.</small>"
+msgstr ""
+"<small>Необходимо подключение к Интернету для авторизации программы.</small>"
 
 #: UI/Account.glade.h:3
-msgid "Authorizing is a simple process wich takes place in your web browser. When you're finished, return to this window to complete authorization and begin using <i>nautilus-flickr-uploader</i>."
-msgstr "Авторизация - простой процесс проиходящий в окне вашего браузера. Когда вы закончите, вернитесь в это окно для завершения авторизации и можете начинать работу с <i>nautilus-flickr-uploader</i>."
+#, fuzzy
+msgid ""
+"Authorizing is a simple process wich takes place in your web browser. When "
+"you're finished, return to this window to complete authorization entering "
+"the verification code."
+msgstr ""
+""
 
 #: UI/Account.glade.h:4
 msgid "Nautilus Flickr Uploader - Flickr Authentication"
 msgstr "Nautilus Flickr Загрузчик - Flickr Аутентификация"
 
 #: UI/Account.glade.h:5
+msgid "Verification Code:"
+msgstr ""
+
+#: UI/Account.glade.h:6
 msgid "_Next"
 msgstr "_Далее"
 
@@ -83,46 +98,66 @@ msgstr "Загрузить фотографии на to Flickr"
 msgid "pixels"
 msgstr "пикселей"
 
-#: lib/Upload.pm:195
+#: lib/Upload.pm:223
+#, fuzzy
 msgid ""
-"The verification of you Flickr account\n"
+"The verification of your Flickr account\n"
 "has failed: "
 msgstr "Произошла ошибка в верификации вашего Flickr аккаунта: "
 
-#: lib/Upload.pm:240
+#: lib/Upload.pm:396
 msgid "<small>Something went wrong uploading the photos.</small>"
 msgstr "<small>Что-то пошло не так при загрузке фотографий.</small>"
 
-#: lib/Upload.pm:379
+#: lib/Upload.pm:540
 msgid "Authorizing..."
 msgstr "Авторизация..."
 
-#: lib/Upload.pm:389
+#: lib/Upload.pm:550
 msgid "No account"
 msgstr "Нет аккаунта"
 
-#: lib/Account/Callbacks.pm:66
-msgid "<b>Return to this window after you have finished the authorization process on Flickr.com</b>"
-msgstr "<b>Вернитесь в это окно после завершения процесса авторизации на Flickr.com</b>"
-
-#: lib/Account/Callbacks.pm:70
-msgid "Once you're done, please click the <i>Finish</i> button on this dialog."
-msgstr "При звершении, кликните <i>Finish</i> кнопку в этом окне."
-
 #: lib/Account/Callbacks.pm:74
-msgid "<small>You can revoke this authorization at any time in you account page on Flickr.com.</small>"
-msgstr "<small>Вы можете отменить авторизацию в любое время на странице своего аккаунта на Flickr.com.</small>"
+msgid "Flickr API it is not available at the moment: error "
+msgstr ""
 
-#: lib/Account/Callbacks.pm:79
+#: lib/Account/Callbacks.pm:93
+msgid ""
+"<b>Return to this window after you have finished the authorization process "
+"on Flickr.com</b>"
+msgstr ""
+"<b>Вернитесь в это окно после завершения процесса авторизации на Flickr.com</"
+"b>"
+
+#: lib/Account/Callbacks.pm:97
+#, fuzzy
+msgid ""
+"Once you're done, please enter the verification code and click the "
+"<i>Finish</i> button on this dialog."
+msgstr ""
+""
+
+#: lib/Account/Callbacks.pm:101
+msgid ""
+"<small>You can revoke this authorization at any time in you account page on "
+"Flickr.com.</small>"
+msgstr ""
+"<small>Вы можете отменить авторизацию в любое время на странице своего "
+"аккаунта на Flickr.com.</small>"
+
+#: lib/Account/Callbacks.pm:106
 msgid "Finish"
 msgstr "Завершить"
 
+#: lib/Upload/Callbacks.pm:206
 msgid "Add files to upload"
 msgstr ""
 
+#: lib/Upload/Callbacks.pm:211
 msgid "Image files"
 msgstr ""
 
+#: 
 msgid "Private"
 msgstr ""
 

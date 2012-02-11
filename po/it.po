@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-flickr-uploader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-30 17:10+0200\n"
+"POT-Creation-Date: 2012-02-11 16:26+0000\n"
 "PO-Revision-Date: 2010-11-08 10:04+0100\n"
 "Last-Translator: Cristian Marchi <cri.penta@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,22 +19,39 @@ msgstr ""
 "X-Poedit-Country: ITALY\n"
 
 #: UI/Account.glade.h:1
-msgid "<b>This program requires your authorization before it can upload your photos to Flickr.</b>"
-msgstr "<b>Questo programma necessita della propria autorizzazione prima di poter caricaricare le foto su flickr</b>."
+msgid ""
+"<b>This program requires your authorization before it can upload your photos "
+"to Flickr.</b>"
+msgstr ""
+"<b>Questo programma necessita della propria autorizzazione prima di poter "
+"caricaricare le foto su flickr</b>."
 
 #: UI/Account.glade.h:2
-msgid "<small>You must be connected to the Internet in order to authorize this program.</small>"
-msgstr "<small>È necessario essere connessi a internet per poter fornire l'autorizzazione a questo programma</small>"
+msgid ""
+"<small>You must be connected to the Internet in order to authorize this "
+"program.</small>"
+msgstr ""
+"<small>È necessario essere connessi a internet per poter fornire "
+"l'autorizzazione a questo programma</small>"
 
 #: UI/Account.glade.h:3
-msgid "Authorizing is a simple process wich takes place in your web browser. When you're finished, return to this window to complete authorization and begin using <i>nautilus-flickr-uploader</i>."
-msgstr "L'autorizzazione è un processo semplice che avviene all'interno del browser web. Al termine, tornare in questa finestra per completare l'autorizzazione e iniziare a usare <i>nautilus-flickr-uploader</i>."
+#, fuzzy
+msgid ""
+"Authorizing is a simple process wich takes place in your web browser. When "
+"you're finished, return to this window to complete authorization entering "
+"the verification code."
+msgstr ""
+""
 
 #: UI/Account.glade.h:4
 msgid "Nautilus Flickr Uploader - Flickr Authentication"
 msgstr "Nautilus Flickr Uploader - Autenticazione flickr"
 
 #: UI/Account.glade.h:5
+msgid "Verification Code:"
+msgstr ""
+
+#: UI/Account.glade.h:6
 msgid "_Next"
 msgstr "_Successiva"
 
@@ -85,48 +103,68 @@ msgstr "Carica le foto su flickr"
 msgid "pixels"
 msgstr "pixel"
 
-#: lib/Upload.pm:195
+#: lib/Upload.pm:223
+#, fuzzy
 msgid ""
-"The verification of you Flickr account\n"
+"The verification of your Flickr account\n"
 "has failed: "
 msgstr ""
 "La verifica del proprio account flickr\n"
 "non è riuscita:"
 
-#: lib/Upload.pm:240
+#: lib/Upload.pm:396
 msgid "<small>Something went wrong uploading the photos.</small>"
 msgstr "<small>Errore nel caricamento delle foto.</small>"
 
-#: lib/Upload.pm:379
+#: lib/Upload.pm:540
 msgid "Authorizing..."
 msgstr "Autorizzazione i corso..."
 
-#: lib/Upload.pm:389
+#: lib/Upload.pm:550
 msgid "No account"
 msgstr "Nessun account"
 
-#: lib/Account/Callbacks.pm:66
-msgid "<b>Return to this window after you have finished the authorization process on Flickr.com</b>"
-msgstr "<b>Tornare a questa finestra al termine del processo di autorizzazione su flickr.</b>"
-
-#: lib/Account/Callbacks.pm:70
-msgid "Once you're done, please click the <i>Finish</i> button on this dialog."
-msgstr "Al termine, premere il pulsante <i>Termina</i> in questa finestra."
-
 #: lib/Account/Callbacks.pm:74
-msgid "<small>You can revoke this authorization at any time in you account page on Flickr.com.</small>"
-msgstr "<small>È possibile revocare questa autorizzazione in qualsiasi momento sulla pagina del proprio account di flickr.</small>"
+msgid "Flickr API it is not available at the moment: error "
+msgstr ""
 
-#: lib/Account/Callbacks.pm:79
+#: lib/Account/Callbacks.pm:93
+msgid ""
+"<b>Return to this window after you have finished the authorization process "
+"on Flickr.com</b>"
+msgstr ""
+"<b>Tornare a questa finestra al termine del processo di autorizzazione su "
+"flickr.</b>"
+
+#: lib/Account/Callbacks.pm:97
+#, fuzzy
+msgid ""
+"Once you're done, please enter the verification code and click the "
+"<i>Finish</i> button on this dialog."
+msgstr ""
+""
+
+#: lib/Account/Callbacks.pm:101
+msgid ""
+"<small>You can revoke this authorization at any time in you account page on "
+"Flickr.com.</small>"
+msgstr ""
+"<small>È possibile revocare questa autorizzazione in qualsiasi momento sulla "
+"pagina del proprio account di flickr.</small>"
+
+#: lib/Account/Callbacks.pm:106
 msgid "Finish"
 msgstr "Termina"
 
+#: lib/Upload/Callbacks.pm:206
 msgid "Add files to upload"
 msgstr "Seleziona file da aggiungere"
 
+#: lib/Upload/Callbacks.pm:211
 msgid "Image files"
 msgstr "File immagine"
 
+#: 
 msgid "Private"
 msgstr "Privato"
 

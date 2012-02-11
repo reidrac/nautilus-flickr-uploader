@@ -7,41 +7,56 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-flickr-uploader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-30 17:10+0200\n"
+"POT-Creation-Date: 2012-02-11 16:26+0000\n"
 "PO-Revision-Date: 2010-11-06 19:54+0100\n"
-"Last-Translator: el_libre - - www.catmidia.cat <el.libre@gmail.com>\n"
+"Last-Translator: el_libre <el.libre@gmail.com>\n"
 "Language-Team: English <en@li.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: UI/Account.glade.h:1
-msgid "<b>This program requires your authorization before it can upload your photos to Flickr.</b>"
-msgstr ""
+msgid ""
+"<b>This program requires your authorization before it can upload your photos "
+"to Flickr.</b>"
+msgstr "<b>Aquest programari necessita de la teua autorització pera pujar les "
+"fotos a Flickr.</b>"
 
 #: UI/Account.glade.h:2
-msgid "<small>You must be connected to the Internet in order to authorize this program.</small>"
-msgstr ""
+msgid ""
+"<small>You must be connected to the Internet in order to authorize this "
+"program.</small>"
+msgstr "<small>Tens que estar conectat a l'Internet pera autoriztar el programari.</small>"
 
 #: UI/Account.glade.h:3
-msgid "Authorizing is a simple process wich takes place in your web browser. When you're finished, return to this window to complete authorization and begin using <i>nautilus-flickr-uploader</i>."
-msgstr ""
+msgid ""
+"Authorizing is a simple process wich takes place in your web browser. When "
+"you're finished, return to this window to complete authorization entering "
+"the verification code."
+msgstr "L'autorització es un senzill procés que es realitza al teu navegador. Quan "
+"has finalitzat, torna a aquesta finestra pera completar l'autorització entrant el "
+"codi de verificació."
 
 #: UI/Account.glade.h:4
 msgid "Nautilus Flickr Uploader - Flickr Authentication"
-msgstr ""
+msgstr "Nautilus Flickr Uploader - Autenticació a Flickr"
 
 #: UI/Account.glade.h:5
+msgid "Verification Code:"
+msgstr "Codi de verificació:"
+
+#: UI/Account.glade.h:6
 msgid "_Next"
 msgstr "_Següent"
 
 #: UI/Upload.glade.h:1
 msgid "<b>Bulk Actions</b>"
-msgstr ""
+msgstr "<b>Accions en lote</b>"
 
 #: UI/Upload.glade.h:2
 msgid "<b>Flickr Account</b>"
-msgstr ""
+msgstr "<b>Usuari al Flickr</b>"
 
 #: UI/Upload.glade.h:3
 msgid "<b>Privacy</b>"
@@ -65,11 +80,11 @@ msgstr "Públic"
 
 #: UI/Upload.glade.h:8
 msgid "Put your tags separated by spaces"
-msgstr ""
+msgstr "Posa les teues etiquetes separades per espais"
 
 #: UI/Upload.glade.h:9
 msgid "Resize:"
-msgstr "Redimensiona :"
+msgstr "Redimensiona:"
 
 #: UI/Upload.glade.h:10
 msgid "Tags:"
@@ -77,52 +92,67 @@ msgstr "Etiquetes:"
 
 #: UI/Upload.glade.h:11
 msgid "Upload Photos to Flickr"
-msgstr ""
+msgstr "Pujar fotos a Flickr"
 
 #: UI/Upload.glade.h:12
 msgid "pixels"
 msgstr "píxels"
 
-#: lib/Upload.pm:195
+#: lib/Upload.pm:223
 msgid ""
-"The verification of you Flickr account\n"
+"The verification of your Flickr account\n"
 "has failed: "
 msgstr ""
 
-#: lib/Upload.pm:240
+#: lib/Upload.pm:396
 msgid "<small>Something went wrong uploading the photos.</small>"
 msgstr ""
 
-#: lib/Upload.pm:379
+#: lib/Upload.pm:540
 msgid "Authorizing..."
 msgstr "S'està autoritzant..."
 
-#: lib/Upload.pm:389
+#: lib/Upload.pm:550
 msgid "No account"
 msgstr "Sense Compte"
 
-#: lib/Account/Callbacks.pm:66
-msgid "<b>Return to this window after you have finished the authorization process on Flickr.com</b>"
-msgstr ""
-
-#: lib/Account/Callbacks.pm:70
-msgid "Once you're done, please click the <i>Finish</i> button on this dialog."
-msgstr ""
-
 #: lib/Account/Callbacks.pm:74
-msgid "<small>You can revoke this authorization at any time in you account page on Flickr.com.</small>"
+msgid "Flickr API it is not available at the moment: error "
 msgstr ""
 
-#: lib/Account/Callbacks.pm:79
+#: lib/Account/Callbacks.pm:93
+msgid ""
+"<b>Return to this window after you have finished the authorization process "
+"on Flickr.com</b>"
+msgstr "<b>Torna a aquesta fiesntra quan hagis finalitzat el procés de autorització "
+"a Flickr.com</b>"
+
+#: lib/Account/Callbacks.pm:97
+msgid ""
+"Once you're done, please enter the verification code and click the "
+"<i>Finish</i> button on this dialog."
+msgstr "Quan hagus terminat, per favor introdueix el codi de verificació i prem "
+" el botó <i>Finalitza</i> a aquesta finestra."
+
+#: lib/Account/Callbacks.pm:101
+msgid ""
+"<small>You can revoke this authorization at any time in you account page on "
+"Flickr.com.</small>"
+msgstr "<small>Pots eliminar aquesta autorització a qualsevol moment en la teua pàgina de usuario a Flickr.com.</small>"
+
+#: lib/Account/Callbacks.pm:106
 msgid "Finish"
 msgstr "Finalitza"
 
+#: lib/Upload/Callbacks.pm:206
 msgid "Add files to upload"
 msgstr "Afegir fitxers per a pujar"
 
+#: lib/Upload/Callbacks.pm:211
 msgid "Image files"
 msgstr "Fitxers de imatges"
 
+#: 
 msgid "Private"
 msgstr "Privat"
 

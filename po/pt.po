@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-flickr-uploader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-30 17:10+0200\n"
+"POT-Creation-Date: 2012-02-11 16:26+0000\n"
 "PO-Revision-Date: 2009-09-20 19:15+0100\n"
 "Last-Translator: Nuno Dias <Nuno.Dias@gmail.com>\n"
 "Language-Team: Portuguese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,32 +22,35 @@ msgid ""
 "<b>This program requires your authorization before it can upload your photos "
 "to Flickr.</b>"
 msgstr ""
-"<b>Este programa requer a sua autorização antes de poder enviar as suas fotos "
-"para o Flickr.</b>"
+"<b>Este programa requer a sua autorização antes de poder enviar as suas "
+"fotos para o Flickr.</b>"
 
 #: UI/Account.glade.h:2
 msgid ""
 "<small>You must be connected to the Internet in order to authorize this "
 "program.</small>"
 msgstr ""
-"<small>Você deve estar ligado à Internet a fim de autorizar este "
-"programa.</small>"
+"<small>Você deve estar ligado à Internet a fim de autorizar este programa.</"
+"small>"
 
 #: UI/Account.glade.h:3
+#, fuzzy
 msgid ""
 "Authorizing is a simple process wich takes place in your web browser. When "
-"you're finished, return to this window to complete authorization and begin "
-"using <i>nautilus-flickr-uploader</i>."
+"you're finished, return to this window to complete authorization entering "
+"the verification code."
 msgstr ""
-"A Autorização é um processo simples que tem lugar no seu browser. Quando "
-"você terminar, retorne a esta janela para completar a autorização e começar "
-"a usar o <i>nautilus-flickr-uploader</i>."
+""
 
 #: UI/Account.glade.h:4
 msgid "Nautilus Flickr Uploader - Flickr Authentication"
 msgstr "Nautilus Flickr Uploader - Autenticação no Flickr"
 
 #: UI/Account.glade.h:5
+msgid "Verification Code:"
+msgstr ""
+
+#: UI/Account.glade.h:6
 msgid "_Next"
 msgstr "_Seguinte"
 
@@ -98,57 +102,69 @@ msgstr "Enviar as Fotos para o Flickr"
 msgid "pixels"
 msgstr "pixels"
 
-#: lib/Upload.pm:195
+#: lib/Upload.pm:223
+#, fuzzy
 msgid ""
-"The verification of you Flickr account\n"
+"The verification of your Flickr account\n"
 "has failed: "
 msgstr ""
 "A verificação da sua conta Flickr\n"
 "falhou: "
 
-#: lib/Upload.pm:240
+#: lib/Upload.pm:396
 msgid "<small>Something went wrong uploading the photos.</small>"
 msgstr "<small>Alguma coisa correu mal no envio das fotos.</small>"
 
-#: lib/Upload.pm:379
+#: lib/Upload.pm:540
 msgid "Authorizing..."
 msgstr "Autorizando..."
 
-#: lib/Upload.pm:389
+#: lib/Upload.pm:550
 msgid "No account"
 msgstr "Sem conta"
 
-#: lib/Account/Callbacks.pm:66
+#: lib/Account/Callbacks.pm:74
+msgid "Flickr API it is not available at the moment: error "
+msgstr ""
+
+#: lib/Account/Callbacks.pm:93
 msgid ""
 "<b>Return to this window after you have finished the authorization process "
 "on Flickr.com</b>"
 msgstr ""
-"<b>Voltar a esta janela depois de ter terminado o processo de autorização "
-"no Flickr.com</b>"
+"<b>Voltar a esta janela depois de ter terminado o processo de autorização no "
+"Flickr.com</b>"
 
-#: lib/Account/Callbacks.pm:70
-msgid "Once you're done, please click the <i>Finish</i> button on this dialog."
-msgstr "Assim que estiver pronto, clique no botão <i>Concluir</i> neste diálogo."
+#: lib/Account/Callbacks.pm:97
+#, fuzzy
+msgid ""
+"Once you're done, please enter the verification code and click the "
+"<i>Finish</i> button on this dialog."
+msgstr ""
+""
 
-#: lib/Account/Callbacks.pm:74
+#: lib/Account/Callbacks.pm:101
 msgid ""
 "<small>You can revoke this authorization at any time in you account page on "
 "Flickr.com.</small>"
 msgstr ""
-"<small>Você pode revogar esta autorização a qualquer momento na página da sua conta em "
-"Flickr.com.</small>"
+"<small>Você pode revogar esta autorização a qualquer momento na página da "
+"sua conta em Flickr.com.</small>"
 
-#: lib/Account/Callbacks.pm:79
+#: lib/Account/Callbacks.pm:106
 msgid "Finish"
 msgstr "Concluir"
 
 # Needs review
+#: lib/Upload/Callbacks.pm:206
 msgid "Add files to upload"
 msgstr "Adicionar ficheiros"
 
+#: lib/Upload/Callbacks.pm:211
 msgid "Image files"
 msgstr "Ficheiros de Imagem"
 
+#: 
 msgid "Private"
 msgstr "Privado"
 
