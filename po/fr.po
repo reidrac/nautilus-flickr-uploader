@@ -28,18 +28,14 @@ msgstr ""
 msgid ""
 "<small>You must be connected to the Internet in order to authorize this "
 "program.</small>"
-msgstr ""
-"<small>Vous devez être connecté à Internet afin d'autoriser ce programme.</"
-"small>"
+msgstr "<small>Vous devez être connecté à Internet afin d'autoriser ce programme.</small>"
 
 #: UI/Account.glade.h:3
-#, fuzzy
 msgid ""
 "Authorizing is a simple process wich takes place in your web browser. When "
 "you're finished, return to this window to complete authorization entering "
 "the verification code."
-msgstr ""
-"L'autorisation c'est un processus simple qui a lieu a votre navigateur. "
+msgstr "L'autorisation c'est un processus simple qui a lieu a votre navigateur. "
 "Lorsque vous avez fini, retournez sur cette fenêtre pour completer "
 "l'autorisation en entrant le code de vérification."
 
@@ -104,7 +100,6 @@ msgid "pixels"
 msgstr "pixels"
 
 #: lib/Upload.pm:223
-#, fuzzy
 msgid ""
 "The verification of your Flickr account\n"
 "has failed: "
@@ -137,7 +132,6 @@ msgstr ""
 "sur Flickr.com</b>"
 
 #: lib/Account/Callbacks.pm:97
-#, fuzzy
 msgid ""
 "Once you're done, please enter the verification code and click the "
 "<i>Finish</i> button on this dialog."

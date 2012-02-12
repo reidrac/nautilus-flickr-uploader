@@ -34,7 +34,6 @@ msgstr ""
 "small>"
 
 #: UI/Account.glade.h:3
-#, fuzzy
 msgid ""
 "Authorizing is a simple process wich takes place in your web browser. When "
 "you're finished, return to this window to complete authorization entering "
@@ -105,7 +104,6 @@ msgid "pixels"
 msgstr "pixeles"
 
 #: lib/Upload.pm:223
-#, fuzzy
 msgid ""
 "The verification of your Flickr account\n"
 "has failed: "
@@ -138,7 +136,6 @@ msgstr ""
 "en Flickr.com</b>"
 
 #: lib/Account/Callbacks.pm:97
-#, fuzzy
 msgid ""
 "Once you're done, please enter the verification code and click the "
 "<i>Finish</i> button on this dialog."
