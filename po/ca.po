@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: nautilus-flickr-uploader\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-11 16:26+0000\n"
-"PO-Revision-Date: 2010-11-06 19:54+0100\n"
-"Last-Translator: el_libre <el.libre@gmail.com>\n"
+"PO-Revision-Date: 2012-02-12 10:40+0100\n"
+"Last-Translator: Alex Puerto <astoret@gmail.com>\n"
 "Language-Team: English <en@li.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -20,14 +20,14 @@ msgstr ""
 msgid ""
 "<b>This program requires your authorization before it can upload your photos "
 "to Flickr.</b>"
-msgstr "<b>Aquest programari necessita de la teua autorització pera pujar les "
+msgstr "<b>Aquest programari necessita de la teua autorització per a pujar les "
 "fotos a Flickr.</b>"
 
 #: UI/Account.glade.h:2
 msgid ""
 "<small>You must be connected to the Internet in order to authorize this "
 "program.</small>"
-msgstr "<small>Tens que estar conectat a l'Internet pera autoriztar el programari.</small>"
+msgstr "<small>Has d'estar conectat a l'Internet per a autoriztar el programari.</small>"
 
 #: UI/Account.glade.h:3
 msgid ""
@@ -35,7 +35,7 @@ msgid ""
 "you're finished, return to this window to complete authorization entering "
 "the verification code."
 msgstr "L'autorització es un senzill procés que es realitza al teu navegador. Quan "
-"has finalitzat, torna a aquesta finestra pera completar l'autorització entrant el "
+"hagis finalitzat, torna a aquesta finestra per a completar l'autorització entrant el "
 "codi de verificació."
 
 #: UI/Account.glade.h:4
@@ -103,10 +103,12 @@ msgid ""
 "The verification of your Flickr account\n"
 "has failed: "
 msgstr ""
+"La verificació del teu compte a Flickr\n"
+"ha fallat: "
 
 #: lib/Upload.pm:396
 msgid "<small>Something went wrong uploading the photos.</small>"
-msgstr ""
+msgstr "<small>Alguna cosa ha anat malament pujant les fotos.</small>"
 
 #: lib/Upload.pm:540
 msgid "Authorizing..."
@@ -118,7 +120,7 @@ msgstr "Sense Compte"
 
 #: lib/Account/Callbacks.pm:74
 msgid "Flickr API it is not available at the moment: error "
-msgstr ""
+msgstr "L'API de Flickr no està disponible en aquest moment: error "
 
 #: lib/Account/Callbacks.pm:93
 msgid ""
