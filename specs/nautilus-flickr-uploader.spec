@@ -1,5 +1,5 @@
 Name:           nautilus-flickr-uploader
-Version:        0.10
+Version:        0.11
 Release:        1%{?dist}
 Summary:        Upload pics to Flickr from Nautilus
 
@@ -65,6 +65,9 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 
 
 %changelog
+* Sun Feb 12 2012 Juan J. Martinez <jjm@usebox.net> 0.11-1
+- sync to upstream 0.11: changed to OAuth, re-authorizing the app is required
+- Added Net::OAuth dependency
 * Sun Feb 13 2011 Juan J. Martinez <jjm@usebox.net> 0.10-1
 - sync to upstream 0.10
 - Added Net::DBus and Net::DBus::GLib dependencies
