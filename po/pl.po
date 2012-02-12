@@ -6,9 +6,9 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-11 16:26+0000\n"
-"PO-Revision-Date: 2009-09-22 13:46+0200\n"
+"PO-Revision-Date: 2012-02-12 20:36+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Polish <fedora-trans-pl@redhat.com>\n"
+"Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,13 +30,13 @@ msgstr ""
 "<small>Należy być połączonym z Internetem, aby upoważnić ten program.</small>"
 
 #: UI/Account.glade.h:3
-#, fuzzy
 msgid ""
 "Authorizing is a simple process wich takes place in your web browser. When "
 "you're finished, return to this window to complete authorization entering "
 "the verification code."
 msgstr ""
-""
+"Upoważnienie jest prostym procesem przeprowadzanym w przeglądarce WWW. Po "
+"ukończeniu należy wrócić to tego okna, aby wprowadzić kod weryfikacji."
 
 #: UI/Account.glade.h:4
 msgid "Nautilus Flickr Uploader - Flickr Authentication"
@@ -44,7 +44,7 @@ msgstr "Nautilus Flickr Uploader - upoważnienie serwisu Flickr"
 
 #: UI/Account.glade.h:5
 msgid "Verification Code:"
-msgstr ""
+msgstr "Kod weryfikacji:"
 
 #: UI/Account.glade.h:6
 msgid "_Next"
@@ -80,7 +80,7 @@ msgstr "Publiczne"
 
 #: UI/Upload.glade.h:8
 msgid "Put your tags separated by spaces"
-msgstr "Proszę wprowadzić znaczniki oddzielone spacjami"
+msgstr "Proszę wprowadzić etykiety oddzielone spacjami"
 
 #: UI/Upload.glade.h:9
 msgid "Resize:"
@@ -88,7 +88,7 @@ msgstr "Zmiana rozmiaru:"
 
 #: UI/Upload.glade.h:10
 msgid "Tags:"
-msgstr "Znaczniki:"
+msgstr "Etykiety:"
 
 #: UI/Upload.glade.h:11
 msgid "Upload Photos to Flickr"
@@ -99,17 +99,16 @@ msgid "pixels"
 msgstr "piksele"
 
 #: lib/Upload.pm:223
-#, fuzzy
 msgid ""
 "The verification of your Flickr account\n"
 "has failed: "
 msgstr ""
 "Sprawdzenia konta w serwisie Flickr\n"
-"nie powiodło się: "
+"się nie powiodło: "
 
 #: lib/Upload.pm:396
 msgid "<small>Something went wrong uploading the photos.</small>"
-msgstr "<small>Coś poszło źle podczas wysyłania zdjęć.</small>"
+msgstr "<small>Wysłania zdjęć się nie powiodło.</small>"
 
 #: lib/Upload.pm:540
 msgid "Authorizing..."
@@ -121,7 +120,7 @@ msgstr "Brak konta"
 
 #: lib/Account/Callbacks.pm:74
 msgid "Flickr API it is not available at the moment: error "
-msgstr ""
+msgstr "API serwisu Flickr nie jest dostępne w tej chwili: błąd "
 
 #: lib/Account/Callbacks.pm:93
 msgid ""
@@ -132,19 +131,19 @@ msgstr ""
 "Flickr.com</b>"
 
 #: lib/Account/Callbacks.pm:97
-#, fuzzy
 msgid ""
 "Once you're done, please enter the verification code and click the "
 "<i>Finish</i> button on this dialog."
 msgstr ""
-""
+"Po ukończeniu proszę wprowadzić kod weryfikacji i kliknąć przycisk "
+"<i>Zakończ</i> w tym oknie."
 
 #: lib/Account/Callbacks.pm:101
 msgid ""
 "<small>You can revoke this authorization at any time in you account page on "
 "Flickr.com.</small>"
 msgstr ""
-"<small>Można unieważnić te upoważnienie w dowolnym czasie na stronie konta w "
+"<small>Można unieważnić to upoważnienie w dowolnym czasie na stronie konta w "
 "serwisie Flickr.com.</small>"
 
 #: lib/Account/Callbacks.pm:106
@@ -153,13 +152,13 @@ msgstr "Zakończ"
 
 #: lib/Upload/Callbacks.pm:206
 msgid "Add files to upload"
-msgstr ""
+msgstr "Dodaj pliki do wysłania"
 
 #: lib/Upload/Callbacks.pm:211
 msgid "Image files"
-msgstr ""
+msgstr "Pliki obrazów"
 
 #: 
 msgid "Private"
-msgstr ""
+msgstr "Prywatne"
 
