@@ -39,7 +39,9 @@ msgid ""
 "you're finished, return to this window to complete authorization entering "
 "the verification code."
 msgstr ""
-""
+"L'autorisation c'est un processus simple qui a lieu a votre navigateur. "
+"Lorsque vous avez fini, retournez sur cette fenêtre pour completer "
+"l'autorisation en entrant le code de vérification."
 
 #: UI/Account.glade.h:4
 msgid "Nautilus Flickr Uploader - Flickr Authentication"
@@ -47,7 +49,7 @@ msgstr "Nautilus Flickr Uploader - Authentification Flickr"
 
 #: UI/Account.glade.h:5
 msgid "Verification Code:"
-msgstr ""
+msgstr "Code de vérification:"
 
 #: UI/Account.glade.h:6
 msgid "_Next"
@@ -124,7 +126,7 @@ msgstr "Sans compte"
 
 #: lib/Account/Callbacks.pm:74
 msgid "Flickr API it is not available at the moment: error "
-msgstr ""
+msgstr "L'API Flickr n'est pas disponible maintenant: erreur "
 
 #: lib/Account/Callbacks.pm:93
 msgid ""
@@ -140,7 +142,8 @@ msgid ""
 "Once you're done, please enter the verification code and click the "
 "<i>Finish</i> button on this dialog."
 msgstr ""
-""
+"Lorsque vous avez terminé, entrez le code de vérification et "
+"cliquez sur le bouton <i>Terminer</i> ci-dessus."
 
 #: lib/Account/Callbacks.pm:101
 msgid ""
