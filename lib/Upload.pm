@@ -322,8 +322,8 @@ sub Thread
                     is_family => $thread_queue{'is_family'},
                     is_friend => $thread_queue{'is_friend'},
                     is_public => $thread_queue{'is_public'},
-                    tags => $thread_queue{'tags'},
-                    title => $title,
+                    tags => encode_utf8( $thread_queue{'tags'} ),
+                    title => encode_utf8( $title ),
                     photo => [ $upload_file,
                         basename( $thread_queue{'file'} ),
                      ], ] );
