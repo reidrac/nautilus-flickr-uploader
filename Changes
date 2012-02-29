@@ -1,3 +1,7 @@
+* Wed Feb 29 2012 Juan J. Martinez <jjm@usebox.net> 0.12-1
+- FIX: Polish translation updated, thanks to Piotr Drąg
+- FIX: support for non ASCII characters in title and tags
+
 * Sun Feb 12 2012 Juan J. Martinez <jjm@usebox.net> 0.11-1
 - NEW: OAuth authentication
 - FIX: added trasnlations to the desktop file
