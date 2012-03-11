@@ -1,6 +1,6 @@
-# nautilus-flicker-uploader
+# nautilus-flickr-uploader
 # Copyright (C) 2009 Juan J. Martinez <jjm@usebox.net>
-# This file is distributed under the same license as the nautilus-flicker-uploader package.
+# This file is distributed under the same license as the nautilus-flickr-uploader package.
 # Juan J. Martinez, 2009.
 # Nuno Dias <Nuno.Dias@gmail.com>, 2009
 #
