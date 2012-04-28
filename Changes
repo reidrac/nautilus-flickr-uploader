@@ -1,3 +1,8 @@
+* Sat Apr 28 2012 Juan J. Martinez <jjm@usebox.net> 0.13-1
+- NEW: removed Flickr::API and XML::Parser::Lite::Tree dependencies,
+replaced by XML::Simple
+- FIX: improved account token verification
+
 * Wed Feb 29 2012 Juan J. Martinez <jjm@usebox.net> 0.12-1
 - FIX: Polish translation updated, thanks to Piotr Drąg
 - FIX: support for non ASCII characters in title and tags

@@ -1,5 +1,5 @@
 Name:           nautilus-flickr-uploader
-Version:        0.12
+Version:        0.13
 Release:        1%{?dist}
 Summary:        Upload pics to Flickr from Nautilus
 
@@ -12,7 +12,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl(Gtk2), perl(Gtk2::GladeXML), perl(Gtk2::Ex::Simple::List)
 BuildRequires:  perl(YAML)
-BuildRequires:  perl(Net::OAuth), perl(Flickr::API), perl(XML::Parser::Lite::Tree)
+BuildRequires:  perl(Net::OAuth), perl(XML::Simple)
 BuildRequires:  perl(Image::Magick)
 BuildRequires:  perl(LWP::UserAgent)
 BuildRequires:  perl(Net::DBus), perl(Net::DBus::GLib)
@@ -65,6 +65,9 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 
 
 %changelog
+* Sat Apr 28 2012 Juan J. Martinez <jjm@usebox.net> 0.13-1
+- removed Flickr::API and XML::Parser::Lite::Tree dependencies, added XML::Simple 
+- sync to upstream 0.13
 * Wed Feb 29 2012 Juan J. Martinez <jjm@usebox.net> 0.12-1
 - sync to upstream 0.12
 * Sun Feb 12 2012 Juan J. Martinez <jjm@usebox.net> 0.11-1
