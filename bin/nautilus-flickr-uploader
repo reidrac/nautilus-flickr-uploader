@@ -30,7 +30,7 @@ use Account;
 
 our ( $config, $config_file, $api );
 
-my $VERSION = '0.12';
+my $VERSION = '0.13';
 my $APPNAME = 'nautilus-flickr-uploader';
 
 sub Help

@@ -1,7 +1,7 @@
 DESTDIR=/usr/local
 NAME=nautilus-flickr-uploader
 PERL=`which perl`
-VERSION=0.12
+VERSION=0.13
 
 all:
 	echo Try reading INSTALL file
