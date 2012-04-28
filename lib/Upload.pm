@@ -366,17 +366,15 @@ sub Thread
 
             if( $response->is_success )
             {
-                my $xml = XML::Parser::Lite::Tree::instance( )->parse( $response->content );
-                
-                if( !$response->is_success ||
-                    $xml->{children}[1]{attributes}{stat} ne 'ok')
+                my $xml = XMLin($response->content);
+                if( !$response->is_success || $xml->{stat} ne 'ok')
                 {
                     warn "Warning: failed to upload " .$thread_queue{'title'}
-                        .': ' .$xml->{children}[1]{children}[1]{attributes}{msg};
+                        .': ' .$xml->{err}->{msg};
                 }
                 else
                 {
-                    push( @IDS, $xml->{children}[1]{children}[1]{children}[0]{content} );
+                    push( @IDS, $xml->{photoid} );
                 }
             }
             else
