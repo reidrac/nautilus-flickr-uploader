@@ -7,8 +7,7 @@ modules (and its dependencies):
    Gtk2::Ex::Simple::List
    Gtk2::GladeXML
    YAML
-   Flickr::API
-   XML::Parser::Lite::Tree;
+   XML::Simple
    Image::Magick
    LWP::UserAgent
    Locale::gettext

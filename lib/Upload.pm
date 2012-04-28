@@ -47,9 +47,8 @@ use Image::Magick;
 use Net::OAuth;
 $Net::OAuth::PROTOCOL_VERSION = Net::OAuth::PROTOCOL_VERSION_1_0A;
 
-use Flickr::API;
-use XML::Parser::Lite::Tree;
 use LWP::UserAgent;
+use XML::Simple;
 
 our ( @FILES, $accountVerified, $thumbsOk );
 
@@ -202,14 +201,51 @@ sub LoadPhotos
 sub TestAccount
 {
     my $conf = $main::config;
-    my $api = Flickr::API->new( $main::api );
-    my $response = $api->execute_method( 'flickr.auth.oauth.checkToken',
-        { "oauth_token" => $conf->{'token'},
-          "api_key" => $main::api->{'key'}, } );
+    my $rest_url = "http://api.flickr.com/services/rest/?"
+                  ."method=flickr.auth.oauth.checkToken&format=rest&"
+                  ."api_key=" .$main::api->{'key'} ."&"
+                  ."token=" .$conf->{'token'};
+    my $request = Net::OAuth->request("protected resource")->new(
+        consumer_key => $main::api->{'key'},
+        consumer_secret => $main::api->{'secret'},
+        token => $conf->{'token'},
+        token_secret => $main::config->{'token_secret'},
+        request_url => $rest_url,
+        request_method => 'GET',
+        signature_method => 'HMAC-SHA1',
+        timestamp => time(),
+        nonce => '.' .time(),
+        );
+
+    $request->sign;
+
+    my $lpw = LWP::UserAgent->new();
+    my $response = $lpw->get(
+        $rest_url,
+        Authorization => $request->to_authorization_header,
+        );
+
+    my $error_message;
+    if ( $response->is_error )
+    {
+        $error_message = $response->message;
+    }
+    else
+    {
+        my $xml = XMLin($response->content);
+        if ( $xml->{stat} ne 'ok' )
+        {
+            $error_message = $xml->{err}->{msg}; 
+        }
+        elsif ( $xml->{oauth}->{perms} ne 'write' )
+        {
+            $error_message = 'Not enough permissions, please re-authenticate'; 
+        }
+    }
 
     my $account = $gladexml->get_widget( 'UserLabel' );
-
-    if( !$response->is_success || $response->{error_code} )
+    
+    if( defined $error_message )
     {
         $account->set_text( 'Failed' );
 
@@ -221,7 +257,7 @@ sub TestAccount
         my $errorLabel = $gladexml->get_widget( 'ErrorLabel' );
         $errorLabel->set_markup( 
             '<small>' ._( "The verification of your Flickr account\nhas failed: " ) 
-            .$response->{error_message} .'.</small>' );
+            .$error_message .'.</small>' );
 
         warn 'Warning: the verification of your Flickr account has failed';
     }
