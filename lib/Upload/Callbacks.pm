@@ -68,7 +68,6 @@ sub SaveConfiguration()
         $conf->{'resize'} = 'yes';
     }
 
-
     open( FD, ">$main::config_file.xml" );
     print FD XMLout( $conf ) or
         warn 'Warning: failed to write the configuration';
