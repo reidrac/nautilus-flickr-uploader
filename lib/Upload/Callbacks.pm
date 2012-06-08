@@ -23,7 +23,7 @@ use warnings;
 use vars qw( $gladexml $upload_thread );
 
 use Gtk2::Gdk::Keysyms;
-use YAML 'DumpFile';
+use XML::Simple;
 
 sub Init
 {
@@ -68,8 +68,11 @@ sub SaveConfiguration()
         $conf->{'resize'} = 'yes';
     }
 
-    DumpFile( $main::config_file,  \%$conf ) or
-        warn 'Warning: failed to write de configuration';
+
+    open( FD, ">$main::config_file.xml" );
+    print FD XMLout( $conf ) or
+        warn 'Warning: failed to write the configuration';
+    close( FD );
 }
 
 sub on_UploadDialog_close

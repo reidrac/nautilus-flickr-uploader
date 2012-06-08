@@ -22,7 +22,7 @@ use warnings;
 
 use vars qw( $gladexml );
 
-use YAML 'DumpFile';
+use XML::Simple;;
 
 my $step = 0;
 my $req_token;
@@ -142,8 +142,10 @@ sub on_NextButton_clicked
         $main::config->{'token_secret'} = $response->token_secret;
         $main::config->{'username'} = $response->username;
 
-        DumpFile( $main::config_file,  \%$conf ) or
-            warn 'Warning: failed to write de configuration';
+        open( FD, ">$main::config_file.xml" );
+        print FD XMLout( $conf ) or
+            warn 'Warning: failed to write the configuration';
+        close( FD );
 
         my $dialog = $gladexml->get_widget( 'AccountDialog' );
         $dialog->destroy( );
