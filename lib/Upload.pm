@@ -48,6 +48,7 @@ use Net::OAuth;
 $Net::OAuth::PROTOCOL_VERSION = Net::OAuth::PROTOCOL_VERSION_1_0A;
 
 use LWP::UserAgent;
+use HTTP::Request::Common;
 use XML::Simple;
 
 our ( @FILES, $accountVerified, $thumbsOk );
@@ -55,6 +56,7 @@ our ( @FILES, $accountVerified, $thumbsOk );
 my @IDS : shared;
 my %thread_queue : shared;
 my $thread_mutex : shared;
+my $thread_progress : shared;
 
 sub _
 {
@@ -325,6 +327,7 @@ sub Thread
                 }
             }
 
+            $HTTP::Request::Common::DYNAMIC_FILE_UPLOAD = 1;
             my $lpw = LWP::UserAgent->new();
             $lpw->agent('NFU/'.$thread_queue{'version'} .' ' .$lpw->_agent);
 
@@ -353,7 +356,7 @@ sub Thread
 
             $request->sign;
 
-            my $response = $lpw->post(
+            my $post_req = POST(
                 'http://api.flickr.com/services/upload/',
                 Content_Type => 'multipart/form-data',
                 Authorization => $request->to_authorization_header,
@@ -367,6 +370,26 @@ sub Thread
                         basename( $thread_queue{'file'} ),
                      ], ] );
 
+            my $file_size = -s $upload_file;
+            my $progress = 0;
+            my $content = $post_req->content();
+            $post_req->content(
+                sub {
+                    my $chunk = &$content();
+
+                    if( $chunk )
+                    {
+                        $progress += length($chunk);
+                        $thread_progress = $progress / $file_size;
+                        $thread_progress = 1 if $thread_progress > 1;
+                    }
+
+                    return $chunk;
+                }
+            );
+
+            $thread_progress = 0;
+            my $response = $lpw->request( $post_req );
             if( $response->is_success )
             {
                 my $xml = XMLin($response->content);
@@ -401,10 +424,20 @@ sub Thread
 #
 sub ThreadPoll
 {
+    my ($index, $total) = @{$_[0]};
+
     if( !%thread_queue )
     {
-        Glib::Idle->add( \&UploadFiles, shift );
+        Glib::Idle->add( \&UploadFiles, $index - 1 );
         return 0;
+    }
+    else
+    {
+        if ( $thread_progress )
+        {
+            my $progressBar = $gladexml->get_widget( 'ProgressBar' );
+            $progressBar->set_fraction( (1 / $total) * $thread_progress + ( ( $total - ( $index + 1 ) ) / $total ) );
+        }
     }
 
     return 1;
@@ -504,9 +537,7 @@ sub UploadFiles
 
     $thread_mutex = 1;
 
-    $progressBar->set_fraction( ( $total - $index ) / $total );
-
-    Glib::Timeout->add( 250, 'Upload::ThreadPoll', $index-1 );
+    Glib::Timeout->add( 250, 'Upload::ThreadPoll', [ $index, $total ] );
 
     return 0;
 }
