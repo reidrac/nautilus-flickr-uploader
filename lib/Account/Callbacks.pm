@@ -50,7 +50,8 @@ sub on_AccountDialog_close
 sub on_NextButton_clicked
 {
     my $conf = $main::config;
-    my $ua = LWP::UserAgent->new;
+    my $ua = LWP::UserAgent->new();
+    $ua->agent('NFU/'.$conf->{'version'} .' ' .$ua->_agent);
 
     if( !$step )
     {

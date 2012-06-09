@@ -209,7 +209,7 @@ sub TestAccount
         consumer_key => $main::api->{'key'},
         consumer_secret => $main::api->{'secret'},
         token => $conf->{'token'},
-        token_secret => $main::config->{'token_secret'},
+        token_secret => $conf->{'token_secret'},
         request_url => $rest_url,
         request_method => 'GET',
         signature_method => 'HMAC-SHA1',
@@ -220,6 +220,8 @@ sub TestAccount
     $request->sign;
 
     my $lpw = LWP::UserAgent->new();
+    $lpw->agent('NFU/'.$conf->{'version'} .' ' .$lpw->_agent);
+
     my $response = $lpw->get(
         $rest_url,
         Authorization => $request->to_authorization_header,
@@ -324,6 +326,7 @@ sub Thread
             }
 
             my $lpw = LWP::UserAgent->new();
+            $lpw->agent('NFU/'.$thread_queue{'version'} .' ' .$lpw->_agent);
 
             # use the filename if the title is empty
             my $title = $thread_queue{'title'} ? 
@@ -485,6 +488,7 @@ sub UploadFiles
 
     # new picture for the upload thread
     %thread_queue = (
+        'version' => $main::config->{'version'},
         'api_key' => $main::api->{'key'},
         'api_secret' => $main::api->{'secret'},
         'token' => $main::config->{'token'},
