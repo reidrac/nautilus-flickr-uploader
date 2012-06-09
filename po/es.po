@@ -166,3 +166,7 @@ msgstr "Ficheros de imágenes"
 msgid "Private"
 msgstr "Privado"
 
+#: 
+msgid "Upload"
+msgstr "Subir"
+

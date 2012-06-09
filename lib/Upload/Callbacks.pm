@@ -151,8 +151,11 @@ sub on_OkButton_clicked
     my $box = $gladexml->get_widget( 'MainBox' );
     $box->set_sensitive( 0 );
 
-    my $progressBar = $gladexml->get_widget( 'ProgressBar' );
-    $progressBar->show( );
+    my $progress = $gladexml->get_widget( 'progress_hbox' );
+    $progress->show( );
+    # TODO
+    #my $speedButton = $gladexml->get_widget( 'SpeedButton' );
+    #$speedButton->set_sensitive( 1 );
 
     # this thread uploads the picures on demand
     if( !$upload_thread )
@@ -183,8 +186,8 @@ sub on_PhotoView_drag_data_received
 
     @Upload::FILES = Upload::ExpandDirectories( @uris );
 
-    my $progressBar = $gladexml->get_widget( 'ProgressBar' );
-    $progressBar->show( );
+    my $progress = $gladexml->get_widget( 'progress_hbox' );
+    $progress->show( );
 
     Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
 }
@@ -246,8 +249,8 @@ sub on_AddPicButton_clicked
         my @files = $dialog->get_filenames( );
         @Upload::FILES = Upload::ExpandDirectories( @files );
 
-        my $progressBar = $gladexml->get_widget( 'ProgressBar' );
-        $progressBar->show( );
+        my $progress = $gladexml->get_widget( 'progress_hbox' );
+        $progress->show( );
 
         Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
     }

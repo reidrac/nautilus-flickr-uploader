@@ -131,6 +131,8 @@ sub LoadPhotos
     my $index = shift;
 
     my $progressBar = $gladexml->get_widget( 'ProgressBar' );
+    my $speedButton = $gladexml->get_widget( 'SpeedButton' );
+    $speedButton->set_sensitive( 0 );
 
     if( $index < 0 )
     {
@@ -142,7 +144,9 @@ sub LoadPhotos
 
         $progressBar->set_fraction( 0 );
         $progressBar->set_text( '' );
-        $progressBar->hide( );
+
+        my $progress = $gladexml->get_widget( 'progress_hbox' );
+        $progress->hide( );
 
         $thumbsOk = 1;
 
@@ -455,7 +459,8 @@ sub UploadFiles
         my $progressBar = $gladexml->get_widget( 'ProgressBar' );
         $progressBar->set_fraction( 0 );
         $progressBar->set_text( '' );
-        $progressBar->hide( );
+        my $progress = $gladexml->get_widget( 'progress_hbox' );
+        $progress->hide( );
 
         if( !scalar( @IDS ) )
         {
@@ -598,7 +603,18 @@ sub Init
 
     @FILES = ExpandDirectories( @ARGV );
 
-    Glib::Idle->add( \&LoadPhotos, $#FILES );
+    if ( @FILES )
+    {
+        my $speedButton = $gladexml->get_widget( 'SpeedButton' );
+        $speedButton->set_sensitive( 0 );
+
+        Glib::Idle->add( \&LoadPhotos, $#FILES );
+    }
+    else
+    {
+        my $progress = $gladexml->get_widget( 'progress_hbox' );
+        $progress->hide( );
+    }
 
     # setup the GUI according to the stored configuration
     my $conf = $main::config;

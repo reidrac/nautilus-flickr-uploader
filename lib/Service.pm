@@ -48,8 +48,8 @@ sub add
 
     @Upload::FILES = Upload::ExpandDirectories( @files );
 
-    my $progressBar = $Upload::gladexml->get_widget( 'ProgressBar' );
-    $progressBar->show( );
+    my $progress = $gladexml->get_widget( 'progress_hbox' );
+    $progress->show( );
 
     Glib::Idle->add( \&Upload::LoadPhotos, $#Upload::FILES );
 

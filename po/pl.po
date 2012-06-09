@@ -162,3 +162,7 @@ msgstr "Pliki obrazów"
 msgid "Private"
 msgstr "Prywatne"
 
+#: 
+msgid "Upload"
+msgstr ""
+

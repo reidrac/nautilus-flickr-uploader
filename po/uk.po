@@ -166,3 +166,7 @@ msgstr "Файли зображень"
 msgid "Private"
 msgstr "Приватний доступ"
 
+#: 
+msgid "Upload"
+msgstr ""
+

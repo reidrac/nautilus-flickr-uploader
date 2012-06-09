@@ -10,3 +10,4 @@ char *s = N_("Resize:");
 char *s = N_("Tags:");
 char *s = N_("Upload Photos to Flickr");
 char *s = N_("pixels");
+char *s = N_("Upload");
