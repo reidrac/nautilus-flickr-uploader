@@ -77,6 +77,8 @@ sub LoadConfiguration()
         if( $config->{token} && !$config->{token_secret} ) {
             undef $config->{token};
         }
+
+        $config->{version} = $VERSION;
     }
     else
     {
