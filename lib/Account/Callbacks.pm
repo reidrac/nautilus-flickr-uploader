@@ -147,6 +147,7 @@ sub on_NextButton_clicked
         print FD XMLout( $conf ) or
             warn 'Warning: failed to write the configuration';
         close( FD );
+        chmod 0600, "$main::config_file.xml";
 
         my $dialog = $gladexml->get_widget( 'AccountDialog' );
         $dialog->destroy( );

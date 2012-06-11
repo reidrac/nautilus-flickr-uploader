@@ -72,6 +72,7 @@ sub SaveConfiguration()
     print FD XMLout( $conf ) or
         warn 'Warning: failed to write the configuration';
     close( FD );
+    chmod 0600, "$main::config_file.xml";
 }
 
 sub on_UploadDialog_close
