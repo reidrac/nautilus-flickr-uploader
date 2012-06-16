@@ -154,9 +154,13 @@ sub on_OkButton_clicked
 
     my $progress = $gladexml->get_widget( 'progress_hbox' );
     $progress->show( );
-    # TODO
-    #my $speedButton = $gladexml->get_widget( 'SpeedButton' );
-    #$speedButton->set_sensitive( 1 );
+
+    my $speedButton = $gladexml->get_widget( 'SpeedButton' );
+    $speedButton->set_label( "0.0 KiB/s" );
+    $speedButton->set_sensitive( 1 );
+
+    # start unlimited
+    $Upload::thread_limit = 0;
 
     # this thread uploads the picures on demand
     if( !$upload_thread )
@@ -259,6 +263,41 @@ sub on_AddPicButton_clicked
     $dialog->destroy( );
 
     $Upload::busy = 0;
+}
+
+sub on_SpeedButton_clicked
+{
+    my $speedButton = $gladexml->get_widget( 'SpeedButton' );
+    my $speedMenu = new Gtk2::Menu( );
+    my $mi = new Gtk2::CheckMenuItem( _( "Unlimited" ) );
+    $mi->signal_connect( 'toggled' => \&on_SpeedMenuItem_toggle, 0 );
+    $mi->set_active( 1 ) if $Upload::thread_limit == 0;
+    $speedMenu->append( $mi );
+
+    for ( [ "5 KiB/s", 5 ], [ "10 KiB/s", 10 ], [ "15 KiB/s", 15 ],
+          [ "20 KiB/s", 20 ], [ "25 KiB/s", 25 ], [ "50 KiB/s", 50 ],
+          [ "75 KiB/s", 75 ], [ "100 KiB/s", 100 ], [ "150 KiB/s", 150 ],
+          [ "200 KiB/s", 200 ] )
+    {
+        $mi = new Gtk2::CheckMenuItem( $_->[0] );
+        $mi->signal_connect( 'toggled' => \&on_SpeedMenuItem_toggle, $_->[1] );
+        $mi->set_active( 1 ) if $Upload::thread_limit == $_->[1];
+        $speedMenu->append( $mi );
+    }
+
+    $speedMenu->show_all( );
+    $speedMenu->popup( undef, undef, undef, undef, 0, 0 );
+}
+
+sub on_SpeedMenuItem_toggle
+{
+    my ( $mi, $value) = @_;
+
+    if( $mi->get_active( ) )
+    {
+        $Upload::thread_limit = $value;
+        $Upload::thread_speed = $value;
+    }
 }
 
 1 ; 

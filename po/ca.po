@@ -162,3 +162,7 @@ msgstr "Privat"
 msgid "Upload"
 msgstr "Pujar"
 
+#:
+msgid "Unlimited"
+msgstr "Il·limitat"
+

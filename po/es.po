@@ -170,3 +170,7 @@ msgstr "Privado"
 msgid "Upload"
 msgstr "Subir"
 
+#:
+msgid "Unlimited"
+msgstr "Ilimitado"
+

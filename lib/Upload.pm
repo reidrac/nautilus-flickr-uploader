@@ -23,13 +23,14 @@ use threads;
 use threads::shared;
 
 use Encode;
+use Time::HiRes qw(sleep);
 
 use Upload::Callbacks;
 
 require Exporter;
 use vars qw ( @EXPORT_OK );
-@EXPORT_OK = qw ( $gladexml );
-use vars qw( $gladexml $sdbus $serviceObject $busy );
+@EXPORT_OK = qw ( $gladexml $thread_limit );
+use vars qw( $gladexml $sdbus $serviceObject $busy $thread_limit );
 
 use Locale::gettext;
 
@@ -57,6 +58,8 @@ my @IDS : shared;
 my %thread_queue : shared;
 my $thread_mutex : shared;
 my $thread_progress : shared;
+my $thread_speed : shared;
+share($thread_limit);
 
 sub _
 {
@@ -132,6 +135,7 @@ sub LoadPhotos
 
     my $progressBar = $gladexml->get_widget( 'ProgressBar' );
     my $speedButton = $gladexml->get_widget( 'SpeedButton' );
+    $speedButton->set_label( "0.0 KiB/s" );
     $speedButton->set_sensitive( 0 );
 
     if( $index < 0 )
@@ -376,13 +380,39 @@ sub Thread
 
             my $file_size = -s $upload_file;
             my $progress = 0;
-            my $content = $post_req->content();
+
+            my $partial = 0;
+            my $speed_len = 0;
+            my $time_now = sub { return sprintf( "%.2f", Time::HiRes::time( ) ); };
+            my $now = &$time_now( );
+
+            $thread_speed = 0;
+
+            my $content = $post_req->content( );
             $post_req->content(
                 sub {
-                    my $chunk = &$content();
+                    my $chunk = &$content( );
 
                     if( $chunk )
                     {
+                        $partial += length($chunk);
+                        if( &$time_now( ) > $now )
+                        {
+                            if( &$time_now( ) - $now > 1 )
+                            {
+                                $speed_len = $partial;
+                                $thread_speed = $speed_len / 1024;
+                                $now = &$time_now( );
+                                $partial = 0;
+                            }
+                        }
+
+                        # throttle
+                        if ( $thread_limit && $thread_speed >= $thread_limit )
+                        {
+                            sleep( ( length($chunk) * $thread_speed / $thread_limit ) / $speed_len );
+                        }
+
                         $progress += length($chunk);
                         $thread_progress = $progress / $file_size;
                         $thread_progress = 1 if $thread_progress > 1;
@@ -441,6 +471,9 @@ sub ThreadPoll
         {
             my $progressBar = $gladexml->get_widget( 'ProgressBar' );
             $progressBar->set_fraction( (1 / $total) * $thread_progress + ( ( $total - ( $index + 1 ) ) / $total ) );
+
+            my $speedButton = $gladexml->get_widget( 'SpeedButton' );
+            $speedButton->set_label( sprintf( "%.1f KiB/s", $thread_speed ) );
         }
     }
 
@@ -606,6 +639,7 @@ sub Init
     if ( @FILES )
     {
         my $speedButton = $gladexml->get_widget( 'SpeedButton' );
+        $speedButton->set_label( "0.0 KiB/s" );
         $speedButton->set_sensitive( 0 );
 
         Glib::Idle->add( \&LoadPhotos, $#FILES );
