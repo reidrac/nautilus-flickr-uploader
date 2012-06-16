@@ -1,4 +1,2 @@
-- Make image preview faster
+- Convert the project to Gtk3
 - Package support for DEB
-- Remove pictures from the list with Drag and Drop
-- More translations to the desktop file
