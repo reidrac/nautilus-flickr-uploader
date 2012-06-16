@@ -50,6 +50,6 @@ rpm: dist
 	mv -f $(NAME)-$(VERSION).tar.gz ~/rpmbuild/SOURCES
 	cp -f specs/nautilus-flickr-uploader.spec ~/rpmbuild/SPECS
 	cd ~/rpmbuild/SPECS && rpmbuild -ba nautilus-flickr-uploader.spec
-	cd ~/rpmbuild/RPMS/noarch && rpmlint nautilus-flickr-uploader-$(VERSION)-1.fc12.noarch.rpm
+	cd ~/rpmbuild/RPMS/noarch && rpmlint nautilus-flickr-uploader-$(VERSION)-*.rpm
 
 # EOF
