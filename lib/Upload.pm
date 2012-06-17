@@ -192,8 +192,6 @@ sub LoadPhotos
         $image = $image->scale_simple( $width, $height, 'bilinear' );
 
         push( @{$slist->{data}}, [ $image, basename( $file ), $file ] );
-
-        $progressBar->set_fraction( ( scalar( @FILES ) - $index ) / scalar( @FILES ) );
     }
     else
     {
@@ -386,8 +384,6 @@ sub Thread
             my $time_now = sub { return sprintf( "%.2f", Time::HiRes::time( ) ); };
             my $now = &$time_now( );
 
-            $thread_speed = 0;
-
             my $content = $post_req->content( );
             $post_req->content(
                 sub {
@@ -422,7 +418,6 @@ sub Thread
                 }
             );
 
-            $thread_progress = 0;
             my $response = $lpw->request( $post_req );
             if( $response->is_success )
             {
@@ -462,6 +457,9 @@ sub ThreadPoll
 
     if( !%thread_queue )
     {
+        $thread_speed = 0;
+        $thread_progress = 0;
+
         Glib::Idle->add( \&UploadFiles, $index - 1 );
         return 0;
     }
@@ -574,6 +572,8 @@ sub UploadFiles
         );
 
     $thread_mutex = 1;
+    $thread_speed = 0;
+    $thread_progress = 0;
 
     Glib::Timeout->add( 250, 'Upload::ThreadPoll', [ $index, $total ] );
 
