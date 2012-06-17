@@ -174,3 +174,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr ""
 
+#:
+msgid "Cancel"
+msgstr ""
+

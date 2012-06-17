@@ -174,3 +174,7 @@ msgstr "Upload"
 msgid "Unlimited"
 msgstr "Unlimited"
 
+#:
+msgid "Cancel"
+msgstr "Cancel"
+

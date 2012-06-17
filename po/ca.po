@@ -166,3 +166,7 @@ msgstr "Pujar"
 msgid "Unlimited"
 msgstr "Il·limitat"
 
+#:
+msgid "Cancel"
+msgstr "Cancel·lar"
+

@@ -171,3 +171,7 @@ msgstr "Envoyer"
 msgid "Unlimited"
 msgstr "Illimité"
 
+#:
+msgid "Cancel"
+msgstr "Annuler"
+

@@ -177,3 +177,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "Unbegrenzt"
 
+#:
+msgid "Cancel"
+msgstr "Abbrechen"
+

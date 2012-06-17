@@ -174,3 +174,7 @@ msgstr "Subir"
 msgid "Unlimited"
 msgstr "Ilimitado"
 
+#: 
+msgid "Cancel"
+msgstr "Cancelar"
+
