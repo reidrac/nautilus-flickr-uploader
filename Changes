@@ -1,3 +1,8 @@
+* Sun Jun 17 2012 Juan J. Martinez <jjm@usebox.net> 0.14.2-1
+- FIX: glitch in the progress bar when moving to the next image
+- FIX: two buttons not marked as translatable
+- FIX: the translation for "Cancel" was missing
+
 * Sat Jun 16 2012 Juan J. Martinez <jjm@usebox.net> 0.14.1-1
 - FIX: error in the DBUS service enabling the progress bar
 
