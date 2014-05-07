@@ -1,3 +1,7 @@
+*
+- NEW: Use Flickr API over SSL (requires LWP::Protocol::http).
+- NEW: Use keep-alive, include content type of the image in the form-data.
+
 * Sun Jun 17 2012 Juan J. Martinez <jjm@usebox.net> 0.14.2-1
 - FIX: glitch in the progress bar when moving to the next image
 - FIX: two buttons not marked as translatable

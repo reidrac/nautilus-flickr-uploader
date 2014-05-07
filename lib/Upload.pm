@@ -49,10 +49,14 @@ use Net::OAuth;
 $Net::OAuth::PROTOCOL_VERSION = Net::OAuth::PROTOCOL_VERSION_1_0A;
 
 use LWP::UserAgent;
+use LWP::MediaTypes qw( guess_media_type );
 use HTTP::Request::Common;
 use XML::Simple;
 
 our ( @FILES, $accountVerified, $thumbsOk );
+
+my $FLICKR_API_AUTH = "https://api.flickr.com/services/rest/";
+my $FLICKR_API_UPLOAD = "https://up.flickr.com/services/upload/";
 
 my @IDS : shared;
 my %thread_queue : shared;
@@ -209,7 +213,7 @@ sub LoadPhotos
 sub TestAccount
 {
     my $conf = $main::config;
-    my $rest_url = "http://api.flickr.com/services/rest/?"
+    my $rest_url = $FLICKR_API_AUTH ."?"
                   ."method=flickr.auth.oauth.checkToken&format=rest&"
                   ."api_key=" .$main::api->{'key'} ."&"
                   ."token=" .$conf->{'token'};
@@ -334,8 +338,8 @@ sub Thread
             }
 
             $HTTP::Request::Common::DYNAMIC_FILE_UPLOAD = 1;
-            my $lpw = LWP::UserAgent->new();
-            $lpw->agent('NFU/'.$thread_queue{'version'} .' ' .$lpw->_agent);
+            my $lpw = LWP::UserAgent->new(keep_alive=>1);
+            $lpw->agent('NFU-SSL/'.$thread_queue{'version'} .' ' .$lpw->_agent);
 
             # use the filename if the title is empty
             my $title = $thread_queue{'title'} ? 
@@ -346,7 +350,7 @@ sub Thread
                 consumer_secret => $thread_queue{'api_secret'},
                 token => $thread_queue{'token'},
                 token_secret => $thread_queue{'token_secret'},
-                request_url => 'http://api.flickr.com/services/upload/',
+                request_url => $FLICKR_API_UPLOAD,
                 request_method => 'POST',
                 signature_method => 'HMAC-SHA1',
                 timestamp => time(),
@@ -363,7 +367,7 @@ sub Thread
             $request->sign;
 
             my $post_req = POST(
-                'http://api.flickr.com/services/upload/',
+                $FLICKR_API_UPLOAD,
                 Content_Type => 'multipart/form-data',
                 Authorization => $request->to_authorization_header,
                 Content => [
@@ -374,6 +378,7 @@ sub Thread
                     title => encode_utf8( $title ),
                     photo => [ $upload_file,
                         basename( $thread_queue{'file'} ),
+						"Content-Type" => guess_media_type( $thread_queue{'file'} ),
                      ], ] );
 
             my $file_size = -s $upload_file;
@@ -434,7 +439,7 @@ sub Thread
             }
             else
             {
-                warn "Warning: failed to post to api.flickr.com: " .$response->status_line;
+                warn "Warning: failed to post to Flickr API: " .$response->status_line;
             }
 
             # we're done
