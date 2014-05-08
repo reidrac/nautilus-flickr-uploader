@@ -1,6 +1,6 @@
 #
 # nautilus-flickr-uploader - upload pics to Flickr from Nautilus
-# Copyright (C) 2009-2012  Juan J. Martinez <jjm@usebox.net>
+# Copyright (C) 2009-2014  Juan J. Martinez <jjm@usebox.net>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
