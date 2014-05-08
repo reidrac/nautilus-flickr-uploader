@@ -1,5 +1,5 @@
 Name:           nautilus-flickr-uploader
-Version:        0.14.2
+Version:        0.15
 Release:        1%{?dist}
 Summary:        Upload pics to Flickr from Nautilus
 
@@ -14,7 +14,7 @@ BuildRequires:  perl(Gtk2), perl(Gtk2::GladeXML), perl(Gtk2::Ex::Simple::List)
 BuildRequires:  perl(YAML)
 BuildRequires:  perl(Net::OAuth), perl(XML::Simple)
 BuildRequires:  perl(Image::Magick)
-BuildRequires:  perl(LWP::UserAgent)
+BuildRequires:  perl(LWP::UserAgent), perl(LWP::Protocol::https)
 BuildRequires:  perl(Net::DBus), perl(Net::DBus::GLib)
 BuildRequires:  gettext
 BuildRequires:  perl(Locale::gettext)
@@ -65,6 +65,8 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 
 
 %changelog
+* Thu May 8 2014 Juan J. Martinez <jjm@usebox.net> 0.15-1
+- sync to upstream 0.15
 * Sun Jun 17 2012 Juan J. Martinez <jjm@usebox.net> 0.14.2-1
 - sync to upstream 0.14.2
 * Sat Jun 16 2012 Juan J. Martinez <jjm@usebox.net> 0.14.1-1
