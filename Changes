@@ -1,4 +1,4 @@
-*
+* Thu May 8 2014 Juan J. Martinez <jjm@usebox.net> 0.15-1
 - NEW: Use Flickr API over SSL (requires LWP::Protocol::http).
 - NEW: Use keep-alive, include content type of the image in the form-data.
 
